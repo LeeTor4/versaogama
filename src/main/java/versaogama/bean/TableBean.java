@@ -1,0 +1,39 @@
+package versaogama.bean;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.enterprise.context.RequestScoped;
+import javax.faces.model.ListDataModel;
+import javax.inject.Named;
+
+import versaogama.conexao.Pool;
+import versaogama.dao.estabelecimentodao.importacaospedfical.LoteImportacaoSpedFiscalDao;
+import versaogama.dao.estabelecimentodao.notafiscal.NotaFiscalDao;
+import versaogama.dao.estabelecimentodao.produto.ProdutoDao;
+import versaogama.managersped.LeitorTxtSpedFiscal;
+import versaogama.model.sped.Reg0200;
+
+@Named("tableprod")
+@RequestScoped
+public class TableBean {
+
+	
+	//private ListDataModel<Reg0200> produtos;
+	private List<Reg0200> produtos;
+	
+	public TableBean() throws Exception {
+		Pool pool = new Pool();
+		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-jan2019.txt");
+		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
+		leitor.leitorSpedFiscal(p,pool);
+		
+		produtos = new ArrayList<Reg0200>();
+		produtos.addAll(leitor.getRegs0200());
+	}
+	public List<Reg0200> getProdutos() {
+		return produtos;
+	}
+}
