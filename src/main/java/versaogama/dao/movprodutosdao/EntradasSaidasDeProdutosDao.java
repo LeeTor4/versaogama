@@ -20,15 +20,15 @@ public class EntradasSaidasDeProdutosDao {
 	}
 	
 	
-	public List<EntradasSaidasDeProdutos> retornaCadastroMovProdutos(String mes) throws SQLException {
+	public List<EntradasSaidasDeProdutos> retornaCadastroMovProdutos(Long id) throws SQLException {
 		
 		List<EntradasSaidasDeProdutos> retorno = new ArrayList<EntradasSaidasDeProdutos>();
 	   
-		String sql = "SELECT * FROM mov_prod_mensal where mes = ?"; 
+		String sql = "SELECT * FROM mov_prod_mensal where id = ?"; 
 		
 		Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){	
-			stmt.setString(1, mes);
+			stmt.setLong(1, id);
 			stmt.execute();
 			try(ResultSet rs = stmt.getResultSet()){	
 				
@@ -46,14 +46,182 @@ public class EntradasSaidasDeProdutosDao {
 	}
 	
 	
-	
-	
-	public void cadastrarTabEntSaiDez(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
-		String sql = "INSERT INTO tb_ent_sai_dez(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,cod_ant_item"
+	public void cadastrarTabEntSaiJan(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_jan(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
 				+ "tot_qtde_ent,"
 				+ "vl_tot_item_ent,"
 				+ "tot_qtde_sai,"
-				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiFev(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_fev(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiMar(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_mar(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiAbr(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_abr(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiMai(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_mai(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiJun(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_jun(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiJul(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_jul(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiAgo(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_ago(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiSet(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_set(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiOut(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_out(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
+	public void cadastrarTabEntSaiNov(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_nov(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		
 		Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -66,11 +234,28 @@ public class EntradasSaidasDeProdutosDao {
 	}
 	
 	
+	public void cadastrarTabEntSaiDez(EntradasSaidasDeProdutos entradaSaida) throws SQLException {
+		String sql = "INSERT INTO tb_ent_sai_dez(id_pai,id_cod_item,cnpj,descricao,ano,mes,cod_item,cod_ant_item,"
+				+ "tot_qtde_ent,"
+				+ "vl_tot_item_ent,"
+				+ "tot_qtde_sai,"
+				+ "vl_tot_item_sai,id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			
+			stmtEntradaSaida(stmt, entradaSaida);
+			stmt.execute();
+		}
+		System.out.println("Movimentação " + entradaSaida.getIdPai() + ", cadastrado com sucesso!!");
+		pool.liberarConnection(con);
+	}
+	
 	
 	private EntradasSaidasDeProdutos rsCadastroMovProdutos(ResultSet rs) throws SQLException {
 	
 		EntradasSaidasDeProdutos retorno = new EntradasSaidasDeProdutos();
-		
+		retorno.setId(rs.getLong("id"));
 		retorno.setIdCodItem(rs.getLong("id_cod_item"));
 		retorno.setCnpj(rs.getString("cnpj"));
 		retorno.setDescricao(rs.getString("descricao"));

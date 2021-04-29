@@ -26,6 +26,7 @@ import versaogama.model.system.notafiscal.ProdutoNota;
 import versaogama.model.system.produto.AlteracaoItem;
 import versaogama.model.system.produto.OutrasUnid;
 import versaogama.model.system.produto.Produto;
+import versaogama.service.estabelecimento.ImportaEntradasSaidasProdutosPorLote;
 import versaogama.service.estabelecimento.LoteImportacaoSpedFiscalService;
 
 public class MainService {
@@ -35,7 +36,7 @@ public class MainService {
 		
 		Pool pool = new Pool();
 		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
+		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo substituto-nov2017-corrigido.txt");
 		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
 		LeitorXML logica = new LeitorXML();	
 
@@ -59,6 +60,7 @@ public class MainService {
 		ItensMovDiarioCFe  itemCfe = new ItensMovDiarioCFe();
 		TotalizadorDiarioCuponsFiscais totDirCF = new TotalizadorDiarioCuponsFiscais();
 		LoteImportacaoSpedFiscalService lote    = new LoteImportacaoSpedFiscalService();
+		ImportaEntradasSaidasProdutosPorLote movPorLote = new ImportaEntradasSaidasProdutosPorLote();
 		Inventario inv = new Inventario();
 		ItensInventario itnInv = new ItensInventario();
 		
@@ -69,6 +71,8 @@ public class MainService {
         
 		lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote);
 		lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote);
+		
+		movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
         
 	}
 

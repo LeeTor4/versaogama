@@ -23,7 +23,23 @@ public class EntradasSaidasDeProdutos {
 		
 	}
 	
-	
+    public EntradasSaidasDeProdutos(Long   idPai,Long   idCodItem,String cnpj,  String descricao,String ano ,String mes,String codItem,String codAntItem,
+    		Double totQtdeEnt,Double totVlItemEnt,Double totQtdeSai,Double totVlItemSai) {
+		this.idPai = idPai;
+		this.idCodItem = idCodItem;
+		this.cnpj = cnpj;
+		this.descricao = descricao;
+		this.ano = ano;
+		this.mes = mes;
+		this.codItem = codItem;
+		this.codAntItem = codAntItem;
+		this.totQtdeEnt = totQtdeEnt;
+		this.totVlItemEnt = totVlItemEnt;
+		this.totQtdeSai =   totQtdeSai;
+		this.totVlItemSai = totVlItemSai;
+		
+	}
+    
 	public Long getId() {
 		return id;
 	}

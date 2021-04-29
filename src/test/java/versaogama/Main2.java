@@ -94,16 +94,91 @@ public class Main2 {
 //         System.out.println("Item 12777 => " + qtdeSum +"|"+ df.format(vlItemSum));
 		
 		
-		
-		  for(EntradasSaidasDeProdutos es :   entsai.retornaCadastroMovProdutos("12")){
+		  Double totQtdeEnt=0.0;
+		  Double vlItemEnt=0.0;
+		  Double totQtdeSai=0.0;
+		  Double vlItemSai=0.0;
+		  for(EntradasSaidasDeProdutos es :   entsai.retornaCadastroMovProdutos(2L)){
 			
-				  TotalizadoresPorItem  resE = entDao.getTotalizadoresItensPorMesAnoEnt(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());
-				  TotalizadoresPorItem  resS = saiDao.getTotalizadoresItensPorMesAnoSai(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());
+			  TotalizadoresPorItem  resE = entDao.getTotalizadoresItensPorMesAnoEnt(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());
+			  TotalizadoresPorItem  resS = saiDao.getTotalizadoresItensPorMesAnoSai(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());
+			  totQtdeEnt = (resE.getVlTotQtde()==null ? 0.0 : resE.getVlTotQtde());
+			  vlItemEnt  = (resE.getVlTotItem()==null ? 0.0 : resE.getVlTotItem());
+			  totQtdeSai = (resS.getVlTotQtde()==null ? 0.0 : resS.getVlTotQtde());
+			  vlItemSai  = (resS.getVlTotItem()==null ? 0.0 : resS.getVlTotItem());
+			  EntradasSaidasDeProdutos obj = new EntradasSaidasDeProdutos(
+					  es.getId(), es.getIdCodItem(), es.getCnpj(), es.getDescricao(), 
+					  es.getAno(), 
+					  es.getMes(),
+					  es.getCodItem(), 
+					  es.getCodAntItem(),
+					  totQtdeEnt,
+					  vlItemEnt,
+					  totQtdeSai,
+					  vlItemSai);
 			  
-			
-				  System.out.println(resE.getIdLote() +"|" +resE.getCodItem()+"|"+resE.getVlTotQtde()+"|"+resE.getVlTotItem()
-				           +"|"
-						  +resS.getIdLote() +"|" +resS.getCodItem()+"|"+resS.getVlTotQtde()+"|"+resS.getVlTotItem());
+			  switch (es.getMes()) {
+				case "1":
+					entsai.cadastrarTabEntSaiJan(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "2":
+					entsai.cadastrarTabEntSaiFev(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "3":
+					entsai.cadastrarTabEntSaiMar(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "4":
+					entsai.cadastrarTabEntSaiAbr(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "5":
+					entsai.cadastrarTabEntSaiMai(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "6":
+					entsai.cadastrarTabEntSaiJun(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "7":
+					entsai.cadastrarTabEntSaiJul(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "8":
+					entsai.cadastrarTabEntSaiAgo(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "9":
+					entsai.cadastrarTabEntSaiSet(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "10":
+					entsai.cadastrarTabEntSaiOut(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "11":
+					entsai.cadastrarTabEntSaiNov(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				case "12":
+					entsai.cadastrarTabEntSaiDez(obj);
+//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
+//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
+					break;
+				}
 				 
 		  }
 	
