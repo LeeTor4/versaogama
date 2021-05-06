@@ -7,6 +7,7 @@ public class EntradasSaidasDeProdutos {
 	private Long   idCodItem;
 	private String cnpj;
 	private String descricao;
+	private String und;
 	private String ano;
 	private String mes;
 	private String codItem;
@@ -71,6 +72,15 @@ public class EntradasSaidasDeProdutos {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+	
+	public String getUnd() {
+		return und;
+	}
+
+	public void setUnd(String und) {
+		this.und = und;
+	}
+
 	public String getAno() {
 		return ano;
 	}

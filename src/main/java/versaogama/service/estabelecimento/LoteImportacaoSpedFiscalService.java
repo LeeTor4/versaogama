@@ -147,13 +147,13 @@ public class LoteImportacaoSpedFiscalService {
 			   
 				if(!daoLote.getLoteImports().contains(lt)) {
 					id = daoLote.salvar(lt);	
-	              importandoParticipantes(leitor, part, 1L, 1L); // Campos preenchidos provisoriamente
-	              importandoProdutos(leitor,prod,outUnid,alt,1L, 1L); // Campos preenchidos provisoriamente
-	              importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,1L,1L);// Campos preenchidos provisoriamente
-	              importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 1L, 1L);
-	              importandoEquipamentoCFe(leitor, cfe, id, 1L, 1L);
-	              importandoItensCFe(pXml, readerCF, logica, leitor, itemCfe, 1L, 1L);
-	              importandoInventario(leitor, inv, itnInv);
+	                importandoParticipantes(leitor, part, 1L, 1L); // Campos preenchidos provisoriamente
+	                importandoProdutos(leitor,prod,outUnid,alt,1L, 1L); // Campos preenchidos provisoriamente
+	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,1L,1L);// Campos preenchidos provisoriamente
+	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 1L, 1L);
+	                importandoEquipamentoCFe(leitor, cfe, id, 1L, 1L);
+	                importandoItensCFe(pXml, readerCF, logica, leitor, itemCfe, 1L, 1L);
+	                importandoInventario(leitor, inv, itnInv);
 			             
 					    
 				}else {
@@ -267,6 +267,11 @@ public class LoteImportacaoSpedFiscalService {
 					 daoTotParRDZ.cadastrar(insereTotParcRDZ(leitor, totRdz, i, x,y, idPaiEmp,idPaiEst));
 					for (int w = 0; w < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y)
 							.getRegsC425().size(); w++) {
+						 TotalizadoresPorItem tot = new TotalizadoresPorItem(); 
+						 tot.setCodItem(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getCodItem());
+						 tot.setVlTotQtde(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getQtde());
+						 tot.setVlTotItem(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getVlItem());
+						 totaisSaidas.add(tot);
 						 daoItensMovDiario.cadastrar(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst));
 					}
 				}
@@ -303,6 +308,11 @@ public class LoteImportacaoSpedFiscalService {
 
 						if (Integer.parseInt(cf.getNumDoc()) >= Integer.parseInt(leitor.getRegsC860().get(i).getDocInicial())
 								&& Integer.parseInt(cf.getNumDoc()) <= Integer.parseInt(leitor.getRegsC860().get(i).getDocFinal())) {
+							     TotalizadoresPorItem tot = new TotalizadoresPorItem(); 
+							     tot.setCodItem(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getCodItem());
+								 tot.setVlTotQtde(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getQtde());
+								 tot.setVlTotItem(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getVlItem());
+								 totaisSaidas.add(tot);
 								 itensCFe.cadastrar( insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst));
 						}
 					}

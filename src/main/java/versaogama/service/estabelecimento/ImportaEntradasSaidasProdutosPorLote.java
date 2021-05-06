@@ -30,7 +30,7 @@ public class ImportaEntradasSaidasProdutosPorLote {
 		  Double vlItemEnt=0.0;
 		  Double totQtdeSai=0.0;
 		  Double vlItemSai=0.0;
-		  for(EntradasSaidasDeProdutos es :   entsai.retornaCadastroMovProdutos(lote)){
+		  for(EntradasSaidasDeProdutos es :   entsai.retornaCadastroMovProdutosPorId(lote)){
 			
 			  TotalizadoresPorItem  resE = entDao.getTotalizadoresItensPorMesAnoEnt(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());
 			  TotalizadoresPorItem  resS = saiDao.getTotalizadoresItensPorMesAnoSai(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());

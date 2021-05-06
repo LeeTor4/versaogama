@@ -98,7 +98,7 @@ public class Main2 {
 		  Double vlItemEnt=0.0;
 		  Double totQtdeSai=0.0;
 		  Double vlItemSai=0.0;
-		  for(EntradasSaidasDeProdutos es :   entsai.retornaCadastroMovProdutos(2L)){
+		  for(EntradasSaidasDeProdutos es :   entsai.retornaCadastroMovProdutosPorId(2L)){
 			
 			  TotalizadoresPorItem  resE = entDao.getTotalizadoresItensPorMesAnoEnt(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());
 			  TotalizadoresPorItem  resS = saiDao.getTotalizadoresItensPorMesAnoSai(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());

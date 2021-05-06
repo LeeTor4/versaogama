@@ -26,6 +26,8 @@ import versaogama.model.system.notafiscal.ProdutoNota;
 import versaogama.model.system.produto.AlteracaoItem;
 import versaogama.model.system.produto.OutrasUnid;
 import versaogama.model.system.produto.Produto;
+import versaogama.service.estabelecimento.ExportaQuantitativoEstoque;
+import versaogama.service.estabelecimento.ExportaTotalizadorAnual;
 import versaogama.service.estabelecimento.ImportaEntradasSaidasProdutosPorLote;
 import versaogama.service.estabelecimento.LoteImportacaoSpedFiscalService;
 
@@ -36,12 +38,17 @@ public class MainService {
 		
 		Pool pool = new Pool();
 		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo substituto-nov2017-corrigido.txt");
+		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
+		
+		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2018.csv";
+		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2017.CSV";
+
 		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
 		LeitorXML logica = new LeitorXML();	
 
 		XMLReader readerCF = XMLReaderFactory.createXMLReader();
 	  
+		ExportaQuantitativoEstoque exporta = new ExportaQuantitativoEstoque();
 		
 		RegC100 nf = new RegC100();
 		leitor.leitorSpedFiscal(p,pool);
@@ -61,18 +68,25 @@ public class MainService {
 		TotalizadorDiarioCuponsFiscais totDirCF = new TotalizadorDiarioCuponsFiscais();
 		LoteImportacaoSpedFiscalService lote    = new LoteImportacaoSpedFiscalService();
 		ImportaEntradasSaidasProdutosPorLote movPorLote = new ImportaEntradasSaidasProdutosPorLote();
+		ExportaTotalizadorAnual totalizadorFinanceiro = new ExportaTotalizadorAnual();
+		
 		Inventario inv = new Inventario();
 		ItensInventario itnInv = new ItensInventario();
 		
 		
-		Long numLote = lote.importandoLoteSpedFiscal(pXml,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
-       
-		System.out.println("Lote externo " + numLote);
-        
-		lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote);
-		lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote);
+//		Long numLote = lote.importandoLoteSpedFiscal(pXml,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
+//       
+//		System.out.println("Lote externo " + numLote);
+//        
+//		lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote);
+//		lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote);
+//		
+//		movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
-		movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
+		
+		 exporta.exportaControleQuantitativos(dirPlanilha, "2018","05329222000176");
+		
+		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2017","05329222000176");
         
 	}
 
