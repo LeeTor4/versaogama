@@ -112,7 +112,9 @@ public class LeitorTxtSpedFiscal {
 	private List<RegH005> regsH005 = new ArrayList<>();
 	private List<RegH010> regsH010 = new ArrayList<>();
 	
-	 
+    private Map<String,Reg0150> mpParticipante = new HashMap<String, Reg0150>();
+    private Map<String,Reg0200>     mpProdTerc = new HashMap<String, Reg0200>();
+    
 	private Reg0000 reg0000;
 	private Reg0200 reg0200;
 	private RegC100 regC100;
@@ -273,6 +275,7 @@ public class LeitorTxtSpedFiscal {
 				   if(i==13){reg0150.setBairro(lista.get(i));}
 			    }
 				   regs0150.add(reg0150);
+				   mpParticipante.put(reg0150.getCodPart(), reg0150);
 			}
 			
 		
@@ -321,6 +324,7 @@ public class LeitorTxtSpedFiscal {
 					}
 					
 					regs0200.add(reg0200);
+					mpProdTerc.put(reg0200.getCodItem(), reg0200);
 				}
 				
 				if(line.startsWith("|0220|")) {
@@ -687,12 +691,17 @@ public class LeitorTxtSpedFiscal {
 		return regs0150;
 	}
 	
-
+	public Map<String, Reg0150> getMpParticipante() {
+		return mpParticipante;
+	}
 	public List<Reg0200> getRegs0200() {
 		return regs0200;
 	}
 	
-    public List<Reg0220> getRegs0220() {
+    public Map<String, Reg0200> getMpProdTerc() {
+		return mpProdTerc;
+	}
+	public List<Reg0220> getRegs0220() {
 		return regs0220;
 	}
     

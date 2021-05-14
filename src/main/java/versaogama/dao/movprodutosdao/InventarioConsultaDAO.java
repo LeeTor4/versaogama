@@ -14,7 +14,7 @@ import versaogama.util.UtilsEConverters;
 
 public class InventarioConsultaDAO {
 
-private final Pool pool;
+    private final Pool pool;
 	
 	public InventarioConsultaDAO(Pool pool) {
 		this.pool = pool;

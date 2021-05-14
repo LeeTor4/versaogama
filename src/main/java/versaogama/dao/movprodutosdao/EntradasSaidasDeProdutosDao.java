@@ -10,11 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import versaogama.conexao.Pool;
-import versaogama.model.system.TotalizadoresPorItem;
 import versaogama.model.system.movprodutos.EntradasSaidasDeProdutos;
 import versaogama.model.system.movprodutos.ModelInventarioDeclarado;
 import versaogama.model.system.movprodutos.ModelSaldoInicial;
-import versaogama.model.system.movprodutos.ModelSaldosMensaisAnuais;
 import versaogama.util.UtilsEConverters;
 
 public class EntradasSaidasDeProdutosDao {

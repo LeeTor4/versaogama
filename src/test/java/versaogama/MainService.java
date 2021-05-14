@@ -38,7 +38,7 @@ public class MainService {
 		
 		Pool pool = new Pool();
 		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
+		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-mar2019.txt");
 		
 		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2018.csv";
 		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2017.CSV";
@@ -74,17 +74,17 @@ public class MainService {
 		ItensInventario itnInv = new ItensInventario();
 		
 		
-//		Long numLote = lote.importandoLoteSpedFiscal(pXml,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
-//       
-//		System.out.println("Lote externo " + numLote);
-//        
-//		lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote);
-//		lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote);
-//		
-//		movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
+		Long numLote = lote.importandoLoteSpedFiscal(pXml,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
+       
+		System.out.println("Lote externo " + numLote);
+        
+		lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote);
+		lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote);
+		
+		movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
 		
-		 exporta.exportaControleQuantitativos(dirPlanilha, "2018","05329222000176");
+		// exporta.exportaControleQuantitativos(dirPlanilha, "2018","05329222000176");
 		
 		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2017","05329222000176");
         
