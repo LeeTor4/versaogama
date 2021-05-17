@@ -230,55 +230,59 @@ public class Main {
 		
 //        O código abaixo ler os registro dos ECF´s		
 		
-		  for (int i = 0; i < leitor.getRegsC400().size(); i++) { // Equipamento ECF
-			 
-				  System.out.println(leitor.getRegsC400().get(i).getId()+"|"+leitor.getRegsC400().get(i).getNumCaixaECF());
-				  for (int x = 0; x < leitor.getRegsC400().get(i).getRegsC405().size(); x++) { //Reduções Z
-					  
-					  System.out.println(leitor.getRegsC400().get(i).getRegsC405().get(x).getId()+"|"+
-				              leitor.getRegsC400().get(i).getRegsC405().get(x).getIdPai()+"|"+
-							  leitor.getRegsC400().get(i).getRegsC405().get(x).getPosicaoRDZ()+"|"+ leitor.getRegsC400().get(i).getRegsC405().get(x).getIdPaiECF());
-					  for (int y = 0; y < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().size(); y++) {//Tot Parciais
-						  
-						  System.out.println(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getId()+"|"+
-								  leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getIdPai()+"|"+
-								  leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getCodTotPar()+"|"+
-								  leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getVlAcumTot());
-					  
-						  for (int w = 0; w < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().size(); w++) {
-							  
-							   System.out.println(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getId()+"|"+
-									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getIdPai()+"|"+
-									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getIdPaiRedZ()+"|"+
-									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getCodItem()+"|"+
-									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getQtd()+"|"+
-									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getUnd()+"|"+
-									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getVlItem());
-							  
-						  }
-	
-					  }
-					  
-					   for (int z = 0; z < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().size(); z++) {
-						   
-						     System.out.println(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getId()+"|"+
-						    		 leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getIdPai()+"|"+
-						    		 leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getCstIcms()+"|"+
-						    		 leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getCfop()+"|"+
-						    		 leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getVlOperacao());
-						   
-					   }
-				  }
-			  
-		  }
+//		  for (int i = 0; i < leitor.getRegsC400().size(); i++) { // Equipamento ECF
+//			 
+//				  System.out.println(leitor.getRegsC400().get(i).getId()+"|"+leitor.getRegsC400().get(i).getNumCaixaECF());
+//				  for (int x = 0; x < leitor.getRegsC400().get(i).getRegsC405().size(); x++) { //Reduções Z
+//					  
+//					  System.out.println(leitor.getRegsC400().get(i).getRegsC405().get(x).getId()+"|"+
+//				              leitor.getRegsC400().get(i).getRegsC405().get(x).getIdPai()+"|"+
+//							  leitor.getRegsC400().get(i).getRegsC405().get(x).getPosicaoRDZ()+"|"+ leitor.getRegsC400().get(i).getRegsC405().get(x).getIdPaiECF());
+//					  for (int y = 0; y < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().size(); y++) {//Tot Parciais
+//						  
+//						  System.out.println(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getId()+"|"+
+//								  leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getIdPai()+"|"+
+//								  leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getCodTotPar()+"|"+
+//								  leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getVlAcumTot());
+//					  
+//						  for (int w = 0; w < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().size(); w++) {
+//							  
+//							   System.out.println(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getId()+"|"+
+//									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getIdPai()+"|"+
+//									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getIdPaiRedZ()+"|"+
+//									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getCodItem()+"|"+
+//									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getQtd()+"|"+
+//									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getUnd()+"|"+
+//									   leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getVlItem());
+//							  
+//						  }
+//	
+//					  }
+//					  
+//					   for (int z = 0; z < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().size(); z++) {
+//						   
+//						     System.out.println(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getId()+"|"+
+//						    		 leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getIdPai()+"|"+
+//						    		 leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getCstIcms()+"|"+
+//						    		 leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getCfop()+"|"+
+//						    		 leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC490().get(z).getVlOperacao());
+//						   
+//					   }
+//				  }
+//			  
+//		  }
 		
 		try {
 			
 			
 			
 			
-//			List<ProdutoNotaXmlProprio> produtosXMLHandler = leitor.getProdutosXMLHandler(pXml, logica);
-//
+			List<ProdutoNotaXmlProprio> produtosXMLHandler = leitor.getProdutosXMLHandler(pXml, logica);
+			
+			for(ProdutoNotaXmlProprio pro : produtosXMLHandler){
+				
+			}
+
 //			for(String cod :  logica.getListaDeProdutos()){
 //				
 //				double sum = produtosXMLHandler.parallelStream()

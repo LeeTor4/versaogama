@@ -112,8 +112,8 @@ public class EstabelecimentoDao implements EstabelecimentoDaoInterface{
 		est.setIe(rs.getString("ie"));
 		est.setNome(rs.getString("nome"));
 		est.setNmFantasia(rs.getString("nome_fantasia"));
-		est.setIdPaiEnd(rs.getLong("ind_pai_end"));
-		est.setIdPai(rs.getLong("ind_pai_emp"));
+		est.setIdPaiEnd(rs.getLong("id_pai_end"));
+		est.setIdPai(rs.getLong("id_pai_emp"));
 				
 		return est;
 	}

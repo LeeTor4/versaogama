@@ -69,7 +69,7 @@ public class ModelHistoricoItensDao {
 		stmt.setDouble(12, hist.getVlLiq());
 		stmt.setString(13, hist.getCst());
 		stmt.setString(14, hist.getCfop());
-		stmt.setDouble(15, hist.getAliqIcms());
+		stmt.setDouble(15, (hist.getAliqIcms() ==null ? 0.0 : hist.getAliqIcms()));
 		stmt.setString(16, hist.getCodMod());
 		stmt.setString(17, hist.getDescricao());
 		stmt.setString(18, hist.getNumDoc());

@@ -90,6 +90,7 @@ public class LeitorTxtSpedFiscal {
 	
 	private Map<String,SituacaoGrpProdutoSpedFiscal> mpSitGrpProdSF = new HashMap<String,SituacaoGrpProdutoSpedFiscal>();
 	
+	private List<Reg0000> regs0000 = new ArrayList<>();
 	private List<Reg0150> regs0150 = new ArrayList<>();
 	private List<Reg0190> regs0190 = new ArrayList<>();
 	private List<Reg0200> regs0200 = new ArrayList<>();
@@ -112,8 +113,16 @@ public class LeitorTxtSpedFiscal {
 	private List<RegH005> regsH005 = new ArrayList<>();
 	private List<RegH010> regsH010 = new ArrayList<>();
 	
-    private Map<String,Reg0150> mpParticipante = new HashMap<String, Reg0150>();
-    private Map<String,Reg0200>     mpProdTerc = new HashMap<String, Reg0200>();
+	private Map<Long,Reg0000>        mpEmpresa  = new HashMap<Long, Reg0000>();
+    private Map<String,Reg0150> mpParticipante  = new HashMap<String, Reg0150>();
+    private Map<String,Reg0200>     mpProdTerc  = new HashMap<String, Reg0200>();
+    
+    private Map<Long,RegC400>       mpEquipEcf  = new HashMap<Long, RegC400>();
+    private Map<Long,RegC405>        mpReducao  = new HashMap<Long, RegC405>();
+    private Map<Long,RegC490>  mpTotalizadorCF  = new HashMap<Long, RegC490>();
+    
+    private Map<Long,RegC860>       mpEquipCFe  = new HashMap<Long, RegC860>();
+    
     
 	private Reg0000 reg0000;
 	private Reg0200 reg0200;
@@ -248,7 +257,8 @@ public class LeitorTxtSpedFiscal {
 				reg0000.setIndPerfil(campos[14]);
 				reg0000.setIndAtiv(campos[15]);
 				
-				
+				regs0000.add(reg0000);
+				mpEmpresa.put(reg0000.getId(), reg0000);
 			}
 	
 			
@@ -485,6 +495,7 @@ public class LeitorTxtSpedFiscal {
 					 if(i==5) {regC400.setNumCaixaECF(lista.get(i));}
 				 }
 				 regsC400.add(regC400);
+				 mpEquipEcf.put(regC400.getId(), regC400);
         	 }
         	 
         	 if(line.startsWith("|C405|")) {
@@ -509,6 +520,7 @@ public class LeitorTxtSpedFiscal {
 					 if(i==7) {regC405.setVlVendaBruta(Double.valueOf(lista.get(i).replace(",",".")));}
 				 }
 				 regC400.adicionaRegC405(regC405);
+				 mpReducao.put(regC405.getId(), regC405);
 				 regsC405.add(regC405);
         	 }
         	 
@@ -572,6 +584,7 @@ public class LeitorTxtSpedFiscal {
 					 if(i==7) {regC490.setVlIcms(Double.valueOf(lista.get(i).replace(",",".")));}
 				 }
 				 regC405.adicionaRegC490(regC490);
+				 mpTotalizadorCF.put(regC490.getIdPai(), regC490);
 				 regsC490.add(regC490);
         	 }
 
@@ -593,6 +606,7 @@ public class LeitorTxtSpedFiscal {
 				 }
 				 
 				 regsC860.add(regC860);
+				 mpEquipCFe.put(regC860.getId(), regC860);
         	 }
    
         	 if(line.startsWith("|H005|")) {
@@ -679,14 +693,17 @@ public class LeitorTxtSpedFiscal {
 	}
 	
 	
-	
-	
-	
-	
 	public Reg0000 getReg0000() {
 		return reg0000;
 	}
-
+	
+	
+	public List<Reg0000> getRegs0000() {
+		return regs0000;
+	}
+	public Map<Long, Reg0000> getMpEmpresa() {
+		return mpEmpresa;
+	}
 	public List<Reg0150> getRegs0150() {
 		return regs0150;
 	}
@@ -719,8 +736,16 @@ public class LeitorTxtSpedFiscal {
 	public List<RegC400> getRegsC400() {
 		return regsC400;
 	}
+	
+	public Map<Long, RegC400> getMpEquipEcf() {
+		return mpEquipEcf;
+	}
 	public List<RegC405> getRegsC405() {
 		return regsC405;
+	}
+	
+	public Map<Long, RegC405> getMpReducao() {
+		return mpReducao;
 	}
 	public List<RegC420> getRegsC420() {
 		return regsC420;
@@ -731,11 +756,17 @@ public class LeitorTxtSpedFiscal {
 	public List<RegC490> getRegsC490() {
 		return regsC490;
 	}
-
+    
+	public Map<Long, RegC490> getMpTotalizadorCF() {
+		return mpTotalizadorCF;
+	}
 	public List<RegC860> getRegsC860() {
 		return regsC860;
 	}
 	
+	public Map<Long, RegC860> getMpEquipCFe() {
+		return mpEquipCFe;
+	}
 	public List<RegH005> getRegsH005() {
 		return regsH005;
 	}

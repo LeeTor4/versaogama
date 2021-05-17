@@ -38,7 +38,7 @@ public class MainService {
 		
 		Pool pool = new Pool();
 		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-mar2019.txt");
+		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-out2020.txt");
 		
 		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2018.csv";
 		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2017.CSV";
