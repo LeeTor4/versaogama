@@ -235,6 +235,7 @@ public class LoteImportacaoSpedFiscalService {
 
 	private void insereHistoricoItensEntradasTerceiros(LeitorTxtSpedFiscal leitor, ProdutoNota pNota, int i, int y,Long idPaiEst)
 			throws SQLException {
+		   histItens.setIdPaiLote(leitor.getReg0000().getId());
 		   histItens.setIdPai(insereProdutosSpedFiscal(leitor, pNota, i, y).getIdPai());
 		   histItens.setEmpresa(leitor.getReg0000().getCnpj()); 
 		   histItens.setOperacao("E");
@@ -271,6 +272,7 @@ public class LoteImportacaoSpedFiscalService {
 	
 	private void insereHistoricoItensEntradasProprias(ProdutoNotaXmlProprio nfP,LeitorTxtSpedFiscal leitor,RegC100 nf,Long idPaiEst) throws SQLException {
 		   nf.getNotasFiscaisTxtSpedFiscal(leitor); 
+		   histItens.setIdPaiLote(leitor.getReg0000().getId());
 		   histItens.setIdPai(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getId());
 		   histItens.setEmpresa(leitor.getReg0000().getCnpj()); 
 		   histItens.setOperacao("E");
@@ -290,10 +292,16 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setDescricao(nfP.getDescricao());
 		   histItens.setNumDoc(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getNumDoc());
 		   histItens.setChaveDoc(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getChvNfe());
-		   histItens.setNome(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()).getNome());
-		   histItens.setCpfCnpj(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()).getCpf());
+		   
+		   if(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()) != null) {
+			   histItens.setNome(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()).getNome());
+			   histItens.setCpfCnpj(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()).getCpf());
 		  
-		   histItemDao.cadastrarHistoricoItem(histItens);
+			   histItemDao.cadastrarHistoricoItem(histItens);
+		   }
+		  
+		  
+		  
 	}
 	
 	
@@ -327,11 +335,14 @@ public class LoteImportacaoSpedFiscalService {
 
 	private void insereHistoricoItensSaidas(ProdutoNotaXmlProprio nfP, LeitorTxtSpedFiscal leitor, RegC100 nf,Long idPaiEst) throws SQLException {
 		   nf.getNotasFiscaisTxtSpedFiscal(leitor); 
-		   histItens.setIdPai(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getId());
+		   
+		   
+		   histItens.setIdPaiLote(leitor.getReg0000().getId());
+		 
 		   histItens.setEmpresa(leitor.getReg0000().getCnpj());
 		   histItens.setOperacao("S");
 		   histItens.setEcfCx("");
-		   histItens.setDtDoc(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getDtEntSai());
+		
 		   histItens.setCodItem(nfP.getCodItem());
 		   histItens.setQtde(nfP.getQtde());
 		   histItens.setUnd(nfP.getUnd());
@@ -342,14 +353,27 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setCst(nfP.getCstIcms());
 		   histItens.setCfop(nfP.getCfop());
 		   histItens.setAliqIcms(0.0);
-		   histItens.setCodMod(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodMod());
+		 
 		   histItens.setDescricao(nfP.getDescricao());
-		   histItens.setNumDoc(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getNumDoc());
-		   histItens.setChaveDoc(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getChvNfe());
-		   histItens.setNome(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()).getNome());
-		   histItens.setCpfCnpj(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()).getCpf());
 		  
-		   histItemDao.cadastrarHistoricoItem(histItens);
+		 
+		  
+		  
+		   if(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart() != null
+				   && leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()) != null) {
+			   histItens.setIdPai(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getId());
+			   histItens.setDtDoc(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getDtEntSai());
+			   histItens.setNumDoc(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getNumDoc());
+			   histItens.setCodMod(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodMod());
+			   histItens.setChaveDoc(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getChvNfe());
+			   histItens.setNome(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()).getNome());
+			   histItens.setCpfCnpj(leitor.getMpParticipante().get(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodPart()).getCpf());  
+		  
+			   histItemDao.cadastrarHistoricoItem(histItens);
+		   }
+		 
+		  
+		  
 		
 	}
 
@@ -400,7 +424,7 @@ public class LoteImportacaoSpedFiscalService {
 
 	private void insereHistoticoItensCF(LeitorTxtSpedFiscal leitor, ItensMovDiario itensCF, Long idPaiEmp, Long idPaiEst, int i,
 			int x, int y, int w) throws SQLException {
-		
+		   histItens.setIdPaiLote(leitor.getReg0000().getId());
 		   histItens.setIdPai(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getIdPai());
 		   histItens.setEmpresa(leitor.getReg0000().getCnpj()); // MOckado
 		   histItens.setOperacao("S");
@@ -475,6 +499,7 @@ public class LoteImportacaoSpedFiscalService {
 
   private void insereHistoricoItensCFe(LeitorTxtSpedFiscal leitor, ItensMovDiarioCFe itenCfe, Long idPaiEmp,
 		Long idPaiEst, Map<String, ProdutoCupomFiscalXml> mpCFe, ProdutoCupomFiscalXml cf, int i) throws SQLException {
+	   histItens.setIdPaiLote(leitor.getReg0000().getId());
 	   histItens.setIdPai(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getIdPai());
 	   histItens.setEmpresa(leitor.getReg0000().getCnpj()); // MOckado
 	   histItens.setOperacao("S");

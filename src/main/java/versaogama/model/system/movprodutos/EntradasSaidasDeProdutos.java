@@ -5,6 +5,7 @@ public class EntradasSaidasDeProdutos {
 	private Long   id;
 	private Long   idPai;
 	private Long   idCodItem;
+	private String operacao;
 	private String cnpj;
 	private String descricao;
 	private String und;
@@ -54,6 +55,15 @@ public class EntradasSaidasDeProdutos {
 	public void setIdPai(Long idPai) {
 		this.idPai = idPai;
 	}
+	
+	public String getOperacao() {
+		return operacao;
+	}
+
+	public void setOperacao(String operacao) {
+		this.operacao = operacao;
+	}
+
 	public Long getIdCodItem() {
 		return idCodItem;
 	}

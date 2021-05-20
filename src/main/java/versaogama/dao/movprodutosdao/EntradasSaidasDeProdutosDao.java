@@ -73,6 +73,41 @@ public class EntradasSaidasDeProdutosDao {
 		return retorno;
 	}
 	
+    public ModelInventarioDeclarado getInventarioDec(String codItem,String codAntItem, String cnpj, String ano) throws SQLException{
+    	
+    	ModelInventarioDeclarado inv = null;
+    	
+    	String sql = "SELECT * FROM v_movimentacao_inv where cod_item in (?,?) and cnpj = ? and ano = ?";
+    	
+    	Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql)){	
+			stmt.setString(1, codItem);
+			stmt.setString(2, codAntItem);
+			stmt.setString(3, cnpj);
+			stmt.setString(4, ano);
+			stmt.executeQuery();
+			try(ResultSet rs = stmt.getResultSet()){		
+				while(rs.next()) {	
+				    inv = new ModelInventarioDeclarado();
+					inv.setCnpj(rs.getString("cnpj"));
+					inv.setAno(rs.getString("ano"));
+					inv.setCodItem(rs.getString("cod_item"));
+					inv.setCodItemAnt(rs.getString("cod_ant_item"));
+					inv.setQtde(rs.getDouble("qtde"));
+					inv.setVlUnit(rs.getDouble("vl_unit"));
+					inv.setVlItem(rs.getDouble("vl_item"));
+				    inv.setDescricao(rs.getString("descricao"));
+				    inv.setDtInv(UtilsEConverters.getSQLParaLocalDate(rs.getDate("dt_inv")));
+					
+					
+				}
+			}
+			
+		}
+		pool.liberarConnection(con);
+    	return inv;
+    }
+    
     public List<ModelInventarioDeclarado> getInventarioDeclarado(String codItem,String codAntItem, String cnpj, String ano) throws SQLException{
     	
     	List<ModelInventarioDeclarado> retorno = new ArrayList<ModelInventarioDeclarado>();
@@ -675,11 +710,13 @@ public class EntradasSaidasDeProdutosDao {
     	pool.liberarConnection(con);
     	return retorno;
     }
+
     
-    public EntradasSaidasDeProdutos getSaldoAnual(String codItem, String codAntItem,String ano, String cnpj) throws SQLException{
-    	EntradasSaidasDeProdutos obj = null;
+    public List<EntradasSaidasDeProdutos> getSaldoAnualV3(String codItem, String codAntItem,String ano, String cnpj) throws SQLException{
     	
-    	String sql = "{call sp_saldo_anual(?,?,?,?)}";
+    	 List<EntradasSaidasDeProdutos> retorno = new ArrayList<EntradasSaidasDeProdutos>();
+    	
+    	String sql = "SELECT * FROM v_saldo_anual WHERE cod_item in (?,?) AND ano = ? AND cnpj = ?";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
@@ -690,26 +727,25 @@ public class EntradasSaidasDeProdutosDao {
 			ResultSet rs = stmt.executeQuery();
 
 			while(rs.next()) {	
-				obj = new EntradasSaidasDeProdutos();
+				EntradasSaidasDeProdutos obj = new EntradasSaidasDeProdutos();
 				
 				obj.setIdCodItem(rs.getLong("id_cod_item"));
+				obj.setOperacao(rs.getString("operacao"));
 				obj.setCnpj(rs.getString("cnpj"));
 				obj.setDescricao(rs.getString("descricao"));
 				obj.setAno(rs.getString("ano"));
 				obj.setCodItem(rs.getString("cod_item"));
-				obj.setCodAntItem(rs.getString("cod_ant_item"));
-				obj.setTotQtdeEnt(rs.getDouble("tot_qtde_ent"));
-				obj.setTotVlItemEnt(rs.getDouble("vl_tot_item_ent"));
-                obj.setTotQtdeSai(rs.getDouble("tot_qtde_sai"));
-				obj.setTotVlItemSai(rs.getDouble("vl_tot_item_sai"));	
+				obj.setCodAntItem(rs.getString("codigo_ant_item"));
+				obj.setTotQtdeEnt(rs.getDouble("tot_qtde"));
+				obj.setTotVlItemEnt(rs.getDouble("vl_tot_item"));
 
+               retorno.add(obj);
 			}
     	}
     	//con.close();
     	pool.liberarConnection(con);
-    	return obj;
+    	return retorno;
     }
-
 	private void resultsetSaldo(List<EntradasSaidasDeProdutos> retorno, ResultSet rs) throws SQLException {
 		while(rs.next()) {	
 			

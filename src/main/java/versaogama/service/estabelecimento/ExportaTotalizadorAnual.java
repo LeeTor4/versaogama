@@ -99,33 +99,40 @@ public class ExportaTotalizadorAnual {
                 totAnual.setVrItemEi(invDeclarado(p.getCodItem(),p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)).getVlItem());
 				System.out.println("INV INI " + totAnual.getQtdeEi()+"|"+totAnual.getVrUnitEi()+"|"+totAnual.getVrItemEi());
 
-		        qtdeEnt1  +=  dao.getSaldoAnual(p.getCodItem(),p.getCodAntItem(), ano, cnpj).getTotQtdeEnt();
-		        vlTotEnt1 +=  dao.getSaldoAnual(p.getCodItem(),p.getCodAntItem(), ano, cnpj).getTotVlItemEnt();
-			
-          	    qtdeSai1  +=  dao.getSaldoAnual(p.getCodItem(),p.getCodAntItem(), ano, cnpj).getTotQtdeSai();
-		        vlTotSai1 +=  dao.getSaldoAnual(p.getCodItem(),p.getCodAntItem(), ano, cnpj).getTotVlItemSai();
-			
+			    for(EntradasSaidasDeProdutos  entsai : dao.getSaldoAnualV3(p.getCodItem(),p.getCodAntItem(), ano, cnpj)){
+			     
+			    	 if(entsai.getOperacao().equals("E")){
+			    		 
+			    		 qtdeEnt1   +=  entsai.getTotQtdeEnt();
+			    		 vlTotEnt1  +=  entsai.getTotVlItemEnt();
+			    	 }
+			    	 
+			    	 if(entsai.getOperacao().equals("S")){
+			    		 
+			    		 qtdeSai1  +=  entsai.getTotQtdeEnt();
+			    		 vlTotSai1 +=  entsai.getTotVlItemEnt();
+			    	 }
+			    }
 		   
-		   
-               totAnual.setQtdeEnt(qtdeEnt1);						
-			   totAnual.setVlItemEnt(vlTotEnt1);
-			   vlUnitEnt = totAnual.getVlItemEnt()/totAnual.getQtdeEnt();
-			   totAnual.setVlUnitEnt((vlUnitEnt.isNaN() ? 0.0 : vlUnitEnt )); 
-			   System.out.println("MOV_ENT |" + totAnual.getQtdeEnt() +"|"+totAnual.getVlUnitEnt()+"|"+totAnual.getVlItemEnt());						    
+                totAnual.setQtdeEnt(qtdeEnt1);						
+			    totAnual.setVlItemEnt(vlTotEnt1);
+			    vlUnitEnt = totAnual.getVlItemEnt()/totAnual.getQtdeEnt();
+			    totAnual.setVlUnitEnt((vlUnitEnt.isNaN() ? 0.0 : vlUnitEnt )); 
+			    System.out.println("MOV_ENT |" + totAnual.getQtdeEnt() +"|"+totAnual.getVlUnitEnt()+"|"+totAnual.getVlItemEnt());						    
 						   
 						  
 								
-			 totAnual.setQtdeSai( qtdeSai1);						
-			 totAnual.setVlItemSai(vlTotSai1);
-			 vlUnitSai = totAnual.getVlItemSai()/totAnual.getQtdeSai();
-			 totAnual.setVlUnitSai((vlUnitSai.isNaN() ? 0.0 : vlUnitSai));
-			 System.out.println("MOV_SAI |" + totAnual.getQtdeSai() +"|"+totAnual.getVlUnitSai()+"|"+totAnual.getVlItemSai());
+			    totAnual.setQtdeSai( qtdeSai1);						
+			    totAnual.setVlItemSai(vlTotSai1);
+			    vlUnitSai = totAnual.getVlItemSai()/totAnual.getQtdeSai();
+			    totAnual.setVlUnitSai((vlUnitSai.isNaN() ? 0.0 : vlUnitSai));
+			    System.out.println("MOV_SAI |" + totAnual.getQtdeSai() +"|"+totAnual.getVlUnitSai()+"|"+totAnual.getVlItemSai());
 							
 						  
 		
-			totAnual.setQtdeEf(invDeclarado(p.getCodItem(),p.getCodAntItem(), cnpj, ano).getQtde());
-			totAnual.setVrUnitEf(invDeclarado(p.getCodItem(),p.getCodAntItem(), cnpj, ano).getVlUnit());
-			totAnual.setVrItemEf(invDeclarado(p.getCodItem(),p.getCodAntItem(), cnpj, ano).getVlItem());
+			    totAnual.setQtdeEf(invDeclarado(p.getCodItem(),p.getCodAntItem(), cnpj, ano).getQtde());
+			    totAnual.setVrUnitEf(invDeclarado(p.getCodItem(),p.getCodAntItem(), cnpj, ano).getVlUnit());
+			    totAnual.setVrItemEf(invDeclarado(p.getCodItem(),p.getCodAntItem(), cnpj, ano).getVlItem());
 							
 				System.out.println("INV_FIN |"+totAnual.getQtdeEf()+"|"+totAnual.getVrUnitEf()+"|"+totAnual.getVrItemEf());
 		   

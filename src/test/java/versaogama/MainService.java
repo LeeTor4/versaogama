@@ -26,6 +26,7 @@ import versaogama.model.system.notafiscal.ProdutoNota;
 import versaogama.model.system.produto.AlteracaoItem;
 import versaogama.model.system.produto.OutrasUnid;
 import versaogama.model.system.produto.Produto;
+import versaogama.service.estabelecimento.ExportaHisoricoItem;
 import versaogama.service.estabelecimento.ExportaQuantitativoEstoque;
 import versaogama.service.estabelecimento.ExportaTotalizadorAnual;
 import versaogama.service.estabelecimento.ImportaEntradasSaidasProdutosPorLote;
@@ -38,10 +39,10 @@ public class MainService {
 		
 		Pool pool = new Pool();
 		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-out2020.txt");
+		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo substituto-fev2019.txt");
 		
-		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2018.csv";
-		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2017.CSV";
+		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2018_v2.csv";
+		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2018.CSV";
 
 		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
 		LeitorXML logica = new LeitorXML();	
@@ -68,7 +69,8 @@ public class MainService {
 		TotalizadorDiarioCuponsFiscais totDirCF = new TotalizadorDiarioCuponsFiscais();
 		LoteImportacaoSpedFiscalService lote    = new LoteImportacaoSpedFiscalService();
 		ImportaEntradasSaidasProdutosPorLote movPorLote = new ImportaEntradasSaidasProdutosPorLote();
-		ExportaTotalizadorAnual totalizadorFinanceiro = new ExportaTotalizadorAnual();
+		ExportaHisoricoItem hist = new ExportaHisoricoItem();
+
 		
 		Inventario inv = new Inventario();
 		ItensInventario itnInv = new ItensInventario();
@@ -84,10 +86,17 @@ public class MainService {
 		movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
 		
-		// exporta.exportaControleQuantitativos(dirPlanilha, "2018","05329222000176");
+		exporta.exportaControleQuantitativos(dirPlanilha, "2018","05329222000176");
 		
-		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2017","05329222000176");
+		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
+		
+		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
+	      String dirPlanHistorico2 = "D:/ORTOGENESE/fichas_estoques/";
+	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
+	      
+	     // hist.exportarHistoricoItem(dirPlanHistorico2, "2019", "05329222000419", "1022", "");
+	      hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
 	}
 
 }

@@ -18,6 +18,9 @@ public class UtilsEConverters {
 	private static DateTimeFormatter formatter = 
 			  DateTimeFormatter.ofPattern("ddMMyyyy");
 	
+	private static DateTimeFormatter formatter2 = 
+			  DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	
 	public static LocalDate getStringParaData(String data) {
 		TemporalAccessor parse = formatter.parse(data);
 		LocalDate from = LocalDate.from(parse);
@@ -72,7 +75,12 @@ public class UtilsEConverters {
     	return formatado;
     }
 	
-	
+	public static String getDataParaString2(LocalDate data) {
+		
+		String dtFormatada = formatter2.format(data);
+		//System.out.println(dtFormatada);
+		return dtFormatada;
+	}
 	
 	/*
 	 * public static void main(String[] args) { LocalDate of = LocalDate.of(2019, 2,

@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class ModelHistoricoItens {
 
 	private Long             id;
+	private Long      idPaiLote;   
 	private Long          idPai;
 	private String      empresa;
 	private String      cnpj;
@@ -35,6 +36,13 @@ public class ModelHistoricoItens {
 	}
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Long getIdPaiLote() {
+		return idPaiLote;
+	}
+	public void setIdPaiLote(Long idPaiLote) {
+		this.idPaiLote = idPaiLote;
 	}
 	public Long getIdPai() {
 		return idPai;
