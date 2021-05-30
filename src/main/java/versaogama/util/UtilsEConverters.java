@@ -82,6 +82,16 @@ public class UtilsEConverters {
 		return dtFormatada;
 	}
 	
+	public static String preencheZerosAEsquerda(String str,int tam) {
+		String zeros = "0";
+		String qtdeZeros="";
+		for(int i =1; i <= tam ;i++) {			
+			qtdeZeros += zeros;
+		}
+		String formatted = (qtdeZeros + str).substring(str.length());
+		return formatted;
+	}
+	
 	/*
 	 * public static void main(String[] args) { LocalDate of = LocalDate.of(2019, 2,
 	 * 13); //getDataParaString(of); //getStringParaData("05072019"); String cam =

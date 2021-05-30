@@ -31,6 +31,10 @@ public class ExportaHisoricoItem {
  		daoInv = new EntradasSaidasDeProdutosDao(pool); 
 	}
  	
+ 	
+ 	public ModelInventarioDeclarado getInvInicial(String codItem,String codAntItem,String cnpj,String ano) throws SQLException {
+		   return daoInv.getInventarioDec(codItem, codAntItem, cnpj, ano);
+    }
  	public List<ModelHistoricoItens> getListHistoricoItem(String cnpj,String codItem,String codAntItem,String ano) throws SQLException{
 		return dao.getHistoricoItens(cnpj,codItem,codAntItem, ano);
 	}
@@ -49,10 +53,10 @@ public class ExportaHisoricoItem {
 			writer.write(linha);
 			writer.newLine();
 			Double qtdeSaldo = 0.0;
-
+			 
 			 ModelInventarioDeclarado invInicial = getInvInicial(codItem, codAntItem, cnpj, String.valueOf(Integer.valueOf(ano)-1));
-			
 			 if(invInicial != null) {
+				
 				 hist.setData(invInicial.getDtInv());
 
 			     hist.setOperacao("INV");
@@ -66,7 +70,7 @@ public class ExportaHisoricoItem {
 			     linha = formatacaoPlanilha(hist);
 		         writer.write(linha);
 		         writer.newLine();
-			 } 
+			 }
  
 			 
 			 for(ModelHistoricoItens obj : getListHistoricoItem(cnpj, codItem, codAntItem, ano)){
@@ -231,9 +235,7 @@ public class ExportaHisoricoItem {
 	}
 	
 	
-	public ModelInventarioDeclarado getInvInicial(String codItem,String codAntItem,String cnpj,String ano) throws SQLException {
-		   return daoInv.getInventarioDec(codItem, codAntItem, cnpj, ano);
-    }
+	
 	
 	   public List<ModelProdutoDePara> importaListaProdutos(String caminho) {
 		   List<ModelProdutoDePara> retorno = new ArrayList<>();
@@ -245,7 +247,7 @@ public class ExportaHisoricoItem {
 				 
 				 @SuppressWarnings("resource")
 				 Scanner leitor = new Scanner(arquivoCSV);
-				 leitor.nextLine();
+				 //leitor.nextLine();
 				 while(leitor.hasNext()){
 					 ModelProdutoDePara prod = new ModelProdutoDePara();
 					 linhaDoArquivo = leitor.nextLine();
@@ -272,9 +274,17 @@ public class ExportaHisoricoItem {
 		   return retorno;
 	   }
 	   
-	   public void exportarHistoricoItensComLista(String fileProdutos,String file, String ano, String cnpj) throws SQLException {	   
-		    for(ModelProdutoDePara p : importaListaProdutos(fileProdutos)){    	
-		    	exportarHistoricoItem(file , ano, cnpj, p.getCodigo(), p.getCodAntItem());
+	   public void exportarHistoricoItensComLista(String fileProdutos,String file, String ano, String cnpj) throws SQLException {
+            int id = 0;
+		    for(ModelProdutoDePara p : importaListaProdutos(fileProdutos)){  
+		    	
+		    	if(p.getCodigo() != null || p.getCodAntItem()  != null) {
+		    		id++;
+		    		//System.out.println(id + " - " + p.getCodigo() + " = " + p.getCodAntItem());
+
+		    		exportarHistoricoItem(file , ano, cnpj, p.getCodigo(), p.getCodAntItem());
+		    	}
+		    
 		    }
 	   }
 }

@@ -25,9 +25,8 @@ public class EntradasSaidasDeProdutos {
 		
 	}
 	
-    public EntradasSaidasDeProdutos(Long   idPai,Long   idCodItem,String cnpj,  String descricao,String ano ,String mes,String codItem,String codAntItem,
+    public EntradasSaidasDeProdutos(Long   idCodItem,String cnpj,  String descricao,String ano ,String mes,String codItem,String codAntItem,
     		Double totQtdeEnt,Double totVlItemEnt,Double totQtdeSai,Double totVlItemSai) {
-		this.idPai = idPai;
 		this.idCodItem = idCodItem;
 		this.cnpj = cnpj;
 		this.descricao = descricao;

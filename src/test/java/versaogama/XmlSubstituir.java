@@ -20,6 +20,7 @@ import org.xml.sax.InputSource;
 
 import versaogama.managerxml.LeitorXML;
 import versaogama.model.xml.CopiaArquivoXML_DE_PARA;
+import versaogama.util.UtilsEConverters;
 
 public class XmlSubstituir {
 
@@ -59,14 +60,16 @@ public class XmlSubstituir {
 //	    	}
 //	    }
 		
-		Path pXmlDE = Paths.get("D:\\xml-202012-repo");
-		Path pXmlPARA = Paths.get("D:\\xml-servidor");
-		CopiaArquivoXML_DE_PARA copiarXML = new CopiaArquivoXML_DE_PARA();
+//		Path pXmlDE = Paths.get("D:\\xml-202012-repo");
+//		Path pXmlPARA = Paths.get("D:\\xml-servidor");
+//		CopiaArquivoXML_DE_PARA copiarXML = new CopiaArquivoXML_DE_PARA();
+//		
+//		boolean copia = copiarXML.copia(new File(pXmlDE.toString()), new File(pXmlPARA.toString()));
+//		
+//		System.out.println(copia);
 		
-		boolean copia = copiarXML.copia(new File(pXmlDE.toString()), new File(pXmlPARA.toString()));
 		
-		System.out.println(copia);
-		
+		System.out.println(UtilsEConverters.preencheZerosAEsquerda("0000000012345", 9));
 	}
 
 }

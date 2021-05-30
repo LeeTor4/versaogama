@@ -5,9 +5,12 @@ import java.sql.SQLException;
 import versaogama.conexao.Pool;
 import versaogama.dao.estabelecimentodao.importacaospedfical.TotalizadorePorItemEntDAO;
 import versaogama.dao.estabelecimentodao.importacaospedfical.TotalizadorePorItemSaiDAO;
+import versaogama.dao.estabelecimentodao.produto.AlteracaoItemDao;
+import versaogama.dao.estabelecimentodao.produto.ProdutoDao;
 import versaogama.dao.movprodutosdao.EntradasSaidasDeProdutosDao;
 import versaogama.model.system.TotalizadoresPorItem;
 import versaogama.model.system.movprodutos.EntradasSaidasDeProdutos;
+import versaogama.util.UtilsEConverters;
 
 public class ImportaEntradasSaidasProdutosPorLote {
 
@@ -15,13 +18,17 @@ public class ImportaEntradasSaidasProdutosPorLote {
 	private EntradasSaidasDeProdutosDao entsai;
 	private TotalizadorePorItemEntDAO entDao;
 	private TotalizadorePorItemSaiDAO saiDao;
+	private ProdutoDao prodDao;
+	private AlteracaoItemDao altItemDao;
 	
 	public ImportaEntradasSaidasProdutosPorLote() {
 		Pool pool = new Pool();
 		
-		entsai = new EntradasSaidasDeProdutosDao(pool);
-		entDao = new TotalizadorePorItemEntDAO(pool);
-		saiDao = new TotalizadorePorItemSaiDAO(pool);
+		entsai      = new EntradasSaidasDeProdutosDao(pool);
+		entDao      = new TotalizadorePorItemEntDAO(pool);
+		saiDao      = new TotalizadorePorItemSaiDAO(pool);
+		prodDao     = new ProdutoDao(pool);
+		altItemDao  = new AlteracaoItemDao(pool);
 	}
 	
 	public void importacaoDosItensDeEntradasESaidasDeProdutos(Long lote) throws SQLException {
@@ -30,7 +37,7 @@ public class ImportaEntradasSaidasProdutosPorLote {
 		  Double vlItemEnt=0.0;
 		  Double totQtdeSai=0.0;
 		  Double vlItemSai=0.0;
-		  for(EntradasSaidasDeProdutos es :   entsai.retornaCadastroMovProdutosPorId(lote)){
+		  for(EntradasSaidasDeProdutos es :   entsai.retornaMovProdutosPorId(lote)){
 			
 			  TotalizadoresPorItem  resE = entDao.getTotalizadoresItensPorMesAnoEnt(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());
 			  TotalizadoresPorItem  resS = saiDao.getTotalizadoresItensPorMesAnoSai(es.getCnpj(), es.getCodItem(), es.getAno(), es.getMes());
@@ -39,16 +46,17 @@ public class ImportaEntradasSaidasProdutosPorLote {
 			  totQtdeSai = (resS.getVlTotQtde()==null ? 0.0 : resS.getVlTotQtde());
 			  vlItemSai  = (resS.getVlTotItem()==null ? 0.0 : resS.getVlTotItem());
 			  EntradasSaidasDeProdutos obj = new EntradasSaidasDeProdutos(
-					  es.getId(), es.getIdCodItem(), es.getCnpj(), es.getDescricao(), 
+					  prodDao.getProdutoPorCodUtiliz(es.getCodItem()).getId(), es.getCnpj(), prodDao.getProdutoPorCodUtiliz(es.getCodItem()).getDescricao(), 
 					  es.getAno(), 
 					  es.getMes(),
 					  es.getCodItem(), 
-					  es.getCodAntItem(),
+					  altItemDao.getAlteracaoItemPorIdProd(Integer.valueOf(prodDao.getProdutoPorCodUtiliz(es.getCodItem()).getId().toString())).getCodAntItem(),
 					  totQtdeEnt,
 					  vlItemEnt,
 					  totQtdeSai,
 					  vlItemSai);
 			  
+			  System.out.println("Historico do Item " + es.getIdCodItem() + "|" + obj.getCodItem() + "|" + obj.getAno()+ "|" + obj.getMes());
 			  switch (es.getMes()) {
 				case "1":
 					entsai.cadastrarTabEntSaiJan(obj);

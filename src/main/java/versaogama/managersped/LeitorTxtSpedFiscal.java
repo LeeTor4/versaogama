@@ -558,9 +558,11 @@ public class LeitorTxtSpedFiscal {
 					 if(i==3) {regC425.setQtd(Double.valueOf(lista.get(i).replace(",",".")));}
 					 if(i==4) {regC425.setUnd(lista.get(i));}
 					 if(i==5) {regC425.setVlItem(Double.valueOf(lista.get(i).replace(",",".")));}
-					 if(i==6) {regC425.setVlPis(Double.valueOf(lista.get(i).replace(",",".")));}
-					 if(i==7) {regC425.setVlCofins(Double.valueOf(lista.get(i).replace(",",".")));}
-					
+					 if(!lista.get(i).isEmpty()) {
+						 if(i==6) {regC425.setVlPis(Double.valueOf(lista.get(i).replace(",",".")));}
+						 if(i==7) {regC425.setVlCofins(Double.valueOf(lista.get(i).replace(",",".")));}
+					 }
+
 				 }
 				 
 				 regC420.adicionaRegC425(regC425);

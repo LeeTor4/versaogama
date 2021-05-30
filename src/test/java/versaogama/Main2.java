@@ -107,7 +107,7 @@ public class Main2 {
 			  totQtdeSai = (resS.getVlTotQtde()==null ? 0.0 : resS.getVlTotQtde());
 			  vlItemSai  = (resS.getVlTotItem()==null ? 0.0 : resS.getVlTotItem());
 			  EntradasSaidasDeProdutos obj = new EntradasSaidasDeProdutos(
-					  es.getId(), es.getIdCodItem(), es.getCnpj(), es.getDescricao(), 
+					  es.getIdCodItem(), es.getCnpj(), es.getDescricao(), 
 					  es.getAno(), 
 					  es.getMes(),
 					  es.getCodItem(), 

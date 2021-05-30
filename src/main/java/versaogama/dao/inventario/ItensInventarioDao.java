@@ -120,7 +120,7 @@ public class ItensInventarioDao implements ItensInventarioDaoInterface{
 		stmt.setString(8, itn.getCodPart());
 		stmt.setString(9, itn.getTxtCompl());
 		stmt.setString(10, itn.getCodCta());
-		stmt.setDouble(11,itn.getVlItemIr());
+		stmt.setDouble(11,(itn.getVlItemIr()==null ? 0.0 : itn.getVlItemIr()));
 		if(itn.getId() != null && itn.getId() > 0) {
 			stmt.setLong(12, itn.getId());
 		}else {

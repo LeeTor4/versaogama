@@ -130,6 +130,23 @@ public class ProdutoDao implements ProdutoDaoInterface{
 		pool.liberarConnection(con);
 		return prod;
 	}
+	
+	public Produto getProdutoPorCodUtiliz(String codigo) throws SQLException {
+		Produto prod = new Produto();
+		String sql = "SELECT * FROM tb_produto WHERE cod_utiliz_emp = ?";
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			stmt.setString(1, codigo);
+			stmt.execute();			
+			try(ResultSet rs = stmt.getResultSet()){		
+				while(rs.next()) {	
+					prod =  rsProd(rs);
+				}	
+			}	
+		}
+		pool.liberarConnection(con);
+		return prod;
+	}
 
 	@Override
 	public List<Produto> getProdutos() throws SQLException {

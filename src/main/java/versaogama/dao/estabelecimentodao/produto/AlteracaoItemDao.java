@@ -89,6 +89,24 @@ public class AlteracaoItemDao implements AlteracaoItemDaoInterface{
 		pool.liberarConnection(con);
 		return alt;
 	}
+	
+	public AlteracaoItem getAlteracaoItemPorIdProd(Integer codigo) throws SQLException {
+		AlteracaoItem alt  = new AlteracaoItem();
+		String sql = "SELECT * FROM tb_alteracao_item WHERE id_pai = ?";
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			stmt.setLong(1, codigo);
+			stmt.execute();			
+			try(ResultSet rs = stmt.getResultSet()){	
+				while(rs.next()) {						
+					alt = rsAlteraItem(rs);
+				}	
+			}	
+			
+		}
+		pool.liberarConnection(con);
+		return alt;
+	}
 
 	@Override
 	public List<AlteracaoItem> getAltItens() throws SQLException {
@@ -116,7 +134,7 @@ public class AlteracaoItemDao implements AlteracaoItemDaoInterface{
 		stmt.setString(4, alt.getDescrAntItem());
 		stmt.setDate(5, UtilsEConverters.getLocalDateParaDateSQL(alt.getDtInicial()));
 		stmt.setDate(6, UtilsEConverters.getLocalDateParaDateSQL(alt.getDtFinal()));
-		stmt.setString(7, alt.getCodAntItem());
+		stmt.setString(7, (alt.getCodAntItem()==null ? "" : alt.getCodAntItem()));
 		if(alt.getId() != null && alt.getId() > 0) {
 			stmt.setLong(8, alt.getId());
 		}else {

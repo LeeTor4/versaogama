@@ -73,6 +73,31 @@ public class EntradasSaidasDeProdutosDao {
 		return retorno;
 	}
 	
+	public List<EntradasSaidasDeProdutos> retornaMovProdutosPorId(Long id) throws SQLException {
+		
+		List<EntradasSaidasDeProdutos> retorno = new ArrayList<EntradasSaidasDeProdutos>();
+	   
+		String sql = "SELECT * FROM mov_prod_mensal_v2 where id = ?"; 
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){	
+			stmt.setLong(1, id);
+			stmt.execute();
+			try(ResultSet rs = stmt.getResultSet()){	
+				
+				while(rs.next()) {		
+					
+					EntradasSaidasDeProdutos entsai = rsMovProdutosMensal(rs);
+					retorno.add(entsai);
+				}
+				
+			}
+			
+		}
+		pool.liberarConnection(con);
+		return retorno;
+	}
+	
     public ModelInventarioDeclarado getInventarioDec(String codItem,String codAntItem, String cnpj, String ano) throws SQLException{
     	
     	ModelInventarioDeclarado inv = null;
@@ -418,6 +443,18 @@ public class EntradasSaidasDeProdutosDao {
 		retorno.setMes(rs.getString("mes"));
 		retorno.setCodItem(rs.getString("cod_item"));
 		retorno.setCodAntItem(rs.getString("codigo_ant_item"));
+
+		return retorno;
+	}
+	
+	private EntradasSaidasDeProdutos rsMovProdutosMensal(ResultSet rs) throws SQLException {
+		
+		EntradasSaidasDeProdutos retorno = new EntradasSaidasDeProdutos();
+		retorno.setId(rs.getLong("id"));
+		retorno.setCnpj(rs.getString("cnpj"));
+		retorno.setAno(rs.getString("ano"));
+		retorno.setMes(rs.getString("mes"));
+		retorno.setCodItem(rs.getString("cod_item"));
 
 		return retorno;
 	}

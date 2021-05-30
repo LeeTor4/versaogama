@@ -21,6 +21,7 @@ import versaogama.model.system.equipecf.TotalizadorDiarioCuponsFiscais;
 import versaogama.model.system.estabelecimento.Participante;
 import versaogama.model.system.inventario.Inventario;
 import versaogama.model.system.inventario.ItensInventario;
+import versaogama.model.system.movprodutos.ModelInventarioDeclarado;
 import versaogama.model.system.notafiscal.NotaFiscal;
 import versaogama.model.system.notafiscal.ProdutoNota;
 import versaogama.model.system.produto.AlteracaoItem;
@@ -39,9 +40,9 @@ public class MainService {
 		
 		Pool pool = new Pool();
 		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo substituto-fev2019.txt");
+		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\05329222000338-063037882-20121001-20121031-0-3D3EF078E30BE1BA6A59AD5C9EF696058C4EE4AB-SPED-EFD.txt");
 		
-		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2018_v2.csv";
+		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2012_Loja03.csv";
 		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2018.CSV";
 
 		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
@@ -70,7 +71,8 @@ public class MainService {
 		LoteImportacaoSpedFiscalService lote    = new LoteImportacaoSpedFiscalService();
 		ImportaEntradasSaidasProdutosPorLote movPorLote = new ImportaEntradasSaidasProdutosPorLote();
 		ExportaHisoricoItem hist = new ExportaHisoricoItem();
-
+		ExportaTotalizadorAnual totalizadorFinanceiro = new ExportaTotalizadorAnual();
+		
 		
 		Inventario inv = new Inventario();
 		ItensInventario itnInv = new ItensInventario();
@@ -79,24 +81,26 @@ public class MainService {
 		Long numLote = lote.importandoLoteSpedFiscal(pXml,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
        
 		System.out.println("Lote externo " + numLote);
+   		
+		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
+				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
+				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
+		
+		
+		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
+		
+		
+		// exporta.exportaControleQuantitativos(dirPlanilha, "2012","05329222000338");
+		
+		// totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
-		lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote);
-		lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote);
 		
-		movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
-		
-		
-		exporta.exportaControleQuantitativos(dirPlanilha, "2018","05329222000176");
-		
-		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
-        
-		
-		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
-	      String dirPlanHistorico2 = "D:/ORTOGENESE/fichas_estoques/";
-	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
-	      
-	     // hist.exportarHistoricoItem(dirPlanHistorico2, "2019", "05329222000419", "1022", "");
-	      hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
+//		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
+//	      String dirPlanHistorico2 = "D:/ORTOGENESE/fichas_estoques/";
+//	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
+//	      
+//	      hist.exportarHistoricoItem(dirPlanHistorico2, "2019", "05329222000419", "1022", "");
+//	      hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
 	}
 
 }
