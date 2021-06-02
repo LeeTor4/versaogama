@@ -2,7 +2,7 @@ package versaogama.bean;
 
 import java.sql.SQLException;
 
-import javax.faces.bean.ManagedBean;
+import javax.annotation.ManagedBean;
 
 import versaogama.conexao.Pool;
 import versaogama.dao.empresadao.EmpresaDAO;

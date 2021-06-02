@@ -41,11 +41,9 @@ import versaogama.model.sped.RegC420;
 import versaogama.model.sped.RegC425;
 import versaogama.model.sped.RegC490;
 import versaogama.model.sped.RegC860;
-import versaogama.model.sped.RegC870;
-import versaogama.model.sped.RegC890;
+import versaogama.model.sped.RegE200;
 import versaogama.model.sped.RegH005;
 import versaogama.model.sped.RegH010;
-import versaogama.model.system.produto.SituacaoGrpProdutoSpedFiscal;
 import versaogama.model.xml.ProdutoCupomFiscalXml;
 import versaogama.model.xml.ProdutoNotaXmlProprio;
 import versaogama.util.UtilsEConverters;
@@ -83,12 +81,20 @@ public class LeitorTxtSpedFiscal {
 	protected Long idPaiC870  = 0L;
 	protected Long idC890     = 0L;
 	protected Long idPaiC890  = 0L;
+	protected Long idE200     = 0L;
+	protected Long idPaiE200  = 0L;
+	protected Long idE210     = 0L;
+	protected Long idPaiE210  = 0L;
+	protected Long idE220     = 0L;
+	protected Long idPaiE220  = 0L;
+	protected Long idE240     = 0L;
+	protected Long idPaiE240  = 0L;
+	protected Long idE250     = 0L;
+	protected Long idPaiE250  = 0L;
 	protected Long idH005     = 0L;  
 	protected Long idPaiH005  = 0L;
 	protected Long idH010     = 0L;  
 	protected Long idPaiH010  = 0L;
-	
-	private Map<String,SituacaoGrpProdutoSpedFiscal> mpSitGrpProdSF = new HashMap<String,SituacaoGrpProdutoSpedFiscal>();
 	
 	private List<Reg0000> regs0000 = new ArrayList<>();
 	private List<Reg0150> regs0150 = new ArrayList<>();
@@ -107,8 +113,7 @@ public class LeitorTxtSpedFiscal {
 	private List<RegC490> regsC490 = new ArrayList<>();
 	
 	private List<RegC860> regsC860 = new ArrayList<>();
-	private List<RegC870> regsC870 = new ArrayList<>();
-	private List<RegC890> regsC890 = new ArrayList<>();
+
 	
 	private List<RegH005> regsH005 = new ArrayList<>();
 	private List<RegH010> regsH010 = new ArrayList<>();
@@ -134,8 +139,8 @@ public class LeitorTxtSpedFiscal {
   	private RegC425 regC425;
 	
   	private RegC860 regC860;
-  	private RegC870 regC870;
-  	private RegC890 regC890;
+
+  	private RegE200 regE200;
   	
   	private RegH005 regH005;
   	private RegH010 regH010;
@@ -611,6 +616,27 @@ public class LeitorTxtSpedFiscal {
 				 mpEquipCFe.put(regC860.getId(), regC860);
         	 }
    
+        	 
+        	 if(line.startsWith("|E200|")) {
+        		 idE200++;
+        		 regE200 = new RegE200();
+        		 String[] campos = line.split("\\|"); 
+				 List<String> lista = Arrays.asList(campos);
+				 regE200.setId(idE200);
+				 regE200.setIdPai(id0000);
+				 for(int i=0; i < campos.length;i++){
+					 if(i == 1) {regE200.setReg(lista.get(i));}
+					 
+				 }
+        	 }
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 
+        	 
         	 if(line.startsWith("|H005|")) {
         		 idH005++;
         		 regH005 = new RegH005();

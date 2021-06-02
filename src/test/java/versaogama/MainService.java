@@ -40,7 +40,7 @@ public class MainService {
 		
 		Pool pool = new Pool();
 		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\05329222000338-063037882-20121001-20121031-0-3D3EF078E30BE1BA6A59AD5C9EF696058C4EE4AB-SPED-EFD.txt");
+		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-dez2020.txt");
 		
 		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2012_Loja03.csv";
 		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2018.CSV";
@@ -90,7 +90,7 @@ public class MainService {
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
 		
-		// exporta.exportaControleQuantitativos(dirPlanilha, "2012","05329222000338");
+		//exporta.exportaControleQuantitativos(dirPlanilha, "2012","05329222000338");
 		
 		// totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
