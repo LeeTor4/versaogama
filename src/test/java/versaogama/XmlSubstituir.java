@@ -69,7 +69,7 @@ public class XmlSubstituir {
 //		System.out.println(copia);
 		
 		
-		System.out.println(UtilsEConverters.preencheZerosAEsquerda("0000000012345", 9));
+		System.out.println(UtilsEConverters.preencheZerosAEsquerda("0000000012345"));
 	}
 
 }

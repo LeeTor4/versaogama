@@ -82,10 +82,10 @@ public class UtilsEConverters {
 		return dtFormatada;
 	}
 	
-	public static String preencheZerosAEsquerda(String str,int tam) {
+	public static String preencheZerosAEsquerda(String str) {
 		String zeros = "0";
 		String qtdeZeros="";
-		for(int i =1; i <= tam ;i++) {			
+		for(int i =1; i <= 8 ;i++) {			
 			qtdeZeros += zeros;
 		}
 		String formatted = (qtdeZeros + str).substring(str.length());

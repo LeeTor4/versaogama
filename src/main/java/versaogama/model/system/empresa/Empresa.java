@@ -74,7 +74,7 @@ public class Empresa {
 	}
 	
 	public void adicionaEstab(Estabelecimento est) {
-		estabs.add(est);
+		this.estabs.add(est);
 	}
 
 	public Map<String, Empresa> getMpEmp() {

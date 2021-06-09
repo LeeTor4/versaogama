@@ -4,13 +4,12 @@
  xmlns:h="http://java.sun.com/jsf/html"
  xmlns:f="http://xmlns.jcp.org/jsf/core"
  xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
- 
+    <h:head />
     <h:body>
        
         <h1>Empresa</h1>
       
-        <h:form>
-            
+        <h:form>           
             <fieldset>
                <legend>Cadastro de Empresas</legend>
                <h:panelGrid columns="2">
@@ -30,8 +29,47 @@
                 <h:inputText id="dtiniativ" value="#{empresaBean.emp.dtIniAtiv}">
                    <f:converter converterId="localDateConverter"/>
                 </h:inputText> 
-                <h:commandButton value="Gravar" action="#{empresaBean.gravar}"/>
-              </h:panelGrid>            
+              </h:panelGrid>      
+              
+                 <fieldset>
+                   <legend>Cadastro de Estabelecimentos</legend>
+                   <h:panelGrid columns="2" id="estabalecimentos">
+                         <h:outputLabel value="Razão Social" for="razaosocialestab" />
+		                 <h:panelGroup>
+		                     <h:inputText id="razaosocialestab" value="#{empresaBean.est.nome}" /> 
+		                     <h:message for="razaosocialestab" />
+		                 </h:panelGroup>
+		                <h:outputLabel value="Nome Fantasia" for="nomefantasiaestab"/>
+		                <h:inputText id="nomefantasiaestab" value="#{empresaBean.est.nmFantasia}"/>
+		                <h:outputLabel value="CNPJ" for="cnpjestab"/>
+		                <h:inputText id="cnpjestab" value="#{empresaBean.est.cnpj}" /> 
+		                <h:outputLabel value="CPF" for="cpfestab"/>
+		                <h:inputText id="cpfestab" /> 
+		                <h:outputLabel value="Insc. Estadual" for="inscestadual"/>
+		                <h:inputText id="inscestadual" value="#{empresaBean.est.ie}"/> 
+		                <h:outputLabel value="Data Inicio de Ativ." for="dtiniativestab"/>
+		                <h:inputText id="dtiniativestab" />
+                   </h:panelGrid>       
+                    <h:commandButton  value="Inserir" action="#{empresaBean.adicionaEstab}">
+                       <f:ajax execute="razaosocialestab nomefantasiaestab"  render="estabalecimentos tabelaEstabs" />
+                    </h:commandButton>
+                    
+                    <h:dataTable value="#{empresaBean.estabelecimentoDaEmpresa}" var="estab" id="tabelaEstabs">
+                       <h:column>
+                         <f:facet name="header">Razão Social</f:facet>
+                         <h:outputText value="#{estab.nome}"/>
+                       </h:column>
+                       <h:column>
+                         <f:facet name="header">Nome Fantasia</f:facet>
+                         <h:outputText value="#{estab.nmFantasia}"/>
+                       </h:column>
+                    </h:dataTable>    
+                 </fieldset>
+              
+                <br/>
+                <h:commandButton value="Gravar" action="#{empresaBean.gravar}" >
+                  <f:ajax execute="razaosocial nomefantasia cnpjbase cpf dtiniativ" />
+                </h:commandButton>      
             </fieldset>
         </h:form>
     </h:body>

@@ -1,4 +1,4 @@
-package versaogama.bean;
+package versaogama.controller;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

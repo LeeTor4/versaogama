@@ -1,6 +1,5 @@
 package versaogama.dao.estabelecimentodao.equipcfe;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

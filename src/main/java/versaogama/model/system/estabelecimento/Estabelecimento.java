@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import versaogama.model.system.empresa.Empresa;
-import versaogama.model.system.inventario.Inventario;
 import versaogama.model.system.produto.Produto;
 
 public class Estabelecimento {

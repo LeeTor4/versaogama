@@ -63,6 +63,7 @@ import versaogama.model.system.produto.OutrasUnid;
 import versaogama.model.system.produto.Produto;
 import versaogama.model.xml.ProdutoCupomFiscalXml;
 import versaogama.model.xml.ProdutoNotaXmlProprio;
+import versaogama.util.UtilsEConverters;
 
 public class LoteImportacaoSpedFiscalService {
 
@@ -195,7 +196,7 @@ public class LoteImportacaoSpedFiscalService {
 	}
 	private void importandoProdutos(LeitorTxtSpedFiscal leitor, Produto prod,OutrasUnid outUnd,AlteracaoItem altItem, Long idPaiEmp, Long idPaiEst) throws SQLException {
 		for(int i = 0; i < leitor.getRegs0200().size();i++) {  
-			listaCodigosProdutosNoLote.add(insereProdutos(leitor, prod, i, idPaiEmp, idPaiEst).getCodUtilizEmp());
+			listaCodigosProdutosNoLote.add(UtilsEConverters.preencheZerosAEsquerda(insereProdutos(leitor, prod, i, idPaiEmp, idPaiEst).getCodUtilizEmp()));
 			if(!daoProd.getProdutos().contains(insereProdutos(leitor, prod, i, idPaiEmp, idPaiEst))){
 				daoProd.cadastrar(insereProdutos(leitor, prod, i, idPaiEmp, idPaiEst));
 				
@@ -253,7 +254,7 @@ public class LoteImportacaoSpedFiscalService {
 
 	private void totalizadoresItensSaidasPropriasNF(LeitorTxtSpedFiscal leitor, ProdutoNota pNota, int i, int y) throws SQLException {
 		TotalizadoresPorItem tot = new TotalizadoresPorItem();  
-		tot.setCodItem(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem());
+		tot.setCodItem(UtilsEConverters.preencheZerosAEsquerda(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem()));
 		tot.setVlTotQtde(insereProdutosSpedFiscal(leitor, pNota, i, y).getQtde());
 		tot.setVlTotItem(insereProdutosSpedFiscal(leitor, pNota, i, y).getVlItem());
 		totaisSaidas.add(tot);
@@ -268,7 +269,7 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setOperacao("S");
 		   histItens.setEcfCx("");
 		   histItens.setDtDoc(leitor.getRegsC100().get(i).getDtEntSai());
-		   histItens.setCodItem(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem());
+		   histItens.setCodItem(UtilsEConverters.preencheZerosAEsquerda(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem()));
 		   histItens.setQtde(insereProdutosSpedFiscal(leitor, pNota, i, y).getQtde());
 		   histItens.setUnd(insereProdutosSpedFiscal(leitor, pNota, i, y).getUnd());
 		   histItens.setVlUnit(insereProdutosSpedFiscal(leitor, pNota, i, y).getVlUnitItem());
@@ -297,7 +298,7 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setOperacao("E");
 		   histItens.setEcfCx("");
 		   histItens.setDtDoc(leitor.getRegsC100().get(i).getDtEntSai());
-		   histItens.setCodItem(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem());
+		   histItens.setCodItem(UtilsEConverters.preencheZerosAEsquerda(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem()));
 		   histItens.setQtde(insereProdutosSpedFiscal(leitor, pNota, i, y).getQtde());
 		   histItens.setUnd(insereProdutosSpedFiscal(leitor, pNota, i, y).getUnd());
 		   histItens.setVlUnit(insereProdutosSpedFiscal(leitor, pNota, i, y).getVlUnitItem());
@@ -308,7 +309,15 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setCfop(insereProdutosSpedFiscal(leitor, pNota, i, y).getCfop());
 		   histItens.setAliqIcms(0.0);
 		   histItens.setCodMod(leitor.getRegsC100().get(i).getCodMod());
-		   histItens.setDescricao(leitor.getMpProdTerc().get(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem()).getDescrItem());
+		   
+		   if(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem() != null) {
+			   if(leitor.getMpProdTerc().get(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem()) != null) {
+				   histItens.setDescricao(leitor.getMpProdTerc().get(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem()).getDescrItem());
+			   }
+			 
+		   }
+		  
+		   
 		   histItens.setNumDoc(leitor.getRegsC100().get(i).getNumDoc());
 		   histItens.setChaveDoc(leitor.getRegsC100().get(i).getChvNfe());
 		   histItens.setNome(leitor.getMpParticipante().get(leitor.getRegsC100().get(i).getCodPart()).getNome());
@@ -320,7 +329,7 @@ public class LoteImportacaoSpedFiscalService {
 	private void totalizadoresItensEntradasTerceirosNF(LeitorTxtSpedFiscal leitor, ProdutoNota pNota, int i, int y)
 			throws SQLException {
 		TotalizadoresPorItem tot = new TotalizadoresPorItem();  
-		tot.setCodItem(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem());
+		tot.setCodItem(UtilsEConverters.preencheZerosAEsquerda(insereProdutosSpedFiscal(leitor, pNota, i, y).getCodItem()));
 		tot.setVlTotQtde(insereProdutosSpedFiscal(leitor, pNota, i, y).getQtde());
 		tot.setVlTotItem(insereProdutosSpedFiscal(leitor, pNota, i, y).getVlItem());
 		totaisEntradas.add(tot);
@@ -334,7 +343,7 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setOperacao("E");
 		   histItens.setEcfCx("");
 		 
-		   histItens.setCodItem(nfP.getCodItem());
+		   histItens.setCodItem(UtilsEConverters.preencheZerosAEsquerda(nfP.getCodItem()));
 		   histItens.setQtde(nfP.getQtde());
 		   histItens.setUnd(nfP.getUnd());
 		   histItens.setVlUnit(nfP.getVlUnit());
@@ -374,8 +383,8 @@ public class LoteImportacaoSpedFiscalService {
 	    nf.getNotasFiscaisTxtSpedFiscal(leitor);
 
 		for(ProdutoNotaXmlProprio nfP :    leitor.getProdutosXMLHandler(pXml, logica)){
-			listaCodigosProdutosNoLote.add(nfP.getCodItem());
-			Produto prod = new Produto(idPaiEmp, idPaiEst, nfP.getCodItem(), nfP.getDescricao(), nfP.getNcm(), nfP.getUnd());
+			listaCodigosProdutosNoLote.add(UtilsEConverters.preencheZerosAEsquerda(nfP.getCodItem()));
+			Produto prod = new Produto(idPaiEmp, idPaiEst, UtilsEConverters.preencheZerosAEsquerda(nfP.getCodItem()), nfP.getDescricao(), nfP.getNcm(), nfP.getUnd());
 			if(prod != null) {
 				if(!daoProd.getProdutos().contains(prod)){
 					daoProd.cadastrar(prod);
@@ -407,7 +416,7 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setOperacao("S");
 		   histItens.setEcfCx("");
 		
-		   histItens.setCodItem(nfP.getCodItem());
+		   histItens.setCodItem(UtilsEConverters.preencheZerosAEsquerda(nfP.getCodItem()));
 		   histItens.setQtde(nfP.getQtde());
 		   histItens.setUnd(nfP.getUnd());
 		   histItens.setVlUnit(nfP.getVlUnit());
@@ -446,7 +455,7 @@ public class LoteImportacaoSpedFiscalService {
 
 	private void totalizadoresItensEntradasPropriasNF(ProdutoNotaXmlProprio nfP) {
 		TotalizadoresPorItem tot = new TotalizadoresPorItem();  
-		tot.setCodItem(nfP.getCodItem());
+		tot.setCodItem(UtilsEConverters.preencheZerosAEsquerda(nfP.getCodItem()));
 		tot.setVlTotQtde(nfP.getQtde());
 		tot.setVlTotItem(nfP.getVlItem());
 		totaisEntradas.add(tot);
@@ -454,7 +463,7 @@ public class LoteImportacaoSpedFiscalService {
 
 	private void totalizadoresItensSaidasNF(ProdutoNotaXmlProprio nfP) {
 		TotalizadoresPorItem tot = new TotalizadoresPorItem();  
-		tot.setCodItem(nfP.getCodItem());
+		tot.setCodItem(UtilsEConverters.preencheZerosAEsquerda(nfP.getCodItem()));
 		tot.setVlTotQtde(nfP.getQtde());
 		tot.setVlTotItem(nfP.getVlItem());
 		totaisSaidas.add(tot);
@@ -497,14 +506,19 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setOperacao("S");
 		   histItens.setEcfCx(leitor.getMpEquipEcf().get(leitor.getRegsC400().get(i).getId()).getNumCaixaECF());
 		   histItens.setDtDoc(leitor.getMpReducao().get(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getIdPaiRedZ()).getDtDoc());
-		   histItens.setCodItem(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getCodItem());
+		   histItens.setCodItem(UtilsEConverters.preencheZerosAEsquerda(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getCodItem()));
 		   histItens.setQtde(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getQtde());
 		   histItens.setUnd(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getUnd());
 		   histItens.setVlUnit(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getVlItem()/insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getQtde());
 		   histItens.setVlBruto(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getVlItem());
 		   histItens.setDesconto(0.0);
 		   histItens.setVlLiq(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getVlItem());
-		   histItens.setCst(leitor.getMpTotalizadorCF().get(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getIdPaiRedZ()).getCstIcms());
+		   
+		   if(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getIdPaiRedZ() != null) {
+			   histItens.setCst(leitor.getMpTotalizadorCF().get(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getIdPaiRedZ()).getCstIcms());
+		   }
+		 
+		  
 		   histItens.setCfop(leitor.getMpTotalizadorCF().get(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getIdPaiRedZ()).getCfop());
 		   histItens.setCodMod(leitor.getMpEquipEcf().get(leitor.getRegsC400().get(i).getId()).getCodModelo());
 		   histItens.setDescricao(leitor.getMpProdTerc().get(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getCodItem()).getDescrItem());
@@ -519,7 +533,7 @@ public class LoteImportacaoSpedFiscalService {
 	private void totalizadoresItensCF(LeitorTxtSpedFiscal leitor, ItensMovDiario itensCF, Long idPaiEmp, Long idPaiEst,
 			int i, int x, int y, int w) {
 		TotalizadoresPorItem tot = new TotalizadoresPorItem(); 
-		 tot.setCodItem(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getCodItem());
+		 tot.setCodItem(UtilsEConverters.preencheZerosAEsquerda(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getCodItem()));
 		 tot.setVlTotQtde(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getQtde());
 		 tot.setVlTotItem(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst).getVlItem());
 		 totaisSaidas.add(tot);
@@ -540,9 +554,9 @@ public class LoteImportacaoSpedFiscalService {
 	   Map<String,ProdutoCupomFiscalXml> mpCFe = new HashMap<String, ProdutoCupomFiscalXml>();
 		try {
 			for (ProdutoCupomFiscalXml cf : leitor.getProdutosXMLHandlerCF(pXml, logica)) {
-				mpCFe.put( cf.getCodItem(), cf);
+				mpCFe.put( UtilsEConverters.preencheZerosAEsquerda(cf.getCodItem()), cf);
 				listaCodigosProdutosNoLote.add(cf.getCodItem());
-			    Produto prod = new Produto(idPaiEmp, idPaiEst, cf.getCodItem(), cf.getDescricao(), cf.getNcm(), cf.getUnd());
+			    Produto prod = new Produto(idPaiEmp, idPaiEst, UtilsEConverters.preencheZerosAEsquerda(cf.getCodItem()), cf.getDescricao(), cf.getNcm(), cf.getUnd());
 				if(prod != null) {
 					if(!daoProd.getProdutos().contains(prod)){
 						daoProd.cadastrar(prod);
@@ -574,7 +588,7 @@ public class LoteImportacaoSpedFiscalService {
 	   histItens.setOperacao("S");
 	   histItens.setEcfCx(leitor.getMpEquipCFe().get( insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getIdPai()).getNumSerieEquipSat());
 	   histItens.setDtDoc(leitor.getMpEquipCFe().get( insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getIdPai()).getDtEmissao());
-	   histItens.setCodItem( insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getCodItem());
+	   histItens.setCodItem( UtilsEConverters.preencheZerosAEsquerda(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getCodItem()));
 	   histItens.setQtde( insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getQtde());
 	   histItens.setUnd( insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getUnd());
 	   histItens.setVlUnit( insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getVlUnit());
@@ -595,8 +609,8 @@ public class LoteImportacaoSpedFiscalService {
 
 	private void totalizadoresItensCFE(LeitorTxtSpedFiscal leitor, ItensMovDiarioCFe itenCfe, Long idPaiEmp, Long idPaiEst,
 			ProdutoCupomFiscalXml cf, int i) throws SQLException {
-		TotalizadoresPorItem tot = new TotalizadoresPorItem(); 
-		 tot.setCodItem(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getCodItem());
+		 TotalizadoresPorItem tot = new TotalizadoresPorItem(); 
+		 tot.setCodItem(UtilsEConverters.preencheZerosAEsquerda(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getCodItem()));
 		 tot.setVlTotQtde(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getQtde());
 		 tot.setVlTotItem(insereItensCFe(cf, leitor, itenCfe,i, idPaiEmp, idPaiEst).getVlItem());
 		 totaisSaidas.add(tot);
@@ -647,7 +661,7 @@ public class LoteImportacaoSpedFiscalService {
 		prod.setIdPaiEst(idPaiEst);
 		prod.setIdGrp(1L);//TODO campo mockado
 		prod.setTipoItem(leitor.getRegs0200().get(i).getTipoItem()); 
-		prod.setCodUtilizEmp(leitor.getRegs0200().get(i).getCodItem());
+		prod.setCodUtilizEmp(UtilsEConverters.preencheZerosAEsquerda(leitor.getRegs0200().get(i).getCodItem()));
 		prod.setDescricao(leitor.getRegs0200().get(i).getDescrItem());
 		prod.setNcm(leitor.getRegs0200().get(i).getCodNcm());
 		prod.setUndPadrao(leitor.getRegs0200().get(i).getUnidInv());
@@ -665,7 +679,7 @@ public class LoteImportacaoSpedFiscalService {
 	    outUnd.setIdPaiEmp(idPaiEmp);
 	    outUnd.setIdPaiEst(idPaiEst);
 	    
-	    outUnd.setIdPai(idPaiReg0200(leitor.getRegs0200().get(i).getOutrasUndMedidas().get(x).getCodItem(),idPaiEmp,idPaiEst));
+	    outUnd.setIdPai(idPaiReg0200(UtilsEConverters.preencheZerosAEsquerda(leitor.getRegs0200().get(i).getOutrasUndMedidas().get(x).getCodItem()),idPaiEmp,idPaiEst));
 	    
 	    outUnd.setUndMed(leitor.getRegs0200().get(i).getOutrasUndMedidas().get(x).getUndConv());
 	    outUnd.setUndEquivPadrao(leitor.getRegs0200().get(i).getOutrasUndMedidas().get(x).getFatConv());
@@ -677,11 +691,15 @@ public class LoteImportacaoSpedFiscalService {
 		
 		altItem.setIdPaiEmp(idPaiEmp);
 		altItem.setIdPaiEst(idPaiEst);
-        altItem.setIdPai(idPaiReg0200(leitor.getRegs0200().get(i).getAlteracaoItem().get(y).getCodItem() , idPaiEmp, idPaiEst));
+        altItem.setIdPai(idPaiReg0200(UtilsEConverters.preencheZerosAEsquerda(leitor.getRegs0200().get(i).getAlteracaoItem().get(y).getCodItem()) , idPaiEmp, idPaiEst));
 		altItem.setDescrAntItem(leitor.getRegs0200().get(i).getAlteracaoItem().get(y).getDescrAntItem());
 		altItem.setDtInicial(leitor.getRegs0200().get(i).getAlteracaoItem().get(y).getDtIni());
 		altItem.setDtFinal(leitor.getRegs0200().get(i).getAlteracaoItem().get(y).getDtFim());
-		altItem.setCodAntItem(leitor.getRegs0200().get(i).getAlteracaoItem().get(y).getCodAntItem());
+		
+		if(leitor.getRegs0200().get(i).getAlteracaoItem().get(y).getCodAntItem() != null) {
+			altItem.setCodAntItem(UtilsEConverters.preencheZerosAEsquerda(leitor.getRegs0200().get(i).getAlteracaoItem().get(y).getCodAntItem()));
+		}
+		
 
 		
 		return altItem;
@@ -711,7 +729,7 @@ public class LoteImportacaoSpedFiscalService {
 		
 		pNota.setIdPai(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getId());
 		pNota.setNumItem(nfP.getNumItem());
-		pNota.setCodItem(nfP.getCodItem());
+		pNota.setCodItem(UtilsEConverters.preencheZerosAEsquerda(nfP.getCodItem()));
 		pNota.setQtde(nfP.getQtde());
 		pNota.setUnd(nfP.getUnd());
 		pNota.setVlUnitItem(nfP.getVlUnit());
@@ -737,7 +755,7 @@ public class LoteImportacaoSpedFiscalService {
 		
 		pNota.setIdPai(leitor.getRegsC100().get(i).getId());
 		pNota.setNumItem(leitor.getRegsC100().get(i).getProdutosNota().get(y).getNumItem());
-		pNota.setCodItem(leitor.getRegsC100().get(i).getProdutosNota().get(y).getCodItem());
+		pNota.setCodItem(UtilsEConverters.preencheZerosAEsquerda(leitor.getRegsC100().get(i).getProdutosNota().get(y).getCodItem()));
 		pNota.setQtde(leitor.getRegsC100().get(i).getProdutosNota().get(y).getQtd());
 		pNota.setUnd(leitor.getRegsC100().get(i).getProdutosNota().get(y).getUnid());
 		pNota.setVlProd(leitor.getRegsC100().get(i).getProdutosNota().get(y).getVlItem());
@@ -798,7 +816,7 @@ public class LoteImportacaoSpedFiscalService {
 		itensCF.setId_pai_est(idPaiEst);
 		itensCF.setIdPai( leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getIdPai());
 		itensCF.setIdPaiRedZ( leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getIdPaiRedZ());
-		itensCF.setCodItem(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getCodItem());
+		itensCF.setCodItem(UtilsEConverters.preencheZerosAEsquerda(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getCodItem()));
 		itensCF.setQtde( leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getQtd());
 		itensCF.setUnd(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getUnd());
 		itensCF.setVlItem(leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y).getRegsC425().get(w).getVlItem());
@@ -846,7 +864,7 @@ public class LoteImportacaoSpedFiscalService {
 				itenCfe.setIdPai(leitor.getRegsC860().get(i).getId());
 				itenCfe.setNumCFe(cf.getNumDoc());
 				itenCfe.setNumItem(cf.getNumItem());
-				itenCfe.setCodItem(cf.getCodItem());
+				itenCfe.setCodItem(UtilsEConverters.preencheZerosAEsquerda(cf.getCodItem()));
 				itenCfe.setQtde(cf.getQtde());
 				itenCfe.setUnd(cf.getUnd());
 				itenCfe.setVlUnit(cf.getVlUnit());
@@ -874,7 +892,7 @@ public class LoteImportacaoSpedFiscalService {
 	private ItensInventario insereItensInventario(ItensInventario itnInv,LeitorTxtSpedFiscal leitor,int i,int x ) {
 		
 		itnInv.setIdPai(leitor.getRegsH005().get(i).getListaItensInv().get(x).getIdPai());
-		itnInv.setCodItem(leitor.getRegsH005().get(i).getListaItensInv().get(x).getCodItem());
+		itnInv.setCodItem(UtilsEConverters.preencheZerosAEsquerda(leitor.getRegsH005().get(i).getListaItensInv().get(x).getCodItem()));
 		itnInv.setUnd(leitor.getRegsH005().get(i).getListaItensInv().get(x).getUnd());
 		itnInv.setQtde(leitor.getRegsH005().get(i).getListaItensInv().get(x).getQtde());
 		itnInv.setVlUnit(leitor.getRegsH005().get(i).getListaItensInv().get(x).getVlUnit());
@@ -899,7 +917,7 @@ public class LoteImportacaoSpedFiscalService {
 		String cnpj = daoLote.getLote(Integer.valueOf(lote.toString())).getCnpj();
 		Double totQtde = 0.0;
 		Double totitem = 0.0;
-		String codItem = c.get(0).getCodItem();
+		String codItem = UtilsEConverters.preencheZerosAEsquerda(c.get(0).getCodItem());
 	
 		        for (int i = 0; i < c.size();)
 		        {
@@ -933,7 +951,7 @@ public class LoteImportacaoSpedFiscalService {
 		String cnpj = daoLote.getLote(Integer.valueOf(lote.toString())).getCnpj();
 		Double totQtde = 0.0;
 		Double totitem = 0.0;
-		String codItem = c.get(0).getCodItem();
+		String codItem = UtilsEConverters.preencheZerosAEsquerda(c.get(0).getCodItem());
 		
 		        for (int i = 0; i < c.size();)
 		        {

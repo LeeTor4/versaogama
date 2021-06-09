@@ -13,8 +13,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import versaogama.bean.TableBean;
 import versaogama.conexao.Pool;
+import versaogama.controller.TableBean;
 import versaogama.dao.estabelecimentodao.equipcfe.EquipamentoCFeDao;
 import versaogama.dao.estabelecimentodao.importacaospedfical.LoteImportacaoSpedFiscalDao;
 import versaogama.dao.estabelecimentodao.importacaospedfical.TotalizadorePorItemEntDAO;

@@ -42,6 +42,10 @@ import versaogama.model.sped.RegC425;
 import versaogama.model.sped.RegC490;
 import versaogama.model.sped.RegC860;
 import versaogama.model.sped.RegE200;
+import versaogama.model.sped.RegE210;
+import versaogama.model.sped.RegE220;
+import versaogama.model.sped.RegE240;
+import versaogama.model.sped.RegE250;
 import versaogama.model.sped.RegH005;
 import versaogama.model.sped.RegH010;
 import versaogama.model.xml.ProdutoCupomFiscalXml;
@@ -141,6 +145,10 @@ public class LeitorTxtSpedFiscal {
   	private RegC860 regC860;
 
   	private RegE200 regE200;
+	private RegE210 regE210;
+	private RegE220 regE220;
+	private RegE240 regE240;
+	private RegE250 regE250;
   	
   	private RegH005 regH005;
   	private RegH010 regH010;
@@ -626,14 +634,102 @@ public class LeitorTxtSpedFiscal {
 				 regE200.setIdPai(id0000);
 				 for(int i=0; i < campos.length;i++){
 					 if(i == 1) {regE200.setReg(lista.get(i));}
-					 
+					 if(i == 2) {regE200.setUf(lista.get(i));}
+					 if(i == 3) {regE200.setDtIni(UtilsEConverters.getStringParaData(lista.get(i)));}
+					 if(i == 4) {regE200.setDtFin(UtilsEConverters.getStringParaData(lista.get(i)));}
 				 }
+        	 
+        	 }
+
+        	 if(line.startsWith("|E210|")) {
+        		 idE210++;
+        		 regE210 = new RegE210();
+        		 String[] campos = line.split("\\|"); 
+				 List<String> lista = Arrays.asList(campos);
+				 regE210.setId(idE210);
+				 regE210.setIdPai(idE200);
+				 for(int i=0; i < campos.length;i++){
+					 if(i == 1) {regE210.setReg(lista.get(i));}
+					 if(i == 2) {regE210.setReg(lista.get(i));}
+					 if(i == 3) {regE210.setIndMovST(lista.get(i));}
+					 if(i == 4) {regE210.setVlSaldoCredAntST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 5) {regE210.setVlDevolucaoICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 6) {regE210.setVlRessarcimentoICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 7) {regE210.setVlOutrosCreditosICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 8) {regE210.setVlAjusteCreditosICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 9) {regE210.setVlRetencaoICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 10) {regE210.setVlOutrosDebitosICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 11) {regE210.setVlSaldoDevedorAnteriorICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 12) {regE210.setVlDeducoesICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 13) {regE210.setVlArecolherICMSST(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 14) {regE210.setVlSaldoCredorICMSSTAtransportar(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 15) {regE210.setDebitoExtraApurICMSSTARecolher(Double.valueOf(lista.get(i).replace(",",".")));}
+					
+				 }
+        		 
         	 }
         	 
+        	 if(line.startsWith("|E220|")) {
+        		 idE220++;
+        		 regE220 = new RegE220();
+        		 String[] campos = line.split("\\|"); 
+				 List<String> lista = Arrays.asList(campos);
+				 regE220.setId(idE220);
+				 regE220.setIdPai(idE200);
+				 for(int i=0; i < campos.length;i++){
+					 if(i == 1) {regE220.setReg(lista.get(i));}
+					 if(i == 2) {regE220.setCodigoDeAjusteApuracao(lista.get(i));}
+					 if(i == 3) {regE220.setDescricaoComplementarAjuste(lista.get(i));}
+					 if(i == 4) {regE220.setVlAjusteApuracao(Double.valueOf(lista.get(i).replace(",",".")));}
+					 
+				 }
+
+        	 }
         	 
+        	 if(line.startsWith("|E240|")) {
+        		 idE240++;
+        		 regE240 = new RegE240();
+        		 String[] campos = line.split("\\|"); 
+				 List<String> lista = Arrays.asList(campos);
+				 regE240.setId(idE240);
+				 regE240.setIdPai(idE220);
+				 for(int i=0; i < campos.length;i++){
+					 if(i == 1) {regE240.setReg(lista.get(i));}
+					 if(i == 2) {regE240.setCodigoPart(lista.get(i));}
+					 if(i == 3) {regE240.setCodModeloDocFiscal(lista.get(i));}
+					 if(i == 4) {regE240.setSerie(lista.get(i));}
+					 if(i == 5) {regE240.setSubSerie(lista.get(i));}
+					 if(i == 6) {regE240.setNumDocumento(lista.get(i));}
+					 if(i == 7) {regE240.setDtEmissaoDoc(UtilsEConverters.getStringParaData(lista.get(i)));}
+					 if(i == 8) {regE240.setCodigoItem(lista.get(i));}
+					 if(i == 9) {regE240.setVlAjusteItem(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 10) {regE240.setChaveEletronicaDoc(lista.get(i));}
+				 
+				 }
+        		 
+        	 }
         	 
-        	 
-        	 
+        	 if(line.startsWith("|E250|")) {
+        		 idE250++;
+        		 regE250 = new RegE250();
+        		 String[] campos = line.split("\\|"); 
+				 List<String> lista = Arrays.asList(campos);
+				 regE250.setId(idE250);
+				 regE250.setIdPai(idE220);
+				 for(int i=0; i < campos.length;i++){
+					 if(i == 1) {regE250.setReg(lista.get(i));}
+					 if(i == 2) {regE250.setCodigoDaObrigARecolher(lista.get(i));}
+					 if(i == 3) {regE250.setVlDaObrigacaoARecolher(Double.valueOf(lista.get(i).replace(",",".")));}
+					 if(i == 4) {regE250.setDtVencimentoObrigacao(UtilsEConverters.getStringParaData(lista.get(i)));}
+					 if(i == 5) {regE250.setCodigoDaReceita(lista.get(i));}
+					 if(i == 6) {regE250.setNumProcesso(lista.get(i));}
+					 if(i == 7) {regE250.setIndOrigemDoProcesso(lista.get(i));}
+					 if(i == 8) {regE250.setDescrResumidaProcesso(lista.get(i));}
+					 if(i == 9) {regE250.setDescrComplementar(lista.get(i));}
+					 if(i == 10) {regE250.setMesReferencia(lista.get(i));}
+				 }
+        		 
+        	 }
         	 
         	 
         	 
