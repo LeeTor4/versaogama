@@ -56,7 +56,8 @@ public class Main2 {
 		LoteImportacaoSpedFiscalDao lote =  new LoteImportacaoSpedFiscalDao(pool);
 		
 		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
+		//Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
+		Path p = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2012\\05329222000338-063037882-20121201-20121231-1-AA27286EA49F89FE653823CCF886CDC756D7CC73-SPED-EFD_0205.txt");
 		
 	    XMLReader reader = XMLReaderFactory.createXMLReader();
 	    LeitorXML logica = new LeitorXML();	
@@ -175,8 +176,6 @@ public class Main2 {
 					break;
 				case "12":
 					entsai.cadastrarTabEntSaiDez(obj);
-//					  System.out.println(obj.getIdPai() +"|" + obj.getCodItem() +"|"+ obj.getTotQtdeEnt() +"|"
-//					  + obj.getTotVlItemEnt() +"|"+ obj.getTotQtdeSai() +"|"+ obj.getTotVlItemSai());
 					break;
 				}
 				 

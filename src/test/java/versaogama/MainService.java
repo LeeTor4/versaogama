@@ -41,9 +41,46 @@ public class MainService {
 		Pool pool = new Pool();
 		Path pXml = Paths.get("D:\\XML");
 		//Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-dez2020.txt");
-		Path p = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2018\\SpedEFD-05329222000338-063037882-Remessa de arquivo original-dez2018.txt");
 		
-		String dirPlanilha  = "D:/ORTOGENESE/CONTROLE_ESTOQUE_2012_Loja03.csv";
+		//Path x1 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\jan");
+		//Path p1 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-jan2015.txt");
+		
+		//Path x2 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\fev");
+		//Path p2 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-fev2015.txt");
+		
+		//Path x3 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\mar");
+		//Path p3 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-mar2015.txt");
+		
+		//Path x4 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\abr");
+		//Path p4 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo original-abr2015.txt");
+		
+		//Path x5 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\mai");
+	    //Path p5 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-mai2015.txt");
+		
+		//Path x6 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\jun");
+		//Path p6 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-jun2015.txt");
+		
+		//Path x7 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\jul");
+		//Path p7 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-Jul2015.txt");
+		
+		//Path x8 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\ago");
+		//Path p8 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-Ago2015.txt");
+		
+		//Path x9 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\set");
+		//Path p9 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-Set2015.txt");
+		
+		 //Path x10 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\out");
+		 //Path p10 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\FARMACIA SPED 201510 RET.txt");
+		
+		//Path x11 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\nov");
+		//Path p11 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\FARMACIA SPED 201511 RET.txt");
+		
+		 Path x12 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\XML\\dez");
+		 Path p12 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2015\\SpedEFD-05329222000338-063037882-Remessa de arquivo substituto-dez2015.txt");
+		
+		
+		
+		String dirPlanilha  = "D:/EMPRESAS/SELLENE/LOJA03/CONTROLE_ESTOQUE_2013_Loja03.csv";
 		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2018.CSV";
 
 		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
@@ -53,9 +90,13 @@ public class MainService {
 	  
 		ExportaQuantitativoEstoque exporta = new ExportaQuantitativoEstoque();
 		
+		Path p = p12;
+		Path x = x12;	
+		
 		RegC100 nf = new RegC100();
 		leitor.leitorSpedFiscal(p,pool);
-		
+
+
 		Participante part = new Participante();
 		Produto prod = new Produto();
 		OutrasUnid outUnid     = new OutrasUnid();
@@ -79,7 +120,7 @@ public class MainService {
 		ItensInventario itnInv = new ItensInventario();
 		
 		
-		Long numLote = lote.importandoLoteSpedFiscal(pXml,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
+		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
        
 		System.out.println("Lote externo " + numLote);
    		
@@ -91,17 +132,17 @@ public class MainService {
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
 		
-		//exporta.exportaControleQuantitativos(dirPlanilha, "2012","05329222000338");
+		//exporta.exportaControleQuantitativos(dirPlanilha, "2013","05329222000338");
 		
 		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
 		
-//		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
-//	      String dirPlanHistorico2 = "D:/ORTOGENESE/fichas_estoques/";
-//	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
-//	      
-//	      hist.exportarHistoricoItem(dirPlanHistorico2, "2019", "05329222000419", "1022", "");
-//	      hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
+		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
+	      String dirPlanHistorico2 = "D:/EMPRESAS/SELLENE/LOJA03/fichas_estoques/";
+	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
+	      
+	     // hist.exportarHistoricoItem(dirPlanHistorico2, "2012", "05329222000338", "00005617", "");
+	     // hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
 	}
 
 }

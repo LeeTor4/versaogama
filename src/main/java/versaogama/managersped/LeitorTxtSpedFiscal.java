@@ -326,7 +326,7 @@ public class LeitorTxtSpedFiscal {
 					reg0200.setIdPai(idPai0200);
 					for(int i=0; i < campos.length;i++){
 						 if(i==1) { reg0200.setReg(lista.get(i));  }
-		                 if(i==2) { reg0200.setCodItem(lista.get(i));}
+		                 if(i==2) { reg0200.setCodItem(UtilsEConverters.preencheZerosAEsquerda(lista.get(i)));}
 		                 if(i==3) { reg0200.setDescrItem(lista.get(i)); }
 		                 if(i==4) { reg0200.setCodBarra(lista.get(i)); }
 		                 if(i==5) { reg0200.setCodAntItem(lista.get(i));}
@@ -450,7 +450,7 @@ public class LeitorTxtSpedFiscal {
 						  	
 							if(i==1) { regC170.setReg(lista.get(i));}
 							if(i==2) { regC170.setNumItem(lista.get(i));}
-							if(i==3) { regC170.setCodItem(lista.get(i));}
+							if(i==3) { regC170.setCodItem(UtilsEConverters.preencheZerosAEsquerda(lista.get(i)));}
 							if(i==4) { regC170.setDescrCompl(lista.get(i));}
 							if(i==5){if(!lista.get(i).isEmpty()){ regC170.setQtd(Double.valueOf(lista.get(i).replace(",", ".")));}}
 							if(i==6) {regC170.setUnid(lista.get(i));}
@@ -566,7 +566,7 @@ public class LeitorTxtSpedFiscal {
 				 for(int i=0; i < campos.length;i++){
 					 if(i==1) {regC425.setReg(lista.get(i));}
 					 if(i==2) {
-						 regC425.setCodItem(lista.get(i));
+						 regC425.setCodItem(UtilsEConverters.preencheZerosAEsquerda(lista.get(i)));
 					 }
 					 if(i==3) {regC425.setQtd(Double.valueOf(lista.get(i).replace(",",".")));}
 					 if(i==4) {regC425.setUnd(lista.get(i));}
@@ -759,7 +759,7 @@ public class LeitorTxtSpedFiscal {
 				 regH010.setIdPai(idH005);
 				 for(int i=0; i < campos.length;i++){
 					 if(i==1) {regH010.setReg(lista.get(i));}
-					 if(i==2) {regH010.setCodItem(lista.get(i));}
+					 if(i==2) {regH010.setCodItem(UtilsEConverters.preencheZerosAEsquerda(lista.get(i)));}
 					 if(i==3) {regH010.setUnd(lista.get(i));}
 					 if(i==4) {regH010.setQtde(Double.valueOf(lista.get(i).replace(",",".")));}
 					 if(i==5) {regH010.setVlUnit(Double.valueOf(lista.get(i).replace(",",".")));}
