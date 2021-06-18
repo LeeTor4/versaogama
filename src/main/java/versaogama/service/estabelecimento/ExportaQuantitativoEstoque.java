@@ -65,18 +65,19 @@ public class ExportaQuantitativoEstoque {
             	 ModeloTotalizadoresMensais totaisMensais = new ModeloTotalizadoresMensais();
             	 
                   totaisMensais.setQteInvDec(invDeclarado(p.getCodItem(), p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)));	
-                 if(dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)-1), cnpj).getSaldo() != null) {
-                	 sIniEnt = dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)-1), cnpj).getSaldo();
+                
+                 if(dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
+                	 sIniEnt = dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
                  }else {
                 	 sIniEnt = 0.0;
                  }
                  
-                 if(dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)-1), cnpj).getSaldo() != null) {
-                	 sIniSai = dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)-1), cnpj).getSaldo();
+                 if(dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
+                	 sIniSai = dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
                  }else {
                 	 sIniSai = 0.0;
                  }
-            	
+
             	 saldoIni = sIniEnt - sIniSai;
             	 totaisMensais.setQteIniInv(saldoIni);
             	 
@@ -177,8 +178,9 @@ public class ExportaQuantitativoEstoque {
     	        	 }
     	        	
     	         }
-            }
+         
 
+        	}  	
 		    writer.close();	
 				
 	        System.out.println("Exportado com Sucesso!!!");

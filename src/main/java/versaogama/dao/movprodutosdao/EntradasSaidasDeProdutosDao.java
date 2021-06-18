@@ -171,7 +171,7 @@ public class EntradasSaidasDeProdutosDao {
 	public ModelSaldoInicial getSaldoInicialEnt(String codItem, String codAntItem,String ano,String cnpj) throws SQLException{
 		
 		ModelSaldoInicial obj = new ModelSaldoInicial();
-		String sql = "SELECT cnpj,ano,cod_item,sum(tot_qtde) as saldo FROM tb_totalizadorporitem_ent where cod_item in (?,?) and ano = ? and cnpj = ? group by ano;";
+		String sql = "SELECT cnpj,ano,cod_item,sum(tot_qtde) as saldo FROM tb_totalizadorporitem_ent  where cod_item in (?,?) and ano < ? and cnpj = ? order by ano;";
 		Connection con = pool.getConnection();
     	if(!con.isClosed()) {    		
     		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -200,7 +200,7 @@ public class EntradasSaidasDeProdutosDao {
 	public ModelSaldoInicial getSaldoInicialSai(String codItem, String codAntItem,String ano,String cnpj) throws SQLException{
 		
 		ModelSaldoInicial obj = new ModelSaldoInicial();
-		String sql = "SELECT cnpj,ano,cod_item,sum(tot_qtde) as saldo FROM tb_totalizadorporitem_sai where cod_item in (?,?) and ano = ? and cnpj = ? group by ano;";
+		String sql = "SELECT cnpj,ano,cod_item,sum(tot_qtde) as saldo FROM tb_totalizadorporitem_sai where cod_item in (?,?) and ano < ? and cnpj = ? order by ano;";
 		Connection con = pool.getConnection();
     	if(!con.isClosed()) {    		
     		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){

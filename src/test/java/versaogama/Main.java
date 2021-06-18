@@ -277,7 +277,7 @@ public class Main {
 			
 			
 			
-			List<ProdutoNotaXmlProprio> produtosXMLHandler = leitor.getProdutosXMLHandler(pXml, logica);
+			List<ProdutoNotaXmlProprio> produtosXMLHandler = leitor.getProdutosXMLHandler(pXml);
 			
 			for(ProdutoNotaXmlProprio pro : produtosXMLHandler){
 				

@@ -130,7 +130,8 @@ public class LeitorTxtSpedFiscal {
     private Map<Long,RegC405>        mpReducao  = new HashMap<Long, RegC405>();
     private Map<Long,RegC490>  mpTotalizadorCF  = new HashMap<Long, RegC490>();
     
-    private Map<Long,RegC860>       mpEquipCFe  = new HashMap<Long, RegC860>();
+    private Map<Long,RegC860>       mpEquipCFe    = new HashMap<Long, RegC860>();
+  
     
     
 	private Reg0000 reg0000;
@@ -383,7 +384,7 @@ public class LeitorTxtSpedFiscal {
 						if(i==2) { reg0205.setDescrAntItem(lista.get(i));}
 						if(i==3) { reg0205.setDtIni(UtilsEConverters.getStringParaData(lista.get(i)));}
 						if(i==4) { reg0205.setDtFim(UtilsEConverters.getStringParaData(lista.get(i)));}
-						if(i==5) { reg0205.setCodAntItem(lista.get(i));}
+						if(i==5) { reg0205.setCodAntItem(UtilsEConverters.preencheZerosAEsquerda(lista.get(i)));}
 		
 					}
 					reg0200.adicionaAlteracaoItem(reg0205);
@@ -411,8 +412,19 @@ public class LeitorTxtSpedFiscal {
 							if(i==7) { regC100.setSer(lista.get(i));}
 							if(i==8) { regC100.setNumDoc(lista.get(i));}
 							if(i==9) { regC100.setChvNfe(lista.get(i));}
-							if(i==10){ regC100.setDtDoc(UtilsEConverters.getStringParaData(lista.get(i)));}
-							if(i==11){ regC100.setDtEntSai(UtilsEConverters.getStringParaData(lista.get(i)));}
+							
+							if(i==10){
+								if(!lista.get(i).isEmpty()) {
+									regC100.setDtDoc(UtilsEConverters.getStringParaData(lista.get(i)));
+								}		
+							}
+							
+							if(i==11){ 
+								if(!lista.get(i).isEmpty()) {
+									regC100.setDtEntSai(UtilsEConverters.getStringParaData(lista.get(i)));
+								}
+							}
+							
 							if(i==12){ regC100.setVlDoc(Double.valueOf(lista.get(i).replace(",", ".")));}
 							if(i==13){ regC100.setIndPgto(lista.get(i));}
 							if(i==14){ if(!lista.get(i).isEmpty()) {regC100.setVlDesc(Double.valueOf(lista.get(i).replace(",", ".")));}}
@@ -622,6 +634,7 @@ public class LeitorTxtSpedFiscal {
 				 
 				 regsC860.add(regC860);
 				 mpEquipCFe.put(regC860.getId(), regC860);
+				
         	 }
    
         	 
@@ -781,8 +794,9 @@ public class LeitorTxtSpedFiscal {
 
 	
 	
-	public List<ProdutoNotaXmlProprio> getProdutosXMLHandler(Path pXml,LeitorXML logica) throws Exception {
+	public List<ProdutoNotaXmlProprio> getProdutosXMLHandler(Path pXml) throws Exception {
 	   List<ProdutoNotaXmlProprio>  retorno = new ArrayList<ProdutoNotaXmlProprio>();
+	   LeitorXML logica = new LeitorXML();
        SAXParserFactory spf = SAXParserFactory.newInstance();
        SAXParser parser = spf.newSAXParser();
 	   try (DirectoryStream<Path> stream = Files.newDirectoryStream(pXml)){
@@ -799,10 +813,10 @@ public class LeitorTxtSpedFiscal {
 	}
 
 	
-	public List<ProdutoCupomFiscalXml> getProdutosXMLHandlerCF(Path pXml, LeitorXML logica) throws Exception{
+	public List<ProdutoCupomFiscalXml> getProdutosXMLHandlerCF(Path pXml) throws Exception{
 		List<ProdutoCupomFiscalXml> retorno = new ArrayList<ProdutoCupomFiscalXml>();
 		SAXParserFactory spf = SAXParserFactory.newInstance();
-					
+		LeitorXML logica = new LeitorXML();			
 		SAXParser parser = spf.newSAXParser();
 	    try (DirectoryStream<Path> stream = Files.newDirectoryStream(pXml)){
 	    	for(Path path :  stream) {		
@@ -891,6 +905,7 @@ public class LeitorTxtSpedFiscal {
 	public Map<Long, RegC860> getMpEquipCFe() {
 		return mpEquipCFe;
 	}
+	
 	public List<RegH005> getRegsH005() {
 		return regsH005;
 	}

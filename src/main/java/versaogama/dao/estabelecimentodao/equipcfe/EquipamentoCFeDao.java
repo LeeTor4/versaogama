@@ -78,6 +78,7 @@ public class EquipamentoCFeDao implements EquipamentoCFeDaoInterface{
 		Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){	
 			stmt.execute();
+			stmt.setLong(1, codigo);
 			try(ResultSet rs = stmt.getResultSet()){	
 				while(rs.next()) {		
 					equip =  rsEquipamento(rs);
@@ -87,6 +88,7 @@ public class EquipamentoCFeDao implements EquipamentoCFeDaoInterface{
 		pool.liberarConnection(con);
 		return equip;
 	}
+	
 
 	@Override
 	public List<EquipamentoCFe> getEquipamentos() throws SQLException {
@@ -94,6 +96,28 @@ public class EquipamentoCFeDao implements EquipamentoCFeDaoInterface{
 		String sql = "SELECT * FROM tb_equip_sat";
 		Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){	
+			stmt.execute();
+			try(ResultSet rs = stmt.getResultSet()){	
+				
+				while(rs.next()) {	
+					
+					EquipamentoCFe cfe = rsEquipamento(rs);
+					retorno.add(cfe);
+				}
+			}
+			
+		}
+
+		pool.liberarConnection(con);
+		return retorno;
+	}
+	
+	public List<EquipamentoCFe> getIdEquip(Long lote) throws SQLException {
+	    List<EquipamentoCFe> retorno = new ArrayList<EquipamentoCFe>();
+		String sql = "SELECT * FROM tb_equip_sat where id_pai_lote = ?";
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){	
+			stmt.setLong(1, lote);
 			stmt.execute();
 			try(ResultSet rs = stmt.getResultSet()){	
 				

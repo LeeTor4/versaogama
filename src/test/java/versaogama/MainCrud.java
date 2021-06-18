@@ -183,6 +183,11 @@ public class MainCrud {
 		ecfsLoja03.add(ecf6_loja03);
 		
 		
+		
+		
+		
+		
+		
 		for(int i = 0; i < ecfsMegadiet.size();i++) {
 			if(!new MainCrud().daoECF.getEquipamentosFiscais().contains(ecfsMegadiet.get(i))){
 				new MainCrud().daoECF.cadastrar(ecfsMegadiet.get(i));
@@ -195,6 +200,15 @@ public class MainCrud {
 			}
 		}
 		
+		EquipamentoECF ecfSaoMateus = new EquipamentoECF();
+		ecfSaoMateus.setId_pai_emp(1L);
+		ecfSaoMateus.setId_pai_est(3L);
+		ecfSaoMateus.setCodModDocFiscal("2D");
+		ecfSaoMateus.setModeloEquip("ECF"); 
+		ecfSaoMateus.setNumSerieFabECF("BE090910100010021907");
+		ecfSaoMateus.setNumECF("1");
+		new MainCrud().daoECF.cadastrar(ecfSaoMateus);
+        
 		
 //		new MainCrud().empDao.excluir(1);	
 //		for(int i=1;i<10;i++){
