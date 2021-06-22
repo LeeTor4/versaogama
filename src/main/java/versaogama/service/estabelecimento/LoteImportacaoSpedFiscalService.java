@@ -164,12 +164,12 @@ public class LoteImportacaoSpedFiscalService {
 			   
 				if(!daoLote.getLoteImports().contains(lt)) {
 					id = daoLote.salvar(lt);	
-	                importandoParticipantes(leitor, part, 1L, 3L); // Campos preenchidos provisoriamente
-	                importandoProdutos(leitor,prod,outUnid,alt,1L, 3L); // Campos preenchidos provisoriamente
-	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,1L,3L);// Campos preenchidos provisoriamente
-	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 1L, 3L);
-	                importandoEquipamentoCFe(leitor, cfe, id, 1L, 3L);
-	                importandoItensCFe(pXml, leitor, itemCfe, id,1L, 3L);
+	                importandoParticipantes(leitor, part, 1L, 6L); // Campos preenchidos provisoriamente
+	                importandoProdutos(leitor,prod,outUnid,alt,1L, 6L); // Campos preenchidos provisoriamente
+	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,1L,6L);// Campos preenchidos provisoriamente
+	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 1L, 6L);
+	                importandoEquipamentoCFe(leitor, cfe, id, 1L, 6L);
+	                importandoItensCFe(pXml, leitor, itemCfe, id,1L, 6L);
 	                importandoInventario(leitor, inv, itnInv);
 			             
 					    
@@ -619,8 +619,8 @@ public class LoteImportacaoSpedFiscalService {
 		   histItens.setCfop(cf.getCfop());
 		   histItens.setCodMod(leitor.getMpEquipCFe().get(getIdEquipSat(Long.valueOf(cf.getNumDoc().toString()), lote)).getCodModDocFiscal());
 		  
-		   if(mpCFe.get( UtilsEConverters.preencheZerosAEsquerda(cf.getCodItem())) != null) {
-			   histItens.setDescricao(mpCFe.get( UtilsEConverters.preencheZerosAEsquerda(cf.getCodItem())).getDescricao());
+		   if(getProdutoPorCodigoUtiliz( UtilsEConverters.preencheZerosAEsquerda(cf.getCodItem())) != null) {
+			   histItens.setDescricao(getProdutoPorCodigoUtiliz( UtilsEConverters.preencheZerosAEsquerda(cf.getCodItem())).getDescricao());
 		   }
 		 
 		   
@@ -1146,6 +1146,11 @@ public class LoteImportacaoSpedFiscalService {
 		return id;
 	}
 
+	private Produto getProdutoPorCodigoUtiliz(String codUtilizado) throws SQLException {
+		
+		return daoProd.getProdutoPorCodUtiliz(codUtilizado);
+		
+	}
 	public Set<String> getListaCodigosProdutosNoLote() {
 		return listaCodigosProdutosNoLote;
 	}
