@@ -12,12 +12,15 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.ResultSet;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.InputSource;
 
+import versaogama.conexao.Pool;
 import versaogama.managerxml.LeitorXML;
 import versaogama.model.xml.CopiaArquivoXML_DE_PARA;
 import versaogama.util.UtilsEConverters;
@@ -69,7 +72,8 @@ public class XmlSubstituir {
 //		System.out.println(copia);
 		
 		
-		System.out.println(UtilsEConverters.preencheZerosAEsquerda("0000000012345"));
+		//System.out.println(UtilsEConverters.preencheZerosAEsquerda("0000000012345"));
+
 	}
 
 }

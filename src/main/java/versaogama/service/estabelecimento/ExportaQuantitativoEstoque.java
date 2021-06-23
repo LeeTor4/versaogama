@@ -81,73 +81,73 @@ public class ExportaQuantitativoEstoque {
             	 saldoIni = sIniEnt - sIniSai;
             	 totaisMensais.setQteIniInv(saldoIni);
             	 
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensJan(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensJan(p.getCodItem(),p.getCodAntItem(), ano,"1",cnpj)){
          			    totaisMensais.setQtdeEntJan(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntJan(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiJan(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiJan(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensFev(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensFev(p.getCodItem(),p.getCodAntItem(), ano,"2",cnpj)){
          			    totaisMensais.setQtdeEntFev(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntFev(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiFev(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiFev(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensMar(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensMar(p.getCodItem(),p.getCodAntItem(), ano,"3",cnpj)){
          			    totaisMensais.setQtdeEntMar(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntMar(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiMar(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiMar(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensAbr(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensAbr(p.getCodItem(),p.getCodAntItem(), ano,"4",cnpj)){
          			    totaisMensais.setQtdeEntAbr(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntAbr(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiAbr(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiAbr(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensMai(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensMai(p.getCodItem(),p.getCodAntItem(), ano,"5",cnpj)){
          			    totaisMensais.setQtdeEntMai(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntMai(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiMai(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiMai(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensJun(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensJun(p.getCodItem(),p.getCodAntItem(), ano,"6",cnpj)){
          			    totaisMensais.setQtdeEntJun(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntJun(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiJun(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiJun(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensJul(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensJul(p.getCodItem(),p.getCodAntItem(), ano,"7",cnpj)){
          			    totaisMensais.setQtdeEntJul(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntJul(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiJul(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiJul(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensAgo(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensAgo(p.getCodItem(),p.getCodAntItem(), ano,"8",cnpj)){
          			    totaisMensais.setQtdeEntAgo(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntAgo(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiAgo(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiAgo(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensSet(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensSet(p.getCodItem(),p.getCodAntItem(), ano,"9",cnpj)){
          			    totaisMensais.setQtdeEntSet(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntSet(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiSet(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiSet(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensOut(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensOut(p.getCodItem(),p.getCodAntItem(), ano,"10",cnpj)){
          			    totaisMensais.setQtdeEntOut(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntOut(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiOut(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiOut(saldos.getTotVlItemSai());
          	     }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensNov(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensNov(p.getCodItem(),p.getCodAntItem(), ano,"11",cnpj)){
             			totaisMensais.setQtdeEntNov(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntNov(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiNov(saldos.getTotQtdeSai());
 						totaisMensais.setVrSaiNov(saldos.getTotVlItemSai());
             	 }
-            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensDez(p.getCodItem(),p.getCodAntItem(), ano)){
+            	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensDez(p.getCodItem(),p.getCodAntItem(), ano,"12",cnpj)){
          			    totaisMensais.setQtdeEntDez(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntDez(saldos.getTotVlItemEnt());
 						totaisMensais.setQtdeSaiDez(saldos.getTotQtdeSai());

@@ -520,16 +520,18 @@ public class EntradasSaidasDeProdutosDao {
 	
 
 	  
-    public List<EntradasSaidasDeProdutos> getSaldoItensJan(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensJan(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_jan(?,?,?)}";
+    	String sql = "{call sp_ent_sai_jan(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -539,16 +541,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensFev(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensFev(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_fev(?,?,?)}";
+    	String sql = "{call sp_ent_sai_fev(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -558,16 +562,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensMar(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensMar(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_mar(?,?,?)}";
+    	String sql = "{call sp_ent_sai_mar(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -577,16 +583,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensAbr(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensAbr(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_abr(?,?,?)}";
+    	String sql = "{call sp_ent_sai_abr(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -596,16 +604,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensMai(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensMai(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_mai(?,?,?)}";
+    	String sql = "{call sp_ent_sai_mai(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -615,16 +625,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensJun(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensJun(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_jun(?,?,?)}";
+    	String sql = "{call sp_ent_sai_jun(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -634,16 +646,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensJul(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensJul(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_jul(?,?,?)}";
+    	String sql = "{call sp_ent_sai_jul(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -653,16 +667,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensAgo(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensAgo(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_ago(?,?,?)}";
+    	String sql = "{call sp_ent_sai_ago(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -672,16 +688,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensSet(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensSet(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_set(?,?,?)}";
+    	String sql = "{call sp_ent_sai_set(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -691,16 +709,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
     
-    public List<EntradasSaidasDeProdutos> getSaldoItensOut(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensOut(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_out(?,?,?)}";
+    	String sql = "{call sp_ent_sai_out(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -710,16 +730,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
 	
-    public List<EntradasSaidasDeProdutos> getSaldoItensNov(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensNov(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_nov(?,?,?)}";
+    	String sql = "{call sp_ent_sai_nov(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
@@ -729,16 +751,18 @@ public class EntradasSaidasDeProdutosDao {
     	return retorno;
     }
 	
-    public List<EntradasSaidasDeProdutos> getSaldoItensDez(String cod_item,String cod_ant_item,String ano) throws SQLException{
+    public List<EntradasSaidasDeProdutos> getSaldoItensDez(String cod_item,String cod_ant_item,String ano,String mes,String cnpj) throws SQLException{
     	List<EntradasSaidasDeProdutos> retorno = new ArrayList<>();
     	
-    	String sql = "{call sp_ent_sai_dez(?,?,?)}";
+    	String sql = "{call sp_ent_sai_dez(?,?,?,?,?)}";
     	
     	Connection con = pool.getConnection();
     	try(CallableStatement stmt =  con.prepareCall(sql)){	
     		stmt.setString(1, cod_item);
     		stmt.setString(2, cod_ant_item);
     		stmt.setString(3, ano);
+    		stmt.setString(4, mes);
+    		stmt.setString(5, cnpj);
     		ResultSet rs = stmt.executeQuery();
 
 			resultsetSaldo(retorno, rs);
