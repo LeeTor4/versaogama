@@ -12,11 +12,11 @@ import versaogama.conexao.Pool;
 import versaogama.model.system.movprodutos.ModelInventarioDeclarado;
 import versaogama.util.UtilsEConverters;
 
-public class InventarioConsultaDAO {
+public class InventarioConsultaDao {
 
     private final Pool pool;
 	
-	public InventarioConsultaDAO(Pool pool) {
+	public InventarioConsultaDao(Pool pool) {
 		this.pool = pool;
 	}
 	

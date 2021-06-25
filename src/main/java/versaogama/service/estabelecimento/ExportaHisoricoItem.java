@@ -13,9 +13,9 @@ import java.util.Scanner;
 import versaogama.conexao.Pool;
 import versaogama.dao.movprodutosdao.EntradasSaidasDeProdutosDao;
 import versaogama.dao.movprodutosdao.ModelHistoricoItensDao;
-import versaogama.dao.movprodutosdao.ModelPlanilhaHistoricoItem;
 import versaogama.model.system.movprodutos.ModelHistoricoItens;
 import versaogama.model.system.movprodutos.ModelInventarioDeclarado;
+import versaogama.model.system.movprodutos.ModelPlanilhaHistoricoItem;
 import versaogama.model.system.movprodutos.ModelProdutoDePara;
 import versaogama.util.UtilsEConverters;
 
@@ -255,7 +255,7 @@ public class ExportaHisoricoItem {
 					 for(int i=0;i<valoresEntreVirgula.length;i++){
 						  
 						    if(i==0){
-						    	 prod.setCodigo(valoresEntreVirgula[0]);;
+						    	 prod.setCodigo(valoresEntreVirgula[0]);
 						    	
 						    }
 						    if(i==1) {
@@ -269,7 +269,7 @@ public class ExportaHisoricoItem {
 		   }catch (FileNotFoundException e) {
 				
 				e.printStackTrace();
-			}
+		   }
 		   
 		   return retorno;
 	   }

@@ -164,12 +164,12 @@ public class LoteImportacaoSpedFiscalService {
 			   
 				if(!daoLote.getLoteImports().contains(lt)) {
 					id = daoLote.salvar(lt);	
-	                importandoParticipantes(leitor, part, 1L, 6L); // Campos preenchidos provisoriamente
-	                importandoProdutos(leitor,prod,outUnid,alt,1L, 6L); // Campos preenchidos provisoriamente
-	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,1L,6L);// Campos preenchidos provisoriamente
-	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 1L, 6L);
-	                importandoEquipamentoCFe(leitor, cfe, id, 1L, 6L);
-	                importandoItensCFe(pXml, leitor, itemCfe, id,1L, 6L);
+	                importandoParticipantes(leitor, part, 1L, 5L); // Campos preenchidos provisoriamente
+	                importandoProdutos(leitor,prod,outUnid,alt,1L, 5L); // Campos preenchidos provisoriamente
+	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,1L,5L);// Campos preenchidos provisoriamente
+	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 1L, 5L);
+	                importandoEquipamentoCFe(leitor, cfe, id, 1L, 5L);
+	                importandoItensCFe(pXml, leitor, itemCfe, id,1L, 5L);
 	                importandoInventario(leitor, inv, itnInv);
 			             
 					    

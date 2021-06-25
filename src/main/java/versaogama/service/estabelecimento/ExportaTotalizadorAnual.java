@@ -10,7 +10,7 @@ import java.util.Map;
 
 import versaogama.conexao.Pool;
 import versaogama.dao.movprodutosdao.EntradasSaidasDeProdutosDao;
-import versaogama.dao.movprodutosdao.InventarioConsultaDAO;
+import versaogama.dao.movprodutosdao.InventarioConsultaDao;
 import versaogama.model.system.movprodutos.EntradasSaidasDeProdutos;
 import versaogama.model.system.movprodutos.ModelInventarioDeclarado;
 import versaogama.model.system.movprodutos.ModelTotalizadoresAnual;
@@ -35,12 +35,12 @@ public class ExportaTotalizadorAnual {
 	private Double vrTotal_OV = 0.00;
 	
 	private EntradasSaidasDeProdutosDao dao;
-	private  InventarioConsultaDAO daoInv;
+	private  InventarioConsultaDao daoInv;
 	
 	public ExportaTotalizadorAnual() {
 		Pool pool  = new Pool();
 		dao = new EntradasSaidasDeProdutosDao(pool);
-		daoInv = new InventarioConsultaDAO(pool);
+		daoInv = new InventarioConsultaDao(pool);
 	}
 	
 	

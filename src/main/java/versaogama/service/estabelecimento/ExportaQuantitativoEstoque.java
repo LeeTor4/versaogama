@@ -10,6 +10,7 @@ import java.util.List;
 
 import versaogama.conexao.Pool;
 import versaogama.dao.movprodutosdao.EntradasSaidasDeProdutosDao;
+import versaogama.dao.movprodutosdao.SaldoInicialControleEstoqueDao;
 import versaogama.model.system.movprodutos.EntradasSaidasDeProdutos;
 import versaogama.model.system.movprodutos.ModelInventarioDeclarado;
 import versaogama.model.system.movprodutos.ModeloTotalizadoresMensais;
@@ -19,10 +20,12 @@ public class ExportaQuantitativoEstoque {
 	
 	
 	private EntradasSaidasDeProdutosDao dao;
+	private SaldoInicialControleEstoqueDao saldoInicial;
 	
 	public ExportaQuantitativoEstoque() {
 		Pool pool = new Pool();
 		dao = new EntradasSaidasDeProdutosDao(pool);
+		saldoInicial = new SaldoInicialControleEstoqueDao(pool);
 	}
 	
    public List<ModelInventarioDeclarado> getMpInvDec(String codItem,String codAntItem,String cnpj,String ano) throws SQLException{	
@@ -64,23 +67,32 @@ public class ExportaQuantitativoEstoque {
             	Double saldoIni = 0.0;
             	 ModeloTotalizadoresMensais totaisMensais = new ModeloTotalizadoresMensais();
             	 
-                  totaisMensais.setQteInvDec(invDeclarado(p.getCodItem(), p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)));	
+                 totaisMensais.setQteInvDec(invDeclarado(p.getCodItem(), p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)));	
                 
-                 if(dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
-                	 sIniEnt = dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
+                
+//                 if(dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
+//                	 sIniEnt = dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
+//                 }else {
+//                	 sIniEnt = 0.0;
+//                 }
+//                 
+//                 if(dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
+//                	 sIniSai = dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
+//                 }else {
+//                	 sIniSai = 0.0;
+//                 }
+//
+//            	 saldoIni = sIniEnt - sIniSai;
+//            	 totaisMensais.setQteIniInv(saldoIni);
+            	  
+                 if(saldoInicial.getSaldoInicial(p.getCodItem(), p.getCodAntItem(), cnpj, ano) != null) {
+      
+                	 totaisMensais.setQteIniInv(saldoInicial.getSaldoInicial(p.getCodItem(), p.getCodAntItem(), cnpj, ano).getQtdeInicial());
                  }else {
-                	 sIniEnt = 0.0;
-                 }
+                	 
+                	 totaisMensais.setQteIniInv(0.0);
+                 } 
                  
-                 if(dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
-                	 sIniSai = dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
-                 }else {
-                	 sIniSai = 0.0;
-                 }
-
-            	 saldoIni = sIniEnt - sIniSai;
-            	 totaisMensais.setQteIniInv(saldoIni);
-            	 
             	 for(EntradasSaidasDeProdutos saldos :  dao.getSaldoItensJan(p.getCodItem(),p.getCodAntItem(), ano,"1",cnpj)){
          			    totaisMensais.setQtdeEntJan(saldos.getTotQtdeEnt());
 						totaisMensais.setVrEntJan(saldos.getTotVlItemEnt());

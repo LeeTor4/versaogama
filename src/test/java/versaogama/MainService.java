@@ -31,6 +31,7 @@ import versaogama.service.estabelecimento.ExportaHisoricoItem;
 import versaogama.service.estabelecimento.ExportaQuantitativoEstoque;
 import versaogama.service.estabelecimento.ExportaTotalizadorAnual;
 import versaogama.service.estabelecimento.ImportaEntradasSaidasProdutosPorLote;
+import versaogama.service.estabelecimento.ImportaSaldoInicialEstoqueMensal;
 import versaogama.service.estabelecimento.LoteImportacaoSpedFiscalService;
 
 public class MainService {
@@ -42,45 +43,45 @@ public class MainService {
 		//Path pXml = Paths.get("D:\\XML");
 		//Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-dez2020.txt");
 		
-		 //Path x1 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\jan");
-		 //Path p1 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo substituto-jan2017.txt");
+		//Path x1 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\XML\\jan");
+	    //Path p1 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\SPED_LJ03_JAN2021.txt");
 		
-		 //Path x2 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\fev");
-		 //Path p2 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo substituto-fev2017.txt");
+	    //Path x2 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\XML\\fev");
+		//Path p2 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\SpedEFD-05329222000338-063037882-Remessa de arquivo original-fev2021.txt");
 		
-	     //Path x3 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\mar");
-	     //Path p3 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo substituto-mar2017.txt");
+	    //Path x3 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\XML\\mar");
+	    //Path p3 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\SpedEFD-05329222000338-063037882-Remessa de arquivo original-mar2021.txt");
 		
-	     //Path x4 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\abr");
-	     //Path p4 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo substituto-abr2017.txt");
+	    //Path x4 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\XML\\abr");
+	    //Path p4 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\SpedEFD-05329222000338-063037882-Remessa de arquivo original-abr2021.txt");
 	
-		 //Path x5 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\mai");
-	     //Path p5 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo substituto-mai2017.txt");
+//	    Path x5 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\mai");
+//        Path p5 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\05329222000338-063037882-20200501-20200531-0-D0F01251229A17153DDB78FBB3C98C7C6CB008BA-SPED-EFD.txt");
+//	
+//        Path x6 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\jun");
+//        Path p6 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\05329222000338-063037882-20200601-20200630-0-8E57B91F3C253C67E0B4C8BDD15401F3ED02D185-SPED-EFD.txt");
+//	
+//	    Path x7 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\jul");
+//        Path p7 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\LOJA03_CD_JULHO2020.txt");
+//	
+//	    Path x8 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\ago");
+//	    Path p8 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\LOJA0320200801.txt");
+//	
+//	    Path x9 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\set");
+//        Path p9 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\loja03_delivery_092020.txt");
+//	
+//        Path x10 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\out");
+//        Path p10 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\Loja03_sped_102020.txt");
+//	
+//        Path x11 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\nov");
+//	    Path p11 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\Loja03_nov2020.txt");
+//	
+//        Path x12 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\dez");
+//        Path p12 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\sped_loja03_dez2020.txt");
 		
-	     //Path x6 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\jun");
-	     //Path p6 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo substituto-jun2017.txt");
-		
-		 //Path x7 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\jul");
-	     //Path p7 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo substituto-jul2017.txt");
-		
-		 //Path x8 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\ago");
-		 //Path p8 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo original-ago2017.txt");
-		
-		 //Path x9 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\set");
-	     //Path p9 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo substituto-set2017.txt");
-		
-	     //Path x10 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\out");
-	     //Path p10 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo original-out2017.txt");
-		
-         //Path x11 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\nov");
-		 //Path p11 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo original-nov2017.txt");
-		
-	     //Path x12 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\XML\\dez");
-	     //Path p12 = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGAFARMA\\SPED\\2017\\SpedEFD-05329222000680-064107167-Remessa de arquivo original-dez2017.txt");
 		
 		
-		
-		String dirPlanilha  = "D:/EMPRESAS/SELLENE/MEGAFARMA/CONTROLE_ESTOQUE_2018_Megafarma.csv";
+		String dirPlanilha  = "D:/EMPRESAS/SELLENE/SAO_MATEUS/CONTROLE_ESTOQUE_2017_saomateus_reprocessado.csv";
 		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2017.CSV";
 
 		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
@@ -90,8 +91,8 @@ public class MainService {
 	  
 		ExportaQuantitativoEstoque exporta = new ExportaQuantitativoEstoque();
 		
-//		Path p = p12;
-//		Path x = x12;	
+//		Path p = p1;
+//		Path x = x1;	
 //		
 //		RegC100 nf = new RegC100();
 //		leitor.leitorSpedFiscal(p,pool);
@@ -114,7 +115,7 @@ public class MainService {
 		ImportaEntradasSaidasProdutosPorLote movPorLote = new ImportaEntradasSaidasProdutosPorLote();
 		ExportaHisoricoItem hist = new ExportaHisoricoItem();
 		ExportaTotalizadorAnual totalizadorFinanceiro = new ExportaTotalizadorAnual();
-		
+		ImportaSaldoInicialEstoqueMensal saldoInicial = new ImportaSaldoInicialEstoqueMensal();
 		
 		Inventario inv = new Inventario();
 		ItensInventario itnInv = new ItensInventario();
@@ -132,17 +133,19 @@ public class MainService {
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
 		
-		  exporta.exportaControleQuantitativos(dirPlanilha, "2018","05329222000680");
+		  exporta.exportaControleQuantitativos(dirPlanilha, "2017","05329222000761");
 		
 		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
+		 String dirSaldoInicial = "D:/EMPRESAS/SELLENE/SAO_MATEUS/saldoInicial.csv";
 		
 		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
 	      String dirPlanHistorico2 = "D:/EMPRESAS/SELLENE/MEGAFARMA/fichas_estoques/";
 	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
 	      
+	      //saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, "2017","05329222000761");
 	      //hist.exportarHistoricoItem(dirPlanHistorico2, "2021", "05329222000680", "00003091","");
-	     // hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
+	      //hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
 	}
 
 }

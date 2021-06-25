@@ -1,4 +1,4 @@
-package versaogama.dao.movprodutosdao;
+package versaogama.model.system.movprodutos;
 
 import java.time.LocalDate;
 
