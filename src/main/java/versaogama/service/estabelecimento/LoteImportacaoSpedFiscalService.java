@@ -164,12 +164,12 @@ public class LoteImportacaoSpedFiscalService {
 			   
 				if(!daoLote.getLoteImports().contains(lt)) {
 					id = daoLote.salvar(lt);	
-	                importandoParticipantes(leitor, part, 1L, 5L); // Campos preenchidos provisoriamente
-	                importandoProdutos(leitor,prod,outUnid,alt,1L, 5L); // Campos preenchidos provisoriamente
-	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,1L,5L);// Campos preenchidos provisoriamente
-	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 1L, 5L);
-	                importandoEquipamentoCFe(leitor, cfe, id, 1L, 5L);
-	                importandoItensCFe(pXml, leitor, itemCfe, id,1L, 5L);
+	                importandoParticipantes(leitor, part, 2L, 7L); // Campos preenchidos provisoriamente
+	                importandoProdutos(leitor,prod,outUnid,alt,2L, 7L); // Campos preenchidos provisoriamente
+	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,2L, 7L);// Campos preenchidos provisoriamente
+	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 2L, 7L);
+	                importandoEquipamentoCFe(leitor, cfe, id, 2L, 7L);
+	                importandoItensCFe(pXml, leitor, itemCfe, id,2L, 7L);
 	                importandoInventario(leitor, inv, itnInv);
 			             
 					    
@@ -411,20 +411,25 @@ public class LoteImportacaoSpedFiscalService {
 			}
 			
 			if(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()) != null) {
-				 daoProdNF.cadastrar(insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf));		
-				 
-				 if(insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf).getCfop().startsWith("1")
-						 || insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf).getCfop().startsWith("2")) {
-					 insereHistoricoItensEntradasProprias(nfP,leitor,nf,idPaiEst);
-					 totalizadoresItensEntradasPropriasNF(nfP);
-				 }
-				 
-				 if(insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf).getCfop().startsWith("5")
-						 || insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf).getCfop().startsWith("6")) {
-					 insereHistoricoItensSaidas(nfP,leitor,nf,idPaiEst);
-					 totalizadoresItensSaidasNF(nfP);
-				 }
-				 
+				
+				if(!nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getCodSit().equals("02")) {
+					
+					 daoProdNF.cadastrar(insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf));		
+					 
+					 if(insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf).getCfop().startsWith("1")
+							 || insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf).getCfop().startsWith("2")) {
+						 insereHistoricoItensEntradasProprias(nfP,leitor,nf,idPaiEst);
+						 totalizadoresItensEntradasPropriasNF(nfP);
+					 }
+					 
+					 if(insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf).getCfop().startsWith("5")
+							 || insereProdutosXmlNotasPropria(leitor, pNota,nfP, nf).getCfop().startsWith("6")) {
+						 insereHistoricoItensSaidas(nfP,leitor,nf,idPaiEst);
+						 totalizadoresItensSaidasNF(nfP);
+					 }
+					 
+				}
+ 
 
 			}
 			

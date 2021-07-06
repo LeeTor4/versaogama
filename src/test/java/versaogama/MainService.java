@@ -39,47 +39,62 @@ public class MainService {
 	
 	public static void main(String[] args) throws Exception {
 		
+		String ano = "2019";
+		String emp = "BENELUX";
+		String estab = "MATRIZ";
+		
+		String anomes1 = ano.concat("01").concat(".txt");
+		String anomes2 = ano.concat("02").concat(".txt");
+		String anomes3 = ano.concat("03").concat(".txt");
+		String anomes4 = ano.concat("04").concat(".txt");
+		String anomes5 = ano.concat("05").concat(".txt");
+		String anomes6 = ano.concat("06").concat(".txt");
+		String anomes7 = ano.concat("07").concat(".txt");
+		String anomes8 = ano.concat("08").concat(".txt");
+		String anomes9 = ano.concat("09").concat(".txt");
+		String anomes10 = ano.concat("10").concat(".txt");
+		String anomes11 = ano.concat("11").concat(".txt");
+		String anomes12 = ano.concat("12").concat(".txt");
+		
 		Pool pool = new Pool();
 		//Path pXml = Paths.get("D:\\XML");
 		//Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-dez2020.txt");
 		
-		//Path x1 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\XML\\jan");
-	    //Path p1 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\SPED_LJ03_JAN2021.txt");
+		 Path x1 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\jan"));
+	     Path p1 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes1));
 		
-	    //Path x2 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\XML\\fev");
-		//Path p2 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\SpedEFD-05329222000338-063037882-Remessa de arquivo original-fev2021.txt");
+	     Path x2 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\fev"));
+	     Path p2 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes2));
 		
-	    //Path x3 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\XML\\mar");
-	    //Path p3 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\SpedEFD-05329222000338-063037882-Remessa de arquivo original-mar2021.txt");
-		
-	    //Path x4 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\XML\\abr");
-	    //Path p4 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2021\\SpedEFD-05329222000338-063037882-Remessa de arquivo original-abr2021.txt");
-	
-//	    Path x5 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\mai");
-//        Path p5 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\05329222000338-063037882-20200501-20200531-0-D0F01251229A17153DDB78FBB3C98C7C6CB008BA-SPED-EFD.txt");
-//	
-//        Path x6 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\jun");
-//        Path p6 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\05329222000338-063037882-20200601-20200630-0-8E57B91F3C253C67E0B4C8BDD15401F3ED02D185-SPED-EFD.txt");
-//	
-//	    Path x7 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\jul");
-//        Path p7 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\LOJA03_CD_JULHO2020.txt");
-//	
-//	    Path x8 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\ago");
-//	    Path p8 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\LOJA0320200801.txt");
-//	
-//	    Path x9 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\set");
-//        Path p9 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\loja03_delivery_092020.txt");
-//	
-//        Path x10 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\out");
-//        Path p10 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\Loja03_sped_102020.txt");
-//	
-//        Path x11 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\nov");
-//	    Path p11 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\Loja03_nov2020.txt");
-//	
-//        Path x12 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\XML\\dez");
-//        Path p12 = Paths.get("D:\\EMPRESAS\\SELLENE\\LOJA03\\SPED\\2020\\sped_loja03_dez2020.txt");
-		
-		
+	     Path x3 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\mar"));
+	     Path p3 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes3));
+	     
+	     Path x4 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\abr"));
+	     Path p4 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes4));
+	     
+	     Path x5 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\mai"));
+	     Path p5 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes5));
+	     
+	     Path x6 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\jun"));
+	     Path p6 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes6));
+	     
+	     Path x7 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\jul"));
+	     Path p7 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes7));
+	     
+	     Path x8 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\ago"));
+	     Path p8 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes8));
+	     
+	     Path x9 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\set"));
+	     Path p9 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes9));
+	     
+	     Path x10 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\out"));
+	     Path p10 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes10));
+	     
+	     Path x11 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\nov"));
+	     Path p11 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes11));
+	     
+	     Path x12 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\dez"));
+	     Path p12 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes12));
 		
 		String dirPlanilha  = "D:/EMPRESAS/SELLENE/SAO_MATEUS/CONTROLE_ESTOQUE_2017_saomateus_reprocessado.csv";
 		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2017.CSV";
@@ -91,11 +106,12 @@ public class MainService {
 	  
 		ExportaQuantitativoEstoque exporta = new ExportaQuantitativoEstoque();
 		
-//		Path p = p1;
-//		Path x = x1;	
-//		
-//		RegC100 nf = new RegC100();
-//		leitor.leitorSpedFiscal(p,pool);
+		Path p = p12;
+		Path x = x12;	
+		
+		
+		RegC100 nf = new RegC100();
+		leitor.leitorSpedFiscal(p,pool);
 
 
 		Participante part = new Participante();
@@ -121,19 +137,19 @@ public class MainService {
 		ItensInventario itnInv = new ItensInventario();
 		
 		
-//		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
-//       
-//		System.out.println("Lote externo " + numLote);
-//   		
-//		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
-//				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
-//				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
+		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
+       
+		System.out.println("Lote externo " + numLote);
+   		
+		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
+				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
+				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
 		
 		
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
 		
-		  exporta.exportaControleQuantitativos(dirPlanilha, "2017","05329222000761");
+		//exporta.exportaControleQuantitativos(dirPlanilha, "2017","05329222000761");
 		
 		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
