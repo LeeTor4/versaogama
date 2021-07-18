@@ -161,15 +161,15 @@ public class LoteImportacaoSpedFiscalService {
 				
 				System.out.println("Sistema " + lt.getId() + "|" + lt.getCnpj()+ "|" + lt.getNome() + "|" + lt.getDtIni() + "|" + lt.getDtFin());
 				System.out.println("Arquivo " + reg.getId() + "|" + reg.getCnpj()+ "|" + reg.getNome() + "|" + reg.getDtIni() + "|" + reg.getDtFin());
-			   
+			    System.out.println(daoEmp.getEmpresa(reg.getCnpj().substring(0,8)).getId() +"|"+ daoEst.getEstabelecimento(reg.getCnpj()).getId());
 				if(!daoLote.getLoteImports().contains(lt)) {
 					id = daoLote.salvar(lt);	
-	                importandoParticipantes(leitor, part, 2L, 7L); // Campos preenchidos provisoriamente
-	                importandoProdutos(leitor,prod,outUnid,alt,2L, 7L); // Campos preenchidos provisoriamente
-	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,2L, 7L);// Campos preenchidos provisoriamente
-	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, 2L, 7L);
-	                importandoEquipamentoCFe(leitor, cfe, id, 2L, 7L);
-	                importandoItensCFe(pXml, leitor, itemCfe, id,2L, 7L);
+	                importandoParticipantes(leitor, part, daoEmp.getEmpresa(reg.getCnpj().substring(0,8)).getId() , daoEst.getEstabelecimento(reg.getCnpj()).getId()); // Campos preenchidos provisoriamente
+	                importandoProdutos(leitor,prod,outUnid,alt,daoEmp.getEmpresa(reg.getCnpj().substring(0,8)).getId(),  daoEst.getEstabelecimento(reg.getCnpj()).getId()); // Campos preenchidos provisoriamente
+	                importandoNotasFiscais(pXml,logica,nota,leitor,id,pNota,nf,daoEmp.getEmpresa(reg.getCnpj().substring(0,8)).getId(),  daoEst.getEstabelecimento(reg.getCnpj()).getId());// Campos preenchidos provisoriamente
+	                importandoReducoesZ(leitor, ecf, rdz, totRdz, itensCF, totDirCF, id, daoEmp.getEmpresa(reg.getCnpj().substring(0,8)).getId(), daoEst.getEstabelecimento(reg.getCnpj()).getId());
+	                importandoEquipamentoCFe(leitor, cfe, id, daoEmp.getEmpresa(reg.getCnpj().substring(0,8)).getId(),  daoEst.getEstabelecimento(reg.getCnpj()).getId());
+	                importandoItensCFe(pXml, leitor, itemCfe, id,daoEmp.getEmpresa(reg.getCnpj().substring(0,8)).getId(),  daoEst.getEstabelecimento(reg.getCnpj()).getId());
 	                importandoInventario(leitor, inv, itnInv);
 			             
 					    
@@ -656,8 +656,9 @@ public class LoteImportacaoSpedFiscalService {
    
    private void importandoItensInventario(LeitorTxtSpedFiscal leitor, ItensInventario itnInv) throws SQLException {
 	   for(int i=0; i < leitor.getRegsH005().size(); i++) {
-		   for(int x=0; x < leitor.getRegsH005().get(i).getListaItensInv().size() ; x++) {
+		   for(int x=0; x < leitor.getRegsH005().get(i).getRegsH010().size(); x++) {
 			   
+			  
 			   itnInvDao.cadastrar(insereItensInventario(itnInv, leitor, i, x));
 		   }
 	   }
@@ -964,17 +965,17 @@ public class LoteImportacaoSpedFiscalService {
 	
 	private ItensInventario insereItensInventario(ItensInventario itnInv,LeitorTxtSpedFiscal leitor,int i,int x ) {
 		
-		itnInv.setIdPai(leitor.getRegsH005().get(i).getListaItensInv().get(x).getIdPai());
-		itnInv.setCodItem(leitor.getRegsH005().get(i).getListaItensInv().get(x).getCodItem());
-		itnInv.setUnd(leitor.getRegsH005().get(i).getListaItensInv().get(x).getUnd());
-		itnInv.setQtde(leitor.getRegsH005().get(i).getListaItensInv().get(x).getQtde());
-		itnInv.setVlUnit(leitor.getRegsH005().get(i).getListaItensInv().get(x).getVlUnit());
-		itnInv.setVlItem(leitor.getRegsH005().get(i).getListaItensInv().get(x).getVlItem());
-		itnInv.setIndProp(leitor.getRegsH005().get(i).getListaItensInv().get(x).getIndProp());
-		itnInv.setCodPart(leitor.getRegsH005().get(i).getListaItensInv().get(x).getCodPart());
-		itnInv.setTxtCompl(leitor.getRegsH005().get(i).getListaItensInv().get(x).getTxtCompl());
-		itnInv.setCodCta(leitor.getRegsH005().get(i).getListaItensInv().get(x).getCodCtda());
-		itnInv.setVlItemIr(leitor.getRegsH005().get(i).getListaItensInv().get(x).getVlItemIR());
+		itnInv.setIdPai(leitor.getRegsH005().get(i).getRegsH010().get(x).getIdPai());
+		itnInv.setCodItem(leitor.getRegsH005().get(i).getRegsH010().get(x).getCodItem());
+		itnInv.setUnd(leitor.getRegsH005().get(i).getRegsH010().get(x).getUnd());
+		itnInv.setQtde(leitor.getRegsH005().get(i).getRegsH010().get(x).getQtde());
+		itnInv.setVlUnit(leitor.getRegsH005().get(i).getRegsH010().get(x).getVlUnit());
+		itnInv.setVlItem(leitor.getRegsH005().get(i).getRegsH010().get(x).getVlItem());
+		itnInv.setIndProp(leitor.getRegsH005().get(i).getRegsH010().get(x).getIndProp());
+		itnInv.setCodPart(leitor.getRegsH005().get(i).getRegsH010().get(x).getCodPart());
+		itnInv.setTxtCompl(leitor.getRegsH005().get(i).getRegsH010().get(x).getTxtCompl());
+		itnInv.setCodCta(leitor.getRegsH005().get(i).getRegsH010().get(x).getCodCtda());
+		itnInv.setVlItemIr(leitor.getRegsH005().get(i).getRegsH010().get(x).getVlItemIR());
 		
 		return itnInv;
 	}

@@ -29,6 +29,7 @@ import versaogama.model.system.produto.OutrasUnid;
 import versaogama.model.system.produto.Produto;
 import versaogama.service.estabelecimento.ExportaHisoricoItem;
 import versaogama.service.estabelecimento.ExportaQuantitativoEstoque;
+import versaogama.service.estabelecimento.ExportaRelacaoInventario;
 import versaogama.service.estabelecimento.ExportaTotalizadorAnual;
 import versaogama.service.estabelecimento.ImportaEntradasSaidasProdutosPorLote;
 import versaogama.service.estabelecimento.ImportaSaldoInicialEstoqueMensal;
@@ -39,9 +40,10 @@ public class MainService {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String ano = "2019";
-		String emp = "BENELUX";
-		String estab = "MATRIZ";
+		String ano = "2017";
+		String cnpj = "05329222000761";
+		String emp = "SELLENE";
+		String estab = "SAO_MATEUS";
 		
 		String anomes1 = ano.concat("01").concat(".txt");
 		String anomes2 = ano.concat("02").concat(".txt");
@@ -96,7 +98,11 @@ public class MainService {
 	     Path x12 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\XML").concat("\\dez"));
 	     Path p12 = Paths.get("D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\SPED").concat("\\").concat(ano).concat("\\").concat(anomes12));
 		
-		String dirPlanilha  = "D:/EMPRESAS/SELLENE/SAO_MATEUS/CONTROLE_ESTOQUE_2017_saomateus_reprocessado.csv";
+	     
+		String dirPlanilha          = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\CONTROLE_ESTOQUE_".concat(cnpj).concat("_").concat(ano).concat(".csv"));
+		String dirPlanReprocessado  = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\CONTROLE_ESTOQUE_".concat(cnpj).concat("_").concat(ano).concat("_").concat("reprocessado").concat(".csv"));
+		String dirPlanInv           = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\INVENTARIO_".concat(cnpj).concat("_").concat(ano).concat(".csv"));
+		
 		String dirTotal     = "D:/ORTOGENESE/TOTALIZADORES_ESTOQUE_2017.CSV";
 
 		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
@@ -106,12 +112,12 @@ public class MainService {
 	  
 		ExportaQuantitativoEstoque exporta = new ExportaQuantitativoEstoque();
 		
-		Path p = p12;
-		Path x = x12;	
-		
-		
-		RegC100 nf = new RegC100();
-		leitor.leitorSpedFiscal(p,pool);
+//		Path p = p12;
+//		Path x = x12;	
+//		
+//		
+//		RegC100 nf = new RegC100();
+//		leitor.leitorSpedFiscal(p,pool);
 
 
 		Participante part = new Participante();
@@ -131,35 +137,39 @@ public class MainService {
 		ImportaEntradasSaidasProdutosPorLote movPorLote = new ImportaEntradasSaidasProdutosPorLote();
 		ExportaHisoricoItem hist = new ExportaHisoricoItem();
 		ExportaTotalizadorAnual totalizadorFinanceiro = new ExportaTotalizadorAnual();
+		ExportaRelacaoInventario relacaoInv = new ExportaRelacaoInventario();
 		ImportaSaldoInicialEstoqueMensal saldoInicial = new ImportaSaldoInicialEstoqueMensal();
 		
 		Inventario inv = new Inventario();
 		ItensInventario itnInv = new ItensInventario();
 		
 		
-		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
-       
-		System.out.println("Lote externo " + numLote);
-   		
-		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
-				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
-				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
+//		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
+//       
+//		System.out.println("Lote externo " + numLote);
+//   		
+//		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
+//				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
+//				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
 		
 		
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
 		
-		//exporta.exportaControleQuantitativos(dirPlanilha, "2017","05329222000761");
+	     //exporta.exportaControleQuantitativos(dirPlanReprocessado, ano,cnpj);
 		
+		 relacaoInv.exportRelacaoInventario(dirPlanInv,cnpj, ano);
 		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
-		 String dirSaldoInicial = "D:/EMPRESAS/SELLENE/SAO_MATEUS/saldoInicial.csv";
+		  String dirSaldoInicial = "D:/EMPRESAS/SELLENE/SAO_MATEUS/saldoInicial.csv";
 		
 		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
 	      String dirPlanHistorico2 = "D:/EMPRESAS/SELLENE/MEGAFARMA/fichas_estoques/";
 	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
 	      
-	      //saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, "2017","05329222000761");
+	      //saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, ano,cnpj);
+	      
+	      
 	      //hist.exportarHistoricoItem(dirPlanHistorico2, "2021", "05329222000680", "00003091","");
 	      //hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
 	}

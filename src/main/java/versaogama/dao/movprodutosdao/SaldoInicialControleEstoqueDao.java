@@ -44,7 +44,7 @@ public class SaldoInicialControleEstoqueDao {
    
    public ModeloSaldoInicialControleEstoque getSaldoInicial(String codItem, String codAntItem, String cnpj, String ano) throws SQLException{
 	   ModeloSaldoInicialControleEstoque obj = null;
-	   String sql = "SELECT * FROM versaogamadb.tb_saldo_inicial_estoque_mensal where cod_item in (?,?) and cnpj = ? and ano = ?;";
+	   String sql = "SELECT * FROM tb_saldo_inicial_estoque_mensal where cod_item in (?,?) and cnpj = ? and ano = ?;";
 	   Connection con = pool.getConnection();
 	   try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 				
@@ -71,6 +71,36 @@ public class SaldoInicialControleEstoqueDao {
 		pool.liberarConnection(con);
 	   
 	    return obj;
+   }
+   
+   public List<ModeloSaldoInicialControleEstoque> getListaProdutosInventario(String cnpj, String ano) throws SQLException{
+	   List<ModeloSaldoInicialControleEstoque> retorno =  new ArrayList<ModeloSaldoInicialControleEstoque>();
+
+	   String sql = "SELECT * FROM tb_saldo_inicial_estoque_mensal where cnpj = ? and ano = ?;";
+	   Connection con = pool.getConnection();
+	   try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+				
+			stmt.setString(1, cnpj);
+			stmt.setString(2, ano);
+			stmt.execute();
+			ResultSet rs = stmt.executeQuery();
+		 	while(rs.next()) {    		 	
+		 		ModeloSaldoInicialControleEstoque obj = new ModeloSaldoInicialControleEstoque();
+		 		
+		 		obj.setId(rs.getLong("id"));
+		 		obj.setCnpj(rs.getString("cnpj"));
+		 		obj.setAno(rs.getString("ano"));
+		 		obj.setCodItem(rs.getString("cod_item"));
+		 		obj.setCodAntItem(rs.getString("cod_ant_item"));
+		 		obj.setDescricao(rs.getString("descricao"));
+		 		obj.setQtdeInicial(rs.getDouble("saldo"));
+		 		retorno.add(obj);
+		 	}
+       }
+		   
+		pool.liberarConnection(con);
+	   
+	    return retorno;
    }
    	 
 }

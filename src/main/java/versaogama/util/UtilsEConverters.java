@@ -92,6 +92,16 @@ public class UtilsEConverters {
 		return formatted;
 	}
 	
+	public static String preencheZerosAEsquerdaDoisDigitos(String str) {
+		String zeros = "0";
+		String qtdeZeros="";
+		for(int i =1; i <= 2 ;i++) {			
+			qtdeZeros += zeros;
+		}
+		String formatted = (qtdeZeros + str).substring(str.length());
+		return formatted;
+	}
+	
 	/*
 	 * public static void main(String[] args) { LocalDate of = LocalDate.of(2019, 2,
 	 * 13); //getDataParaString(of); //getStringParaData("05072019"); String cam =

@@ -137,5 +137,24 @@ public class InventarioDao implements InventarioDaoInterface{
 
 		return inv;
 	}
+	
+	public  Long getIncInv() {
+		Long idRetorno = null;
+		Pool pool = new Pool();
+		String sql = "SELECT AUTO_INCREMENT AS ID FROM information_schema.tables WHERE table_name = 'tb_inv_totais' AND table_schema = 'versaogamadb' ;";
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){					
+			stmt.execute();
+			try(ResultSet rs = stmt.getResultSet()){		
+				while(rs.next()) {					
+					idRetorno =  rs.getLong("id");					
+				}				
+			}			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return idRetorno;
+	}
 
 }

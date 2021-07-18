@@ -102,6 +102,23 @@ public class EmpresaDAO implements EmpresaDaoInterface{
 		pool.liberarConnection(con);
 		return emp;
 	}
+	
+	public Empresa getEmpresa(String cnpjbase) throws SQLException {
+		Empresa emp = new Empresa();
+		String sql = "SELECT * FROM tb_empresa WHERE cnpjbase = ?";
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){	
+			stmt.setString(1, cnpjbase);
+			stmt.execute();
+			try(ResultSet rs = stmt.getResultSet()){				
+				while(rs.next()) {
+					emp = rsEmpresa(rs);
+				}				
+			}			
+		}	
+		pool.liberarConnection(con);
+		return emp;
+	}
 
 	@Override
 	public List<Empresa> getEmpresas() throws SQLException {

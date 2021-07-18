@@ -56,7 +56,7 @@ public class RegH005 {
 		listaItensInv.add(regH010);
 	}
 	
-    public List<RegH010> getListaItensInv() {
+    public List<RegH010> getRegsH010() {
 		return listaItensInv;
 	}
 }

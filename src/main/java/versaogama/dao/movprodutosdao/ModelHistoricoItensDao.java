@@ -10,6 +10,7 @@ import java.util.List;
 
 import versaogama.conexao.Pool;
 import versaogama.model.system.movprodutos.ModelHistoricoItens;
+import versaogama.model.system.movprodutos.ModelValorUnitarioDoProduto;
 import versaogama.util.UtilsEConverters;
 
 public class ModelHistoricoItensDao {
@@ -114,6 +115,8 @@ public class ModelHistoricoItensDao {
 		return retorno;
 		
 	}
+	
+	
     private ModelHistoricoItens rsModelHistoricoItem(ResultSet rs) throws SQLException {
     	ModelHistoricoItens retorno = new ModelHistoricoItens();
     	
@@ -143,4 +146,6 @@ public class ModelHistoricoItensDao {
     	
     	return retorno;
     }
+    
+
 }

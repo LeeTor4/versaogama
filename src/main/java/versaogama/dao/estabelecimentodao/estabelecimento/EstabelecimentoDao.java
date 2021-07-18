@@ -104,6 +104,23 @@ public class EstabelecimentoDao implements EstabelecimentoDaoInterface{
 		}
 		return est;
 	}
+	
+	public Estabelecimento getEstabelecimento(String cnpj) throws SQLException {
+		Estabelecimento est = new Estabelecimento();
+		String sql  = "SELECT * FROM tb_estabelecimento WHERE cnpj = ?";
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){					
+			stmt.setString(1, cnpj);
+			stmt.execute();
+			try(ResultSet rs = stmt.getResultSet()){					
+				while(rs.next()) {		
+					
+					est = rsEst(rs);
+				}	
+			}
+		}
+		return est;
+	}
 
 	private Estabelecimento rsEst(ResultSet rs) throws SQLException {
 		Estabelecimento est = new Estabelecimento();

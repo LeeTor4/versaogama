@@ -10,6 +10,7 @@ import java.util.List;
 
 import versaogama.conexao.Pool;
 import versaogama.model.system.TotalizadoresPorItem;
+import versaogama.model.system.movprodutos.ModelValorUnitarioDoProduto;
 
 public class TotalizadorePorItemEntDAO implements TotalizadorPorItemInterface{
 
@@ -119,7 +120,43 @@ public class TotalizadorePorItemEntDAO implements TotalizadorPorItemInterface{
 		pool.liberarConnection(con);	
 		return retorno;
 	}
-
+	
+	
+	public ModelValorUnitarioDoProduto ultimoRegistroDoItem(String cnpj,  String codItem,String ano) throws SQLException {
+		ModelValorUnitarioDoProduto retorno = null;
+		String sql = "SELECT ano,mes,cod_item, tot_qtde, (vl_tot_item/tot_qtde) as vl_unit, vl_tot_item FROM  (SELECT (@id:=@id+1) as id,ano,mes,cod_item,tot_qtde,vl_tot_item\r\n" + 
+				"					FROM tb_totalizadorporitem_ent \r\n" + 
+				"					CROSS join (SELECT @id:=0)  as seq\r\n" + 
+				"					WHERE cnpj = ? and cod_item = ? and ano < ? \r\n" + 
+				"					ORDER BY ano,mes) AS tabinv\r\n" + 
+				"ORDER BY id desc limit 1;";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			stmt.setString(1, cnpj);
+			stmt.setString(2, codItem);
+			stmt.setString(3, ano);
+			stmt.executeQuery();
+	        try(ResultSet rs = stmt.getResultSet()){	
+	           while(rs.next()) {	
+	        	   retorno = new ModelValorUnitarioDoProduto();
+	        	   	
+	        	   retorno.setAno(rs.getString("ano"));
+	        	   retorno.setMes(rs.getString("mes"));
+	        	   retorno.setCodItem(rs.getString("cod_item"));
+	        	   retorno.setTotQtde(rs.getDouble("tot_qtde"));
+	        	   retorno.setVlUnit(rs.getDouble("vl_unit"));
+	        	   retorno.setVlTotItem(rs.getDouble("vl_tot_item"));
+	           }
+	        }
+			
+		}
+		pool.liberarConnection(con);	
+		return retorno;
+	}
+	
+	
+	
 	private TotalizadoresPorItem rsListTotalizadores(ResultSet rs) throws SQLException {
 		TotalizadoresPorItem totItem = new TotalizadoresPorItem();
 		totItem.setId(rs.getLong("id"));

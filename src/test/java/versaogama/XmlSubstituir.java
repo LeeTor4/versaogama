@@ -21,6 +21,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 
 import versaogama.conexao.Pool;
+import versaogama.dao.movprodutosdao.ModelHistoricoItensDao;
 import versaogama.managerxml.LeitorXML;
 import versaogama.model.xml.CopiaArquivoXML_DE_PARA;
 import versaogama.util.UtilsEConverters;
@@ -73,6 +74,10 @@ public class XmlSubstituir {
 		
 		
 		//System.out.println(UtilsEConverters.preencheZerosAEsquerda("0000000012345"));
+		
+		Pool pool = new Pool();
+		ModelHistoricoItensDao dao = new ModelHistoricoItensDao(pool);
+
 
 	}
 

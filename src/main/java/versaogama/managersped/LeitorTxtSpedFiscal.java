@@ -26,6 +26,7 @@ import versaogama.dao.estabelecimentodao.importacaospedfical.LoteImportacaoSpedF
 import versaogama.dao.estabelecimentodao.notafiscal.NotaFiscalDao;
 import versaogama.dao.estabelecimentodao.participantes.ParticipanteDao;
 import versaogama.dao.estabelecimentodao.produto.ProdutoDao;
+import versaogama.dao.inventario.InventarioDao;
 import versaogama.managerxml.LeitorXML;
 import versaogama.model.sped.Reg0000;
 import versaogama.model.sped.Reg0150;
@@ -162,6 +163,7 @@ public class LeitorTxtSpedFiscal {
 	private ReducaoZDao  daoRdz;
 	private TotParciaisRDZDao daoTotParRdz;
 	private EquipamentoCFeDao daoEquipCFe;
+	private InventarioDao daoInv;
 	
 
     public Long incLoteImportacao(Pool pool) {
@@ -229,6 +231,15 @@ public class LeitorTxtSpedFiscal {
 		return id;
 	}
 	
+	public Long incInv(Pool pool) {
+		Long id = 0L;
+		daoInv = new InventarioDao(pool);
+		try {
+		    id = daoInv.getIncInv();
+        }catch (Exception e) {}
+		return id;
+	}
+	
 	public LeitorTxtSpedFiscal() {
 		
 		
@@ -241,6 +252,7 @@ public class LeitorTxtSpedFiscal {
 		idC405 = (incRDZ(pool)!=0 ? incRDZ(pool)-1:incRDZ(pool));
 		idC420 = (incTotParcRdz(pool)!=0 ? incTotParcRdz(pool)-1:incTotParcRdz(pool));
 		idC860 = (incTotEquipCFe(pool) !=0 ? incTotEquipCFe(pool)-1:incTotEquipCFe(pool));
+		idH005 = (incInv(pool) != 0 ? incInv(pool)-1 : incInv(pool));
 		List<String> lines = Files.readAllLines(p,Charset.forName("ISO-8859-1"));
 		 for(String line : lines) {
 			 id0000 = reg0000(line,pool);			 
@@ -915,7 +927,7 @@ public class LeitorTxtSpedFiscal {
 		return regsH005;
 	}
 	
-    public RegH010 getRegH010() {
-		return regH010;
+    public List<RegH010> getRegsH010() {
+		return regsH010;
 	}
 }	
