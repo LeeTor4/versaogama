@@ -40,10 +40,10 @@ public class MainService {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String ano = "2017";
-		String cnpj = "05329222000761";
+		String ano = "2019"; 
+		String cnpj = "05329222000842";
 		String emp = "SELLENE";
-		String estab = "SAO_MATEUS";
+		String estab = "HARMONY";
 		
 		String anomes1 = ano.concat("01").concat(".txt");
 		String anomes2 = ano.concat("02").concat(".txt");
@@ -155,22 +155,23 @@ public class MainService {
 		
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
+		String dirSaldoInicial = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\itensRetroativos2019".concat(".csv"));
+		 
+		 
+	    exporta.exportaControleQuantitativos(dirSaldoInicial,dirPlanReprocessado, dirPlanilha, ano,cnpj);
 		
-	     //exporta.exportaControleQuantitativos(dirPlanReprocessado, ano,cnpj);
-		
-		 relacaoInv.exportRelacaoInventario(dirPlanInv,cnpj, ano);
+		//relacaoInv.exportRelacaoInventario(dirPlanInv,cnpj, ano);
 		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
-		  String dirSaldoInicial = "D:/EMPRESAS/SELLENE/SAO_MATEUS/saldoInicial.csv";
+		
 		
 		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
 	      String dirPlanHistorico2 = "D:/EMPRESAS/SELLENE/MEGAFARMA/fichas_estoques/";
 	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
 	      
 	      //saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, ano,cnpj);
-	      
-	      
-	      //hist.exportarHistoricoItem(dirPlanHistorico2, "2021", "05329222000680", "00003091","");
+
+	       //hist.exportarHistoricoItem(dirPlanHistorico2, "2017", "05329222000680", "00000120","");
 	      //hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
 	}
 

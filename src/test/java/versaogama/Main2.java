@@ -41,11 +41,18 @@ import versaogama.model.system.produto.Produto;
 import versaogama.model.system.produto.SituacaoGrpProdutoSpedFiscal;
 import versaogama.model.xml.ProdutoCupomFiscalXml;
 import versaogama.model.xml.ProdutoNotaXmlProprio;
+import versaogama.service.estabelecimento.ImportaSaldoInicialEstoqueMensal;
 
 public class Main2 {
 	
 
 	public static void main(String[] args) throws Exception {
+		
+		
+		String ano = "2017";
+		String cnpj = "05329222000680";
+		String emp = "SELLENE";
+		String estab = "MEGAFARMA";
 		
 		Pool pool = new Pool();
 		ProdutoNotaDao daoProdNF  = new ProdutoNotaDao(pool);
@@ -54,25 +61,28 @@ public class Main2 {
 		TotalizadorePorItemSaiDAO saiDao = new TotalizadorePorItemSaiDAO(pool);
 		EntradasSaidasDeProdutosDao entsai = new EntradasSaidasDeProdutosDao(pool);
 		LoteImportacaoSpedFiscalDao lote =  new LoteImportacaoSpedFiscalDao(pool);
+		ImportaSaldoInicialEstoqueMensal importaSaldo = new ImportaSaldoInicialEstoqueMensal();
 		
-		Path pXml = Paths.get("D:\\XML");
-		//Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
-		Path p = Paths.get("D:\\EMPRESAS\\SELLENE\\SAO_MATEUS\\SPED\\2021\\SAO-MATEUS-032021.txt");
+//		Path pXml = Paths.get("D:\\XML");
+//		//Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
+//		Path p = Paths.get("D:\\EMPRESAS\\SELLENE\\SAO_MATEUS\\SPED\\2021\\SAO-MATEUS-032021.txt");
+//		
+//	    XMLReader reader = XMLReaderFactory.createXMLReader();
+//	    LeitorXML logica = new LeitorXML();	
+//	    reader.setContentHandler(logica); 
+//	    
+//		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
+//		leitor.leitorSpedFiscal(p,pool);
+//		
+//		RegC100 nf = new RegC100();
+//		nf.getNotasFiscaisTxtSpedFiscal(leitor);
+//		  
+//		
+//		for(RegC100 notas : leitor.getRegsC100()){
+//			System.out.println( notas.getDtEntSai() + "|" + notas.getDtDoc() + "|" + notas.getChvNfe());
+//		}
 		
-	    XMLReader reader = XMLReaderFactory.createXMLReader();
-	    LeitorXML logica = new LeitorXML();	
-	    reader.setContentHandler(logica); 
-	    
-		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
-		leitor.leitorSpedFiscal(p,pool);
 		
-		RegC100 nf = new RegC100();
-		nf.getNotasFiscaisTxtSpedFiscal(leitor);
-		  
-		
-		for(RegC100 notas : leitor.getRegsC100()){
-			System.out.println( notas.getDtEntSai() + "|" + notas.getDtDoc() + "|" + notas.getChvNfe());
-		}
 	   // ProdutoNota pNota = new ProdutoNota();
 	
 		//pNota.listaProdutosAgregadosSpedXml(p, pXml, reader, logica,pool);
@@ -185,9 +195,37 @@ public class Main2 {
 //				 
 //		  }
 	
-		 // System.out.println(lote.getLote(1).getDtIni()+"|"+lote.getLote(1).getDtFin());
+		  String dirSaldoInicial = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\itensRetroativos2017".concat(".csv"));
+		  for(EntradasSaidasDeProdutos mov : importaSaldo.listaItensRetroativos(dirSaldoInicial, "2017", "05329222000680")) {
+			  
+			     if(saldoInicial(mov, "00005348") != 0.0) {
+			    	  System.out.println(saldoInicial(mov, "00005348"));
+			     }
+				
+			 
+			 
+		  }
+		  
+//		  entsai.retornaCadastroMovProdutosPorAno("2017").addAll(importaSaldo.listaItensRetroativos(dirSaldoInicial, "2017", "05329222000680"));
+//		  for(EntradasSaidasDeProdutos mov : entsai.retornaCadastroMovProdutosPorAno("2017")){
+//			  if(mov.getCodItem().equals("00035580")) {
+//				  System.out.println(mov.getCodItem());
+//			  }
+//		  }
+		
+		
 	}
 	
+	public static Double saldoInicial(EntradasSaidasDeProdutos entsai, String codigo) {
+		Double qtde = 0.0;
+	  
+	  if(entsai.getCodItem().equals(codigo)) {
+		 
+		  qtde = entsai.getTotQtdeEnt();
+	  }
+	
+		return qtde;
+	}
 
 }
 
