@@ -1,8 +1,15 @@
 package versaogama.managersped;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -816,12 +824,27 @@ public class LeitorTxtSpedFiscal {
 	   LeitorXML logica = new LeitorXML();
        SAXParserFactory spf = SAXParserFactory.newInstance();
        SAXParser parser = spf.newSAXParser();
+       StringBuffer sb =  new StringBuffer();
 	   try (DirectoryStream<Path> stream = Files.newDirectoryStream(pXml)){
 			
-			for(Path path :  stream) {				
+			for(Path path :  stream) {	
 	   			InputStream ips = new FileInputStream(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
-	   			InputSource is = new InputSource(ips);	   			
-	   			parser.parse(is, logica);
+	   			InputSource is = new InputSource(ips);	
+	   			
+	   			File xmlFile = new File(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
+	   			BufferedReader br = new BufferedReader(new FileReader(xmlFile));
+	   			String line = null;
+	   			while((line = br.readLine())!= null)
+	   			{
+	   			    if(line.contains("<?xml"))
+	   			    {
+	   			        parser.parse(is, logica);
+	   			    } 
+	   			 
+	   			    //sb.append(line);                
+	   			}
+	   			br.close();
+	   			
 	   			retorno = logica.getProdutosNF();
 			}
 		}
@@ -834,13 +857,32 @@ public class LeitorTxtSpedFiscal {
 		List<ProdutoCupomFiscalXml> retorno = new ArrayList<ProdutoCupomFiscalXml>();
 		SAXParserFactory spf = SAXParserFactory.newInstance();
 		LeitorXML logica = new LeitorXML();			
-		SAXParser parser = spf.newSAXParser();
-	    try (DirectoryStream<Path> stream = Files.newDirectoryStream(pXml)){
+		SAXParser parser = spf.newSAXParser();	   
+		StringBuffer sb =  new StringBuffer();
+		try (DirectoryStream<Path> stream = Files.newDirectoryStream(pXml)){
 	    	for(Path path :  stream) {		
-	    		InputStream ips = new FileInputStream(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
-	   			InputSource is = new InputSource(ips);	
-	   			parser.parse(is, logica);
-	   			retorno = logica.getProdutosCF();
+	    		//InputStream ips = new FileInputStream(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
+		    	try(InputStreamReader ips = new InputStreamReader(new FileInputStream(path.getParent().toString().concat("\\").concat(path.getFileName().toString())),"UTF-8")){
+
+	                InputSource is = new InputSource(ips);
+
+		   			File xmlFile = new File(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
+		   			BufferedReader br = new BufferedReader(new FileReader(xmlFile));
+		   			String line = null;
+		   			while((line = br.readLine())!= null)
+		   			{
+		   			    if(line.contains("<?xml"))
+		   			    {
+		   			        parser.parse(is, logica);
+		   			    } 
+		   			 
+		   			    //sb.append(line);                
+		   			}
+		   			br.close();
+
+	                retorno = logica.getProdutosCF();
+		    	}
+	    		
 	    	}
 	    }
 		        

@@ -73,7 +73,7 @@ public class LeitorXML  extends DefaultHandler{
 	public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 		// recupera o nome da tag atual
 		   tagAtual = qName;
-		   
+	
 		   if (qName.compareTo("infNFe") == 0) {
 			   chaveDoc = attributes.getValue(0).substring(3);
 			   idNumItem = 1;

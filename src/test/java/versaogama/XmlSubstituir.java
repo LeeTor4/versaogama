@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.List;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -22,8 +23,10 @@ import org.xml.sax.InputSource;
 
 import versaogama.conexao.Pool;
 import versaogama.dao.movprodutosdao.ModelHistoricoItensDao;
+import versaogama.managersped.LeitorTxtSpedFiscal;
 import versaogama.managerxml.LeitorXML;
 import versaogama.model.xml.CopiaArquivoXML_DE_PARA;
+import versaogama.model.xml.ProdutoCupomFiscalXml;
 import versaogama.util.UtilsEConverters;
 
 public class XmlSubstituir {
@@ -52,6 +55,8 @@ public class XmlSubstituir {
 //	   			    if(line.indexOf("&") != -1)
 //	   			    {
 //	   			        line = line.replaceAll("&","E");
+//	   			        System.out.println(line);
+//	   			        
 //	   			    }         
 //	   			    sb.append(line);                
 //	   			}
@@ -75,9 +80,16 @@ public class XmlSubstituir {
 		
 		//System.out.println(UtilsEConverters.preencheZerosAEsquerda("0000000012345"));
 		
+		Path pXml = Paths.get("D:\\XML");
 		Pool pool = new Pool();
 		ModelHistoricoItensDao dao = new ModelHistoricoItensDao(pool);
-
+		LeitorTxtSpedFiscal leitor = new  LeitorTxtSpedFiscal();
+		
+		List<ProdutoCupomFiscalXml>  lista = leitor.getProdutosXMLHandlerCF(pXml);
+		
+		for(ProdutoCupomFiscalXml cfe :  lista){
+			System.out.println(cfe.getChaveCF());
+		}
 
 	}
 
