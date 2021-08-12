@@ -63,24 +63,24 @@ public class Main2 {
 		LoteImportacaoSpedFiscalDao lote =  new LoteImportacaoSpedFiscalDao(pool);
 		ImportaSaldoInicialEstoqueMensal importaSaldo = new ImportaSaldoInicialEstoqueMensal();
 		
-//		Path pXml = Paths.get("D:\\XML");
-//		//Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
-//		Path p = Paths.get("D:\\EMPRESAS\\SELLENE\\SAO_MATEUS\\SPED\\2021\\SAO-MATEUS-032021.txt");
-//		
-//	    XMLReader reader = XMLReaderFactory.createXMLReader();
-//	    LeitorXML logica = new LeitorXML();	
-//	    reader.setContentHandler(logica); 
-//	    
-//		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
-//		leitor.leitorSpedFiscal(p,pool);
-//		
-//		RegC100 nf = new RegC100();
-//		nf.getNotasFiscaisTxtSpedFiscal(leitor);
-//		  
-//		
-//		for(RegC100 notas : leitor.getRegsC100()){
-//			System.out.println( notas.getDtEntSai() + "|" + notas.getDtDoc() + "|" + notas.getChvNfe());
-//		}
+		Path pXml = Paths.get("D:\\XML");
+		//Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000176-068147449-Remessa de arquivo original-jan2018_0205_ok.txt");
+		Path p = Paths.get("D:\\EMPRESAS\\SELLENE\\SAO_MATEUS\\SPED\\2021\\SAO-MATEUS-032021.txt");
+		
+	    XMLReader reader = XMLReaderFactory.createXMLReader();
+	    LeitorXML logica = new LeitorXML();	
+	    reader.setContentHandler(logica); 
+	    
+		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
+		leitor.leitorSpedFiscal(p,pool);
+		
+		RegC100 nf = new RegC100();
+		nf.getNotasFiscaisTxtSpedFiscal(leitor);
+		  
+		
+		for(RegC100 notas : leitor.getRegsC100()){
+			System.out.println( notas.getDtEntSai() + "|" + notas.getDtDoc() + "|" + notas.getChvNfe());
+		}
 		
 		
 	   // ProdutoNota pNota = new ProdutoNota();
@@ -195,16 +195,16 @@ public class Main2 {
 //				 
 //		  }
 	
-		  String dirSaldoInicial = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\itensRetroativos2017".concat(".csv"));
-		  for(EntradasSaidasDeProdutos mov : importaSaldo.listaItensRetroativos(dirSaldoInicial, "2017", "05329222000680")) {
-			  
-			     if(saldoInicial(mov, "00005348") != 0.0) {
-			    	  System.out.println(saldoInicial(mov, "00005348"));
-			     }
-				
-			 
-			 
-		  }
+//		  String dirSaldoInicial = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\itensRetroativos2017".concat(".csv"));
+//		  for(EntradasSaidasDeProdutos mov : importaSaldo.listaItensRetroativos(dirSaldoInicial, "2017", "05329222000680")) {
+//			  
+//			     if(saldoInicial(mov, "00005348") != 0.0) {
+//			    	  System.out.println(saldoInicial(mov, "00005348"));
+//			     }
+//				
+//			 
+//			 
+//		  }
 		  
 //		  entsai.retornaCadastroMovProdutosPorAno("2017").addAll(importaSaldo.listaItensRetroativos(dirSaldoInicial, "2017", "05329222000680"));
 //		  for(EntradasSaidasDeProdutos mov : entsai.retornaCadastroMovProdutosPorAno("2017")){

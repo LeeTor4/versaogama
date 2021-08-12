@@ -831,19 +831,25 @@ public class LeitorTxtSpedFiscal {
 	   			InputStream ips = new FileInputStream(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
 	   			InputSource is = new InputSource(ips);	
 	   			
-	   			File xmlFile = new File(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
-	   			BufferedReader br = new BufferedReader(new FileReader(xmlFile));
-	   			String line = null;
-	   			while((line = br.readLine())!= null)
-	   			{
-	   			    if(line.contains("<?xml"))
-	   			    {
-	   			        parser.parse(is, logica);
-	   			    } 
-	   			 
-	   			    //sb.append(line);                
-	   			}
-	   			br.close();
+                try {
+               	 parser.parse(is, logica);
+               }catch (Exception e) {
+					System.out.println(e.getMessage());
+				} 
+                
+//	   			File xmlFile = new File(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
+//	   			BufferedReader br = new BufferedReader(new FileReader(xmlFile));
+//	   			String line = null;
+//	   			while((line = br.readLine())!= null)
+//	   			{
+//	   			    if(line.contains("<?xml"))
+//	   			    {
+//	   			        parser.parse(is, logica);
+//	   			    } 
+//	   			 
+//	   			    //sb.append(line);                
+//	   			}
+//	   			br.close();
 	   			
 	   			retorno = logica.getProdutosNF();
 			}
@@ -865,20 +871,29 @@ public class LeitorTxtSpedFiscal {
 		    	try(InputStreamReader ips = new InputStreamReader(new FileInputStream(path.getParent().toString().concat("\\").concat(path.getFileName().toString())),"UTF-8")){
 
 	                InputSource is = new InputSource(ips);
-
-		   			File xmlFile = new File(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
-		   			BufferedReader br = new BufferedReader(new FileReader(xmlFile));
-		   			String line = null;
-		   			while((line = br.readLine())!= null)
-		   			{
-		   			    if(line.contains("<?xml"))
-		   			    {
-		   			        parser.parse(is, logica);
-		   			    } 
-		   			 
-		   			    //sb.append(line);                
-		   			}
-		   			br.close();
+	                
+	                try {
+	                	 parser.parse(is, logica);
+	                }catch (Exception e) {
+						System.out.println(e.getMessage());
+					} 
+	               
+	                
+	                
+//		   			File xmlFile = new File(path.getParent().toString().concat("\\").concat(path.getFileName().toString()));
+//		   			BufferedReader br = new BufferedReader(new FileReader(xmlFile));
+//		   			String line = null;
+//		   			while((line = br.readLine())!= null)
+//		   			{
+//		   			    if(line.contains("<?xml"))
+//		   			    {
+//		   			        parser.parse(is, logica);
+//  
+//		   			    } 
+//		   			 
+//		   			    //sb.append(line);                
+//		   			}
+//		   			br.close();
 
 	                retorno = logica.getProdutosCF();
 		    	}

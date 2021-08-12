@@ -112,8 +112,8 @@ public class MainService {
 	  
 		ExportaQuantitativoEstoque exporta = new ExportaQuantitativoEstoque();
 		
-		Path p = p9;
-		Path x = x9;	
+		Path p = p3;
+		Path x = x3;	
 		
 		
 		RegC100 nf = new RegC100();
@@ -144,13 +144,13 @@ public class MainService {
 		ItensInventario itnInv = new ItensInventario();
 		
 		
-		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
-       
-		System.out.println("Lote externo " + numLote);
-   		
-		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
-				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
-				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
+//		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
+//       
+//		System.out.println("Lote externo " + numLote);
+//   		
+//		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
+//				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
+//				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
 		
 		
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
@@ -166,12 +166,12 @@ public class MainService {
 		
 		
 		  String dirPlanHistorico = "D:/ORTOGENESE/fichas_estoques/2019/";
-	      String dirPlanHistorico2 = "D:/EMPRESAS/SELLENE/MEGAFARMA/fichas_estoques/";
+	      String dirPlanHistorico2 = "D:/EMPRESAS/SELLENE/MEGADIET/fichas_estoques/";
 	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
 	      
 	      //saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, ano,cnpj);
 
-	       //hist.exportarHistoricoItem(dirPlanHistorico2, "2017", "05329222000680", "00000120","");
+	       //hist.exportarHistoricoItem(dirPlanHistorico2, "2020", "05329222000419", "00028362","");
 	      //hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
 	}
 
