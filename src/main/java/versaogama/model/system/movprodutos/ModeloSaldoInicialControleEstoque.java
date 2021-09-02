@@ -5,6 +5,8 @@ public class ModeloSaldoInicialControleEstoque {
 	private Long id;
 	private String cnpj;
 	private String ano;
+	private String tipo;
+	private String secao;
 	private String codItem;
 	private String codAntItem;
 	private String descricao;
@@ -29,6 +31,19 @@ public class ModeloSaldoInicialControleEstoque {
 	}
 	public void setAno(String ano) {
 		this.ano = ano;
+	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	public String getSecao() {
+		return secao;
+	}
+	public void setSecao(String secao) {
+		this.secao = secao;
 	}
 	public String getCodItem() {
 		return codItem;

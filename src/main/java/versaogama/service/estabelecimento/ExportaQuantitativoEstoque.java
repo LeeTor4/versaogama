@@ -64,39 +64,40 @@ public class ExportaQuantitativoEstoque {
 			writer.write(linha);
 			writer.newLine();
 		
-//			for(EntradasSaidasDeProdutos mov : importaSaldo.listaItensRetroativos(dirSaldoInicial, ano, cnpj)) {
-//				ModeloTotalizadoresMensais totaisMensais = new ModeloTotalizadoresMensais();
-//				  if(saldoInicial(mov, mov.getCodItem()) != null) {
-//					  if(saldoInicial(mov, mov.getCodItem()) != 0.0) {
-//							
-//						  totaisMensais.setQteIniInv(saldoInicial(mov, mov.getCodItem()));
-//					  }
-//				  }
-//				  
-//	    	         if(totaisMensais != null) {
-//	    	        	 
-//	    	        	 totaisMensais.setCodItem(mov.getCodItem());
-//	    	        	 totaisMensais.setCodAntItem(mov.getCodAntItem());
-//	    	        	 totaisMensais.setDescricao(mov.getDescricao());
-//	    	        	 totaisMensais.setUnidMedida(mov.getUnd());
-//	    	        	 
-//	    	        	// System.out.println("Saldo Inicial "   +p.getCogigo()+"|"+p.getCodAntItem() + "|"+saldoInicial(p.getCogigo(), p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)));
-//	                    // System.out.println("Saldo Declarado "+String.valueOf(Integer.valueOf(ano)-1)+"| " +p.getCogigo()+"|"+p.getCodAntItem() + "|"+invDeclarado(p.getCogigo(), p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)));
-//	                      
-//	    	        	 
-//	    	        	 if(!formatacaoPlanilha(totaisMensais).contains(";0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00")) {
-//
-//	    	        			 System.out.println("linha " + formatacaoPlanilha(totaisMensais));
-//	    	        			 linha = formatacaoPlanilha(totaisMensais);
-//	    				         writer.write(linha);
-//	    				         writer.newLine(); 
-//	    	        	 }
-//	    	        	
-//	    	         }
-//			}
+			for(EntradasSaidasDeProdutos mov : importaSaldo.listaItensRetroativos(dirSaldoInicial, ano, cnpj)) {
+				ModeloTotalizadoresMensais totaisMensais = new ModeloTotalizadoresMensais();
+				  if(saldoInicial(mov, mov.getCodItem()) != null) {
+					  if(saldoInicial(mov, mov.getCodItem()) != 0.0) {
+							
+						  totaisMensais.setQteIniInv(saldoInicial(mov, mov.getCodItem()));
+					  }
+				  }
+				  
+	    	         if(totaisMensais != null) {
+	    	        	 
+	    	        	 totaisMensais.setCodItem(mov.getCodItem());
+	    	        	 totaisMensais.setCodAntItem(mov.getCodAntItem());
+	    	        	 totaisMensais.setDescricao(mov.getDescricao());
+	    	        	 totaisMensais.setUnidMedida(mov.getUnd());
+	    	        	 
+	    	        	// System.out.println("Saldo Inicial "   +p.getCogigo()+"|"+p.getCodAntItem() + "|"+saldoInicial(p.getCogigo(), p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)));
+	                    // System.out.println("Saldo Declarado "+String.valueOf(Integer.valueOf(ano)-1)+"| " +p.getCogigo()+"|"+p.getCodAntItem() + "|"+invDeclarado(p.getCogigo(), p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)));
+	                      
+	    	        	 
+	    	        	 if(!formatacaoPlanilha(totaisMensais).contains(";0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00;0,00")) {
+
+	    	        			 System.out.println("linha " + formatacaoPlanilha(totaisMensais));
+	    	        			 linha = formatacaoPlanilha(totaisMensais);
+	    				         writer.write(linha);
+	    				         writer.newLine(); 
+	    	        	 }
+	    	        	
+	    	         }
+			}
 			
 			
             for(EntradasSaidasDeProdutos p : dao.retornaCadastroMovProdutosPorAno(ano)) {
+
             	Double sIniEnt = 0.0;
             	Double sIniSai = 0.0;
             	Double saldoIni = 0.0;
@@ -105,32 +106,30 @@ public class ExportaQuantitativoEstoque {
                 totaisMensais.setQteInvDec(invDeclarado(p.getCodItem(), p.getCodAntItem(), cnpj, String.valueOf(Integer.valueOf(ano)-1)));	
                 
                 
-                 if(dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
-                	 sIniEnt = dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
-                 }else {
-                	 sIniEnt = 0.0;
-                 }
-                 
-                 if(dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
-                	 sIniSai = dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
-                 }else {
-                	 sIniSai = 0.0;
-                 }
-
-            	 saldoIni = sIniEnt - sIniSai;
-            	 totaisMensais.setQteIniInv(saldoIni);
-                
-                
-            	  
-//                 if(saldoInicial.getSaldoInicial(p.getCodItem(), p.getCodAntItem(), cnpj, ano) != null) {
-//      
-//                	 totaisMensais.setQteIniInv(saldoInicial.getSaldoInicial(p.getCodItem(), p.getCodAntItem(), cnpj, ano).getQtdeInicial());
-//                 
-//                 
+//                 if(dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
+//                	 sIniEnt = dao.getSaldoInicialEnt(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
 //                 }else {
-//                	 
-//                	 totaisMensais.setQteIniInv(0.0);
-//                 } 
+//                	 sIniEnt = 0.0;
+//                 }
+//                 
+//                 if(dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo() != null) {
+//                	 sIniSai = dao.getSaldoInicialSai(p.getCodItem(),p.getCodAntItem(), String.valueOf(Integer.valueOf(ano)), cnpj).getSaldo();
+//                 }else {
+//                	 sIniSai = 0.0;
+//                 }
+//
+//            	 saldoIni = sIniEnt - sIniSai;
+//            	 totaisMensais.setQteIniInv(saldoIni);
+                
+  
+                 if(saldoInicial.getSaldoInicial(p.getCodItem(), p.getCodAntItem(), cnpj, ano) != null) {
+      
+                	 totaisMensais.setQteIniInv(saldoInicial.getSaldoInicial(p.getCodItem(), p.getCodAntItem(), cnpj, ano).getQtdeInicial());                 
+                 
+                 }else {
+                	 
+                	 totaisMensais.setQteIniInv(0.0);
+                 } 
 
                
                  
@@ -231,7 +230,8 @@ public class ExportaQuantitativoEstoque {
     	        	 }
     	        	
     	         }
-         
+           
+
 
         	}  	
 		    writer.close();	

@@ -44,12 +44,29 @@ public class ExportaRelacaoInventario {
 		
 		
 	        for(ModeloSaldoInicialControleEstoque mov : daoSaldo.getListaProdutosInventario(cnpj, ano)){
-	        	
-	        	if(dao.ultimoRegistroDoItem(cnpj, mov.getCodItem(), ano) == null) {
-	        	   vl = 0.0;
-	        	}else {
-	        	   vl = dao.ultimoRegistroDoItem(cnpj, mov.getCodItem(), ano).getVlUnit();
+
+	        	if(mov.getSecao() != null) {
+	
+	        	   if(mov.getSecao().equals("CAFETERIA")) {
+		        		
+		        		if(dao.ultimoRegistroDoItemCafeteria(cnpj, mov.getCodItem(), ano) == null) {
+		 	        	   vl = 0.0;
+		 	        	}else {
+		 	        	   vl = dao.ultimoRegistroDoItemCafeteria(cnpj, mov.getCodItem(), ano).getVlUnit();
+		 	        	}
+		        		
+		        		
+		        	}else {
+		        		
+		        		if(dao.ultimoRegistroDoItem(cnpj, mov.getCodItem(), ano) == null) {
+		 	        	   vl = 0.0;
+		 	        	}else {
+		 	        	   vl = dao.ultimoRegistroDoItem(cnpj, mov.getCodItem(), ano).getVlUnit();
+		 	        	}
+		        	}
 	        	}
+
+	        	
 	        	
 	     
 //	        	if(mov.getQtdeInicial() != 0.0){
@@ -104,6 +121,8 @@ public class ExportaRelacaoInventario {
 	    			writer.newLine();
     			
 	        	}
+	        	
+	        	
 	        }
 		     
 	        writer.close();	

@@ -22,17 +22,19 @@ public class SaldoInicialControleEstoqueDao {
 	 
    public void importarSaldoInicialEstoque(ModeloSaldoInicialControleEstoque obj) throws SQLException {
 	   
-	   String sql = "INSERT INTO tb_saldo_inicial_estoque_mensal (cnpj,ano,cod_item,cod_ant_item,descricao,saldo) VALUES (?,?,?,?,?,?)";
+	   String sql = "INSERT INTO tb_saldo_inicial_estoque_mensal (cnpj,ano,tipo,secao,cod_item,cod_ant_item,descricao,saldo) VALUES (?,?,?,?,?,?,?,?)";
 	   
 	   Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
 			
 			stmt.setString(1, obj.getCnpj());
 			stmt.setString(2, obj.getAno());
-			stmt.setString(3, obj.getCodItem());
-			stmt.setString(4, obj.getCodAntItem());
-			stmt.setString(5, obj.getDescricao());
-			stmt.setDouble(6, obj.getQtdeInicial());
+			stmt.setString(3, obj.getTipo());
+			stmt.setString(4, obj.getSecao());
+			stmt.setString(5, obj.getCodItem());
+			stmt.setString(6, obj.getCodAntItem());
+			stmt.setString(7, obj.getDescricao());
+			stmt.setDouble(8, obj.getQtdeInicial());
 			
 			stmt.execute();
 			
@@ -90,6 +92,8 @@ public class SaldoInicialControleEstoqueDao {
 		 		obj.setId(rs.getLong("id"));
 		 		obj.setCnpj(rs.getString("cnpj"));
 		 		obj.setAno(rs.getString("ano"));
+		 		obj.setTipo(rs.getString("tipo"));
+		 		obj.setSecao(rs.getString("secao"));
 		 		obj.setCodItem(rs.getString("cod_item"));
 		 		obj.setCodAntItem(rs.getString("cod_ant_item"));
 		 		obj.setDescricao(rs.getString("descricao"));

@@ -26,7 +26,7 @@ public class TableBean {
 	
 	public TableBean() throws Exception {
 		Pool pool = new Pool();
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-jan2019.txt");
+		Path p = Paths.get("D:\\EMPRESAS\\SELLENE\\MEGADIET\\SPED\\2021\\202101.txt");
 		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
 		leitor.leitorSpedFiscal(p,pool);
 		

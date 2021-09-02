@@ -125,6 +125,14 @@ public class ImportaSaldoInicialEstoqueMensal {
                     	 
                     	 saldo.setQtdeInicial(qtde);
                      }
+                     
+                     if(i==4){
+                    	 saldo.setTipo(valoresEntreVirgula[4]);
+                     }
+                     
+                     if(i==5){
+                    	 saldo.setSecao(valoresEntreVirgula[5]);
+                     }
 					 
 				 }
 				 

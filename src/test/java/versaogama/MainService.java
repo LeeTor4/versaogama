@@ -40,7 +40,7 @@ public class MainService {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String ano = "2020"; 
+		String ano = "2017";
 		String cnpj = "05329222000419";
 		String emp = "SELLENE";
 		String estab = "MEGADIET";
@@ -112,12 +112,12 @@ public class MainService {
 	  
 		ExportaQuantitativoEstoque exporta = new ExportaQuantitativoEstoque();
 		
-		Path p = p3;
-		Path x = x3;	
-		
-		
-		RegC100 nf = new RegC100();
-		leitor.leitorSpedFiscal(p,pool);
+//		Path p = p12;
+//		Path x = x12;	
+//		
+//		
+//		RegC100 nf = new RegC100();
+//		leitor.leitorSpedFiscal(p,pool);
 
 
 		Participante part = new Participante();
@@ -155,7 +155,7 @@ public class MainService {
 		
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
-		String dirSaldoInicial = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\itensRetroativos2020".concat(".csv"));
+		String dirSaldoInicial = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\saldoInicial".concat(".csv"));
 		 
 		 
 	    //exporta.exportaControleQuantitativos(dirSaldoInicial,dirPlanReprocessado, dirPlanilha, ano,cnpj);
@@ -169,9 +169,9 @@ public class MainService {
 	      String dirPlanHistorico2 = "D:/EMPRESAS/SELLENE/MEGADIET/fichas_estoques/";
 	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
 	      
-	      //saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, ano,cnpj);
+	      saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, ano,cnpj);
 
-	       //hist.exportarHistoricoItem(dirPlanHistorico2, "2020", "05329222000419", "00028362","");
+	      //hist.exportarHistoricoItem(dirPlanHistorico2, "2021", "05329222000419", "00033735","");
 	      //hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
 	}
 

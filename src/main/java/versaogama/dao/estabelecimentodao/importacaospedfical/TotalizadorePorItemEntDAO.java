@@ -156,7 +156,38 @@ public class TotalizadorePorItemEntDAO implements TotalizadorPorItemInterface{
 	}
 	
 	
-	
+	public ModelValorUnitarioDoProduto ultimoRegistroDoItemCafeteria(String cnpj,  String codItem,String ano) throws SQLException {
+		ModelValorUnitarioDoProduto retorno = null;
+		String sql = "SELECT id,operacao,ano,mes,cod_item, qtde,  vl_unit \r\n" + 
+				"       FROM  (SELECT (@id:=@id+1) as id,operacao,year(dt_doc) as ano, month(dt_doc) as mes,cod_item,qtde,vl_unit \r\n" + 
+				"									FROM tb_historico_item  \r\n" + 
+				"									CROSS join (SELECT @id:=0)  as seq \r\n" + 
+				"									WHERE emp = ? and cod_item = ? and year(dt_doc) < ? \r\n" + 
+				"									ORDER BY ano,mes) AS tabinv ORDER BY id desc limit 1;";
+		
+		Connection con = pool.getConnection();
+		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
+			stmt.setString(1, cnpj);
+			stmt.setString(2, codItem);
+			stmt.setString(3, ano);
+			stmt.executeQuery();
+	        try(ResultSet rs = stmt.getResultSet()){	
+	           while(rs.next()) {	
+	        	   retorno = new ModelValorUnitarioDoProduto();
+	        	   	
+	        	   retorno.setAno(rs.getString("ano"));
+	        	   retorno.setMes(rs.getString("mes"));
+	        	   retorno.setCodItem(rs.getString("cod_item"));
+	        	   retorno.setTotQtde(rs.getDouble("qtde"));
+	        	   retorno.setVlUnit(rs.getDouble("vl_unit"));
+	        	   //retorno.setVlTotItem(rs.getDouble("vl_tot_item"));
+	           }
+	        }
+			
+		}
+		pool.liberarConnection(con);	
+		return retorno;
+	}
 	private TotalizadoresPorItem rsListTotalizadores(ResultSet rs) throws SQLException {
 		TotalizadoresPorItem totItem = new TotalizadoresPorItem();
 		totItem.setId(rs.getLong("id"));
