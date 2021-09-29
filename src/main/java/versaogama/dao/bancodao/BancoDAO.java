@@ -39,14 +39,9 @@ public class BancoDAO {
 					retorno.setNomeTabela(rs.getString("TABLE_NAME"));
 					retorno.setLinhaTabela(rs.getLong("TABLE_ROWS"));
 					retorno.setAutoIncremento(rs.getLong("AUTO_INCREMENT"));
-					
-					
-				}
-				
+						
+				}	
 			}
-			
-			
-			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();

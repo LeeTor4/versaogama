@@ -347,8 +347,7 @@ public class Main {
 		//System.out.println(dadosDoBanco.getAutoIncremento());
 		
 		bancoDao.metadados();
-		
-	 
+
 	}
 	
 

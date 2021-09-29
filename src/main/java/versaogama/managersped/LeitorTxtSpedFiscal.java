@@ -1,15 +1,9 @@
 package versaogama.managersped;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.XMLConstants;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
@@ -27,15 +20,7 @@ import org.xml.sax.InputSource;
 
 import versaogama.conexao.Pool;
 import versaogama.dao.bancodao.BancoDAO;
-import versaogama.dao.estabelecimentodao.equipcfe.EquipamentoCFeDao;
 import versaogama.dao.estabelecimentodao.equipecf.EquipamentoECFDao;
-import versaogama.dao.estabelecimentodao.equipecf.ReducaoZDao;
-import versaogama.dao.estabelecimentodao.equipecf.TotParciaisRDZDao;
-import versaogama.dao.estabelecimentodao.importacaospedfical.LoteImportacaoSpedFiscalDao;
-import versaogama.dao.estabelecimentodao.notafiscal.NotaFiscalDao;
-import versaogama.dao.estabelecimentodao.participantes.ParticipanteDao;
-import versaogama.dao.estabelecimentodao.produto.ProdutoDao;
-import versaogama.dao.inventario.InventarioDao;
 import versaogama.managerxml.LeitorXML;
 import versaogama.model.sped.Reg0000;
 import versaogama.model.sped.Reg0150;
@@ -141,7 +126,7 @@ public class LeitorTxtSpedFiscal {
     private Map<Long,RegC405>        mpReducao  = new HashMap<Long, RegC405>();
     private Map<Long,RegC490>  mpTotalizadorCF  = new HashMap<Long, RegC490>();
     
-    private Map<Long,RegC860>       mpEquipCFe    = new HashMap<Long, RegC860>();
+    private Map<Long,RegC860>       mpEquipCFe  = new HashMap<Long, RegC860>();
   
     
     
@@ -165,15 +150,8 @@ public class LeitorTxtSpedFiscal {
   	private RegH005 regH005;
   	private RegH010 regH010;
   	
-  	private LoteImportacaoSpedFiscalDao daoLote;
-  	private ParticipanteDao daoPart;
-  	private ProdutoDao daoProd;
-	private NotaFiscalDao daoNF;
+
 	private EquipamentoECFDao daoECF;
-	private ReducaoZDao  daoRdz;
-	private TotParciaisRDZDao daoTotParRdz;
-	private EquipamentoCFeDao daoEquipCFe;
-	private InventarioDao daoInv;
 	
     private BancoDAO bancoDao;
     private String nomeBanco = "versaogamadb";
@@ -184,33 +162,37 @@ public class LeitorTxtSpedFiscal {
     		bancoDao = new BancoDAO(pool);
     		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_lote_import_sped_icms");
     		id = dadosDoBanco.getAutoIncremento();
-    		//id = daoLote.getIncLoteImp();
     	}catch (Exception e) {}
     	
     	return id;
     }
+    
+    
 	public Long incPart(Pool pool) {
-		daoPart    = new ParticipanteDao(pool);
-		id0150     = daoPart.getIncPart();
+		bancoDao = new BancoDAO(pool);
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_participantes");
+		id0150     = dadosDoBanco.getAutoIncremento();
 		return id0150;
 	}
 	public Long incProd(Pool pool) {
-		daoProd      = new ProdutoDao(pool);
-		id0200 = daoProd.getIncProd();
+		bancoDao = new BancoDAO(pool);
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_produto");
+		id0200 =  dadosDoBanco.getAutoIncremento();
 
 		return id0200;
 	}
 
-	public Long incNFe(Pool pool) {
-		
-		daoNF      = new NotaFiscalDao(pool);	
-		idC100 = daoNF.getIncNFe();
+	public Long incNFe(Pool pool) {		
+		bancoDao = new BancoDAO(pool);
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_notafiscal");
+		idC100 = dadosDoBanco.getAutoIncremento();
 		return idC100;
 	}
 	
 	public Long incRDZ(Pool pool) {
-		daoRdz = new ReducaoZDao(pool);
-		idC405 = daoRdz.getIncReducaoZ();		
+		bancoDao = new BancoDAO(pool);
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_reducaoz");
+		idC405 = dadosDoBanco.getAutoIncremento();		
 		return idC405;
 	}
 	public Long idECFRegC405(String numFab,Pool pool) {
@@ -229,29 +211,29 @@ public class LeitorTxtSpedFiscal {
 	
 	public Long incTotParcRdz(Pool pool) {
 		Long id = 0L;
-		daoTotParRdz = new TotParciaisRDZDao(pool);
-		try {
-			id = daoTotParRdz.getIncTotParcRDZ();
-		}catch (Exception e) {}
+		bancoDao = new BancoDAO(pool);
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_tot_parc_rdz");
+		id = dadosDoBanco.getAutoIncremento();	
 		return id;
 	}
 	
 	public Long incTotEquipCFe(Pool pool) {
 		Long id = 0L;
-		daoEquipCFe = new EquipamentoCFeDao(pool);
-		try {
-		    id = daoEquipCFe.getIncEquipCFe();
-        }catch (Exception e) {}
+		bancoDao = new BancoDAO(pool);
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_equip_sat");
+		id = dadosDoBanco.getAutoIncremento();	
 		return id;
+		
+		
 	}
 	
 	public Long incInv(Pool pool) {
 		Long id = 0L;
-		daoInv = new InventarioDao(pool);
-		try {
-		    id = daoInv.getIncInv();
-        }catch (Exception e) {}
-		return id;
+		bancoDao = new BancoDAO(pool);
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_inv_totais");
+		id = dadosDoBanco.getAutoIncremento();	
+  
+		return id;	
 	}
 	
 	public LeitorTxtSpedFiscal() {

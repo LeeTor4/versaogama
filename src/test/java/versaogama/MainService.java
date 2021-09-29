@@ -112,12 +112,12 @@ public class MainService {
 	  
 		ExportaQuantitativoEstoque exporta = new ExportaQuantitativoEstoque();
 		
-//		Path p = p12;
-//		Path x = x12;	
-//		
-//		
-//		RegC100 nf = new RegC100();
-//		leitor.leitorSpedFiscal(p,pool);
+		Path p = p8;
+		Path x = x8;	
+		
+		
+		RegC100 nf = new RegC100();
+		leitor.leitorSpedFiscal(p,pool);
 
 
 		Participante part = new Participante();
@@ -144,23 +144,23 @@ public class MainService {
 		ItensInventario itnInv = new ItensInventario();
 		
 		
-//		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
-//       
-//		System.out.println("Lote externo " + numLote);
-//   		
-//		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
-//				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
-//				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
+		Long numLote = lote.importandoLoteSpedFiscal(x,leitor,logica,readerCF,part,prod,outUnid,alt,nota,pNota,nf,ecf,rdz,totRDZ,itensCF,totDirCF,cfe,itemCfe,inv,itnInv);
+       
+		System.out.println("Lote externo " + numLote);
+   		
+		lote.inserindoMovimentacoesMensaisEntradasSaidasPorLote(lote.getListaCodigosProdutosNoLote(),
+				lote.getTotalizaValoresPorItnEnt(lote.getTotaisEntradas(), numLote),
+				lote.getTotalizaValoresPorItnSai(lote.getTotaisSaidas(), numLote), numLote);
 		
 		
 		//movPorLote.importacaoDosItensDeEntradasESaidasDeProdutos(numLote);
 		
-		String dirSaldoInicial = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\saldoInicial".concat(".csv"));
+		//String dirSaldoInicial = "D:\\EMPRESAS".concat("\\").concat(emp).concat("\\").concat(estab).concat("\\saldoInicial".concat(".csv"));
 		 
 		 
 	    //exporta.exportaControleQuantitativos(dirSaldoInicial,dirPlanReprocessado, dirPlanilha, ano,cnpj);
 		
-		 relacaoInv.exportRelacaoInventario(dirPlanInv,cnpj, ano);
+		 //relacaoInv.exportRelacaoInventario(dirPlanInv,cnpj, ano);
 		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
 		
