@@ -26,6 +26,7 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.InputSource;
 
 import versaogama.conexao.Pool;
+import versaogama.dao.bancodao.BancoDAO;
 import versaogama.dao.estabelecimentodao.equipcfe.EquipamentoCFeDao;
 import versaogama.dao.estabelecimentodao.equipecf.EquipamentoECFDao;
 import versaogama.dao.estabelecimentodao.equipecf.ReducaoZDao;
@@ -57,6 +58,7 @@ import versaogama.model.sped.RegE240;
 import versaogama.model.sped.RegE250;
 import versaogama.model.sped.RegH005;
 import versaogama.model.sped.RegH010;
+import versaogama.model.system.banco.Metadados;
 import versaogama.model.xml.ProdutoCupomFiscalXml;
 import versaogama.model.xml.ProdutoNotaXmlProprio;
 import versaogama.util.UtilsEConverters;
@@ -173,12 +175,16 @@ public class LeitorTxtSpedFiscal {
 	private EquipamentoCFeDao daoEquipCFe;
 	private InventarioDao daoInv;
 	
-
+    private BancoDAO bancoDao;
+    private String nomeBanco = "versaogamadb";
+    
     public Long incLoteImportacao(Pool pool) {
     	Long id = 0L;
     	try {
-    		daoLote = new LoteImportacaoSpedFiscalDao(pool);
-    		id = daoLote.getIncLoteImp();
+    		bancoDao = new BancoDAO(pool);
+    		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_lote_import_sped_icms");
+    		id = dadosDoBanco.getAutoIncremento();
+    		//id = daoLote.getIncLoteImp();
     	}catch (Exception e) {}
     	
     	return id;

@@ -1,5 +1,6 @@
 package versaogama;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -14,6 +15,7 @@ import org.xml.sax.helpers.XMLReaderFactory;
 
 import versaogama.conexao.Pool;
 import versaogama.controller.TableBean;
+import versaogama.dao.bancodao.BancoDAO;
 import versaogama.dao.estabelecimentodao.equipcfe.EquipamentoCFeDao;
 import versaogama.dao.estabelecimentodao.produto.ProdutoDao;
 import versaogama.managersped.LeitorTxtSpedFiscal;
@@ -27,6 +29,7 @@ import versaogama.model.sped.RegC100;
 import versaogama.model.sped.RegC170;
 import versaogama.model.sped.RegC400;
 import versaogama.model.sped.RegC860;
+import versaogama.model.system.banco.Metadados;
 import versaogama.model.system.movprodutos.ModelHistoricoItens;
 import versaogama.model.system.produto.Produto;
 import versaogama.model.system.produto.ProdutoNota;
@@ -40,23 +43,28 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 		
 		Pool pool = new Pool();
-		ProdutoDao daoProd = new ProdutoDao(pool);
 		
-		Path pXml = Paths.get("D:\\XML");
-		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-jan2019.txt");
 		
-	    XMLReader reader = XMLReaderFactory.createXMLReader();
-	    LeitorXML logica = new LeitorXML();	
-	    reader.setContentHandler(logica); 
+		
+//		ProdutoDao daoProd = new ProdutoDao(pool);
+//		
+//		Path pXml = Paths.get("D:\\XML");
+//		Path p = Paths.get("D:\\ORTOGENESE\\SPED\\2014\\SpedEFD-05329222000419-063882345-Remessa de arquivo original-jan2019.txt");
+//		
+//	    XMLReader reader = XMLReaderFactory.createXMLReader();
+//	    LeitorXML logica = new LeitorXML();	
+//	    reader.setContentHandler(logica); 
+//	    
+//		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
+//		leitor.leitorSpedFiscal(p,pool);
+//		
+//		RegC100 nf = new RegC100();
+//		nf.getNotasFiscaisTxtSpedFiscal(leitor);
+//		  
+//	    ProdutoNota pNota = new ProdutoNota();
+//	    ModelHistoricoItens historico = new ModelHistoricoItens();
 	    
-		LeitorTxtSpedFiscal leitor = new LeitorTxtSpedFiscal();
-		leitor.leitorSpedFiscal(p,pool);
-		
-		RegC100 nf = new RegC100();
-		nf.getNotasFiscaisTxtSpedFiscal(leitor);
-		  
-	    ProdutoNota pNota = new ProdutoNota();
-	    ModelHistoricoItens historico = new ModelHistoricoItens();
+	    
 		//pNota.listaProdutosAgregadosSpedXml(p, pXml, reader, logica,pool);
 
 		
@@ -274,14 +282,7 @@ public class Main {
 		
 		try {
 			
-			
-			
-			
-			List<ProdutoNotaXmlProprio> produtosXMLHandler = leitor.getProdutosXMLHandler(pXml);
-			
-			for(ProdutoNotaXmlProprio pro : produtosXMLHandler){
-				
-			}
+
 
 //			for(String cod :  logica.getListaDeProdutos()){
 //				
@@ -338,6 +339,16 @@ public class Main {
 			System.out.println(e.getMessage());
 		}
 
+		
+		BancoDAO bancoDao = new BancoDAO(pool);
+		
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco("versaogamadb", "BASE TABLE", "tb_lote_import_sped_icms");
+		
+		//System.out.println(dadosDoBanco.getAutoIncremento());
+		
+		bancoDao.metadados();
+		
+	 
 	}
 	
 

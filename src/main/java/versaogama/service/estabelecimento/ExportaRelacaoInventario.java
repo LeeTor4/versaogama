@@ -56,7 +56,8 @@ public class ExportaRelacaoInventario {
 		 	        	}
 		        		
 		        		
-		        	}else {
+		        	}
+	        	   else {
 		        		
 		        		if(dao.ultimoRegistroDoItem(cnpj, mov.getCodItem(), ano) == null) {
 		 	        	   vl = 0.0;

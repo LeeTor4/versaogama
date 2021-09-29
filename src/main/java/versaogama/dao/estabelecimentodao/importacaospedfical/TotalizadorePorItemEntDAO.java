@@ -124,12 +124,16 @@ public class TotalizadorePorItemEntDAO implements TotalizadorPorItemInterface{
 	
 	public ModelValorUnitarioDoProduto ultimoRegistroDoItem(String cnpj,  String codItem,String ano) throws SQLException {
 		ModelValorUnitarioDoProduto retorno = null;
-		String sql = "SELECT ano,mes,cod_item, tot_qtde, (vl_tot_item/tot_qtde) as vl_unit, vl_tot_item FROM  (SELECT (@id:=@id+1) as id,ano,mes,cod_item,tot_qtde,vl_tot_item\r\n" + 
-				"					FROM tb_totalizadorporitem_ent \r\n" + 
-				"					CROSS join (SELECT @id:=0)  as seq\r\n" + 
-				"					WHERE cnpj = ? and cod_item = ? and ano < ? \r\n" + 
-				"					ORDER BY ano,mes) AS tabinv\r\n" + 
-				"ORDER BY id desc limit 1;";
+		
+		
+		
+		String sql = "SELECT id,operacao,ano,mes,cod_item, qtde as tot_qtde , vl_unit \r\n" + 
+				"       FROM  (SELECT (@id:=@id+1) as id,operacao,year(dt_doc) as ano, month(dt_doc) as mes,cod_item,qtde,vl_unit, VL_LIQ\r\n" + 
+				"									FROM tb_historico_item  \r\n" + 
+				"									CROSS join (SELECT @id:=0)  as seq \r\n" + 
+				"									WHERE emp = ? and cod_item = ? and year(dt_doc) < ? \r\n" + 
+				"                                    and operacao = 'E' and cfop not in ('1411','2411','1949','2949')\r\n" + 
+				"									ORDER BY ano,mes) AS tabinv ORDER BY id desc limit 1;";
 		
 		Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
@@ -146,7 +150,7 @@ public class TotalizadorePorItemEntDAO implements TotalizadorPorItemInterface{
 	        	   retorno.setCodItem(rs.getString("cod_item"));
 	        	   retorno.setTotQtde(rs.getDouble("tot_qtde"));
 	        	   retorno.setVlUnit(rs.getDouble("vl_unit"));
-	        	   retorno.setVlTotItem(rs.getDouble("vl_tot_item"));
+	        	   //retorno.setVlTotItem(rs.getDouble("vl_tot_item"));
 	           }
 	        }
 			
@@ -158,6 +162,8 @@ public class TotalizadorePorItemEntDAO implements TotalizadorPorItemInterface{
 	
 	public ModelValorUnitarioDoProduto ultimoRegistroDoItemCafeteria(String cnpj,  String codItem,String ano) throws SQLException {
 		ModelValorUnitarioDoProduto retorno = null;
+		
+		
 		String sql = "SELECT id,operacao,ano,mes,cod_item, qtde,  vl_unit \r\n" + 
 				"       FROM  (SELECT (@id:=@id+1) as id,operacao,year(dt_doc) as ano, month(dt_doc) as mes,cod_item,qtde,vl_unit \r\n" + 
 				"									FROM tb_historico_item  \r\n" + 

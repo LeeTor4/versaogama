@@ -1,5 +1,9 @@
 package versaogama.conexao;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -15,7 +19,7 @@ public class Pool implements InterfacePool {
 	private ResourceBundle config;
 	
 	public Pool() {
-		config = ResourceBundle.getBundle("versaogama.conexao.bancodedados");
+		config = ResourceBundle.getBundle(getCaminhoBancoDados());
 		ds = new DataSource(config.getString("url"), 
 				            config.getString("driver"), 
 				            config.getString("usuario"), 
@@ -56,8 +60,23 @@ public class Pool implements InterfacePool {
 	public void liberarConnection(Connection con) {
 		conexoesLivres.add(con);
 		conexoesUtilizadas.remove(con.toString());
-		
-
 	}
+
+	public String getCaminhoBancoDados() {
+		
+		String retorno = null;
+		File dir1 = new File ("./");
+		try {
+			Path p = Paths.get(dir1.getCanonicalPath());
+			retorno = p.getFileName().toString().concat(".").concat("conexao").concat(".").concat("bancodedados");
+
+		} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+		
+		return retorno;
+	}
+
 
 }

@@ -40,7 +40,7 @@ public class MainService {
 	
 	public static void main(String[] args) throws Exception {
 		
-		String ano = "2017";
+		String ano = "2021";
 		String cnpj = "05329222000419";
 		String emp = "SELLENE";
 		String estab = "MEGADIET";
@@ -160,7 +160,7 @@ public class MainService {
 		 
 	    //exporta.exportaControleQuantitativos(dirSaldoInicial,dirPlanReprocessado, dirPlanilha, ano,cnpj);
 		
-		 //relacaoInv.exportRelacaoInventario(dirPlanInv,cnpj, ano);
+		 relacaoInv.exportRelacaoInventario(dirPlanInv,cnpj, ano);
 		//totalizadorFinanceiro.exportaTotalizadorFinanceiroEstoque(dirTotal,  "2018","05329222000176");
         
 		
@@ -169,7 +169,7 @@ public class MainService {
 	      String dirPlanHistorico2 = "D:/EMPRESAS/SELLENE/MEGADIET/fichas_estoques/";
 	      String dirListaProds = "D:/ORTOGENESE/ListaCodItem2.csv";
 	      
-	      saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, ano,cnpj);
+	      //saldoInicial.importaSaldoInicialEstoqueMensal(dirSaldoInicial, ano,cnpj);
 
 	      //hist.exportarHistoricoItem(dirPlanHistorico2, "2021", "05329222000419", "00033735","");
 	      //hist.exportarHistoricoItensComLista(dirListaProds, dirPlanHistorico2,  "2019", "05329222000419");
