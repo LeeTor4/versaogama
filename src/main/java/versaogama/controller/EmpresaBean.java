@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 
 import versaogama.conexao.Pool;
 import versaogama.dao.empresadao.EmpresaDAO;
@@ -13,8 +11,7 @@ import versaogama.dao.estabelecimentodao.estabelecimento.EstabelecimentoDao;
 import versaogama.model.system.empresa.Empresa;
 import versaogama.model.system.estabelecimento.Estabelecimento;
 
-@Named
-@SessionScoped 
+
 public class EmpresaBean implements Serializable{
     
 	/**

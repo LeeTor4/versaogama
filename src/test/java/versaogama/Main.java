@@ -342,7 +342,7 @@ public class Main {
 		
 		BancoDAO bancoDao = new BancoDAO(pool);
 		
-		Metadados dadosDoBanco = bancoDao.dadosDoBanco("versaogamadb", "BASE TABLE", "tb_lote_import_sped_icms");
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco( "tb_lote_import_sped_icms");
 		
 		//System.out.println(dadosDoBanco.getAutoIncremento());
 		

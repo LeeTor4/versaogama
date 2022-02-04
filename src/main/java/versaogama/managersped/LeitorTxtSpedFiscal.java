@@ -154,14 +154,15 @@ public class LeitorTxtSpedFiscal {
 	private EquipamentoECFDao daoECF;
 	
     private BancoDAO bancoDao;
-    private String nomeBanco = "versaogamadb";
+    private String nomeBanco = "bd05329222000680";
     
     public Long incLoteImportacao(Pool pool) {
     	Long id = 0L;
     	try {
     		bancoDao = new BancoDAO(pool);
-    		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_lote_import_sped_icms");
-    		id = dadosDoBanco.getAutoIncremento();
+    		Metadados dadosDoBanco = bancoDao.dadosDoBanco( "tb_lote_import_sped_icms");
+    		id =dadosDoBanco.getAutoIncremento();
+    		
     	}catch (Exception e) {}
     	
     	return id;
@@ -170,13 +171,13 @@ public class LeitorTxtSpedFiscal {
     
 	public Long incPart(Pool pool) {
 		bancoDao = new BancoDAO(pool);
-		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_participantes");
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco( "tb_participantes");
 		id0150     = dadosDoBanco.getAutoIncremento();
 		return id0150;
 	}
 	public Long incProd(Pool pool) {
 		bancoDao = new BancoDAO(pool);
-		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_produto");
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco( "tb_produto");
 		id0200 =  dadosDoBanco.getAutoIncremento();
 
 		return id0200;
@@ -184,16 +185,18 @@ public class LeitorTxtSpedFiscal {
 
 	public Long incNFe(Pool pool) {		
 		bancoDao = new BancoDAO(pool);
-		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_notafiscal");
-		idC100 = dadosDoBanco.getAutoIncremento();
-		return idC100;
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco( "tb_notafiscal");
+		Long id = 0L;
+		id = dadosDoBanco.getAutoIncremento();
+		return id;
 	}
 	
 	public Long incRDZ(Pool pool) {
 		bancoDao = new BancoDAO(pool);
-		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_reducaoz");
-		idC405 = dadosDoBanco.getAutoIncremento();		
-		return idC405;
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco( "tb_reducaoz");
+		Long id = 0L;
+		id = dadosDoBanco.getAutoIncremento();
+		return id;
 	}
 	public Long idECFRegC405(String numFab,Pool pool) {
 		Long id = 0L;
@@ -212,16 +215,16 @@ public class LeitorTxtSpedFiscal {
 	public Long incTotParcRdz(Pool pool) {
 		Long id = 0L;
 		bancoDao = new BancoDAO(pool);
-		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_tot_parc_rdz");
-		id = dadosDoBanco.getAutoIncremento();	
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco("tb_tot_parc_rdz");
+		id = dadosDoBanco.getAutoIncremento();
 		return id;
 	}
 	
 	public Long incTotEquipCFe(Pool pool) {
 		Long id = 0L;
 		bancoDao = new BancoDAO(pool);
-		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_equip_sat");
-		id = dadosDoBanco.getAutoIncremento();	
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco( "tb_equip_sat");
+		id =dadosDoBanco.getAutoIncremento();
 		return id;
 		
 		
@@ -230,8 +233,8 @@ public class LeitorTxtSpedFiscal {
 	public Long incInv(Pool pool) {
 		Long id = 0L;
 		bancoDao = new BancoDAO(pool);
-		Metadados dadosDoBanco = bancoDao.dadosDoBanco(nomeBanco, "BASE TABLE", "tb_inv_totais");
-		id = dadosDoBanco.getAutoIncremento();	
+		Metadados dadosDoBanco = bancoDao.dadosDoBanco( "tb_inv_totais");
+		id =dadosDoBanco.getAutoIncremento();
   
 		return id;	
 	}
@@ -242,13 +245,13 @@ public class LeitorTxtSpedFiscal {
 	}
     
 	public void leitorSpedFiscal(Path p,Pool pool) throws Exception {
-		id0000 = (incLoteImportacao(pool) !=0 ? incLoteImportacao(pool) -1:incLoteImportacao(pool));
-		id0200 = (incProd(pool)!=0 ? incProd(pool)-1:incProd(pool));
-		idC100 = (incNFe(pool)!=0 ? incNFe(pool)-1:incNFe(pool));
-		idC405 = (incRDZ(pool)!=0 ? incRDZ(pool)-1:incRDZ(pool));
-		idC420 = (incTotParcRdz(pool)!=0 ? incTotParcRdz(pool)-1:incTotParcRdz(pool));
-		idC860 = (incTotEquipCFe(pool) !=0 ? incTotEquipCFe(pool)-1:incTotEquipCFe(pool));
-		idH005 = (incInv(pool) != 0 ? incInv(pool)-1 : incInv(pool));
+		id0000 = incLoteImportacao(pool);
+		id0200 = incProd(pool);
+		idC100 = incNFe(pool);
+		idC405 = incRDZ(pool);
+		idC420 = incTotParcRdz(pool);
+		idC860 = incTotEquipCFe(pool);
+		idH005 = incInv(pool);
 		List<String> lines = Files.readAllLines(p,Charset.forName("ISO-8859-1"));
 		 for(String line : lines) {
 			 id0000 = reg0000(line,pool);			 
@@ -821,7 +824,7 @@ public class LeitorTxtSpedFiscal {
 	   			
                 try {
                	 parser.parse(is, logica);
-               }catch (Exception e) {
+                }catch (Exception e) {
 					System.out.println(e.getMessage());
 				} 
                 

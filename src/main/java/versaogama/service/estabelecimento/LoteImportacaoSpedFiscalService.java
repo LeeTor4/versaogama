@@ -141,9 +141,10 @@ public class LoteImportacaoSpedFiscalService {
 		 Participante part,Produto prod,OutrasUnid outUnid,AlteracaoItem alt ,NotaFiscal nota,ProdutoNota pNota,RegC100 nf,
 		 EquipamentoECF ecf, ReducaoZ rdz,TotParciaisRDZ totRdz,ItensMovDiario itensCF,TotalizadorDiarioCuponsFiscais totDirCF,
 		 EquipamentoCFe cfe,ItensMovDiarioCFe  itemCfe, Inventario inv, ItensInventario itnInv) {
-		 Long id = 0L;
+		
+		Long id = 0L;
 		try {
-
+			   
 			    Reg0000 reg = leitor.getReg0000();
 			    LoteImportacaoSpedFiscal lt = new LoteImportacaoSpedFiscal();
 			    lt.setId(reg.getId());
@@ -509,8 +510,10 @@ public class LoteImportacaoSpedFiscalService {
 				    daoRDZ.cadastrar(insereReducoesZ(leitor, rdz, id, i,x, idPaiEmp, idPaiEst));
 				  
 			    for (int y = 0; y < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().size(); y++) {
-					 daoTotParRDZ.cadastrar(insereTotParcRDZ(leitor, totRdz, i, x,y, idPaiEmp,idPaiEst));
-					for (int w = 0; w < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y)
+					 
+			    	daoTotParRDZ.cadastrar(insereTotParcRDZ(leitor, totRdz, i, x,y, idPaiEmp,idPaiEst));
+					
+					 for (int w = 0; w < leitor.getRegsC400().get(i).getRegsC405().get(x).getRegsC420().get(y)
 							.getRegsC425().size(); w++) {
 						 totalizadoresItensCF(leitor, itensCF, idPaiEmp, idPaiEst, i, x, y, w);
 						   daoItensMovDiario.cadastrar(insereItensMovDiario(leitor, itensCF, i, x, y, w,idPaiEmp, idPaiEst));
@@ -756,7 +759,7 @@ public class LoteImportacaoSpedFiscalService {
 	
 	private ProdutoNota insereProdutosXmlNotasPropria(LeitorTxtSpedFiscal leitor, ProdutoNota pNota, ProdutoNotaXmlProprio nfP,RegC100 nf) throws SQLException {
 
-		
+		System.out.println("Doc Proprio " + nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getId());
 		pNota.setIdPai(nf.buscaIDNotaFiscalPorChaveEletronica().get(nfP.getChaveNota()).getId());
 		pNota.setNumItem(nfP.getNumItem());
 		pNota.setCodItem(UtilsEConverters.preencheZerosAEsquerda(nfP.getCodItem()));

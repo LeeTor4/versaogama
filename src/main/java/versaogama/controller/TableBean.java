@@ -5,9 +5,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.enterprise.context.RequestScoped;
+
 import javax.faces.model.ListDataModel;
-import javax.inject.Named;
+
 
 import versaogama.conexao.Pool;
 import versaogama.dao.estabelecimentodao.importacaospedfical.LoteImportacaoSpedFiscalDao;
@@ -16,8 +16,7 @@ import versaogama.dao.estabelecimentodao.produto.ProdutoDao;
 import versaogama.managersped.LeitorTxtSpedFiscal;
 import versaogama.model.sped.Reg0200;
 
-@Named("tableprod")
-@RequestScoped
+
 public class TableBean {
 
 	

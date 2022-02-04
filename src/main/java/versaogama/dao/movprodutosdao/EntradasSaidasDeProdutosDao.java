@@ -77,7 +77,7 @@ public class EntradasSaidasDeProdutosDao {
 		
 		List<EntradasSaidasDeProdutos> retorno = new ArrayList<EntradasSaidasDeProdutos>();
 	   
-		String sql = "SELECT * FROM mov_prod_mensal_v2 where id = ?"; 
+		String sql = "SELECT * FROM mov_prod_mensal where id = ?"; 
 		
 		Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){	

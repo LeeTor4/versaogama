@@ -103,36 +103,36 @@ public class ImportaSaldoInicialEstoqueMensal {
 				 for(int i=0;i<valoresEntreVirgula.length;i++){
 					 saldo.setAno(ano);
 					 saldo.setCnpj(cnpj);
-					 if(i==0){
-						 
-						 saldo.setCodItem(UtilsEConverters.preencheZerosAEsquerda(valoresEntreVirgula[0]));
-					 }
-                     if(i==1){
-						 
-						 saldo.setCodAntItem(UtilsEConverters.preencheZerosAEsquerda(valoresEntreVirgula[1]));
-					 }
-                     if(i==2){
-						 
-						 saldo.setDescricao(valoresEntreVirgula[2]);
-					 }
                      if(i==3){
+                    	 saldo.setTipo(valoresEntreVirgula[i]);
+                     }
+					 if(i==4){
+						 
+						 saldo.setSecao(valoresEntreVirgula[i]);
+					 }
+					 if(i==5){
+						 
+						 saldo.setCodItem(UtilsEConverters.preencheZerosAEsquerda(valoresEntreVirgula[i]));
+					 }
+                     if(i==6){
+						 
+						 saldo.setCodAntItem(UtilsEConverters.preencheZerosAEsquerda(valoresEntreVirgula[i]));
+					 }
+                     if(i==7){
+						 
+						 saldo.setDescricao(valoresEntreVirgula[i]);
+					 }
+                     if(i==8){
                     	 Double qtde = 0.0;
-                    	 if(Double.valueOf(valoresEntreVirgula[3].replace(",", ".")) < 0) {
-                    		 qtde = Math.abs(Double.valueOf(valoresEntreVirgula[3].replace(",", ".")));
+                    	 if(Double.valueOf(valoresEntreVirgula[i].replace(",", ".")) < 0) {
+                    		 qtde = Math.abs(Double.valueOf(valoresEntreVirgula[8].replace(",", ".")));
                     	 }else {
-                    		 qtde = Double.valueOf(valoresEntreVirgula[3].replace(",", ".")); 
+                    		 qtde = Double.valueOf(valoresEntreVirgula[i].replace(",", ".")); 
                     	 }
                     	 
                     	 saldo.setQtdeInicial(qtde);
                      }
-                     
-                     if(i==4){
-                    	 saldo.setTipo(valoresEntreVirgula[4]);
-                     }
-                     
-                     if(i==5){
-                    	 saldo.setSecao(valoresEntreVirgula[5]);
-                     }
+                    
 					 
 				 }
 				 

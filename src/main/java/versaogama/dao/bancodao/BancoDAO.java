@@ -19,26 +19,22 @@ public class BancoDAO {
 	}
 	
 	
-	public Metadados dadosDoBanco(String nomeBD, String tipoTabela, String nomeTabela){
+	public Metadados dadosDoBanco(String nomeTabela){
 		
 		Metadados retorno = null;
-		String sql = "SELECT * FROM information_schema.tables where table_schema = ? and table_type = ? and table_name = ?";
+		//String sql = "SELECT * FROM information_schema.tables where table_schema = ? and table_type = ? and table_name = ?";
+		String sql = "select coalesce( max( id ), 0) as id from " + nomeTabela;
 		
 		Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){
-			stmt.setString(1, nomeBD);
-			stmt.setString(2, tipoTabela);
-			stmt.setString(3, nomeTabela);
+			//stmt.setString(1, nomeTabela);
 			stmt.execute();
 			try(ResultSet rs = stmt.getResultSet()){	
 				
 				while(rs.next()) {		
 					
 					retorno = new Metadados();
-					retorno.setNomeBanco(rs.getString("TABLE_SCHEMA"));
-					retorno.setNomeTabela(rs.getString("TABLE_NAME"));
-					retorno.setLinhaTabela(rs.getLong("TABLE_ROWS"));
-					retorno.setAutoIncremento(rs.getLong("AUTO_INCREMENT"));
+					retorno.setAutoIncremento(rs.getLong("id"));
 						
 				}	
 			}

@@ -137,10 +137,11 @@ public class EnderecoDAO implements EnderecoDaoInterface{
 		end.setNmMun(rs.getString("municipio"));
 		return end;
 	}
-
-	public Long pegarValorAutoIncremento() throws SQLException {
+	
+	public Long pegarValorAutoIncremento(String nomeBanco) throws SQLException {
 		Long id = null;
-		String sql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'tb_endereco' AND table_schema = 'versaogamadb'";
+		String sql = 
+				"SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_name = 'tb_endereco' AND table_schema = " + "'"+nomeBanco+"'";
 	
 		Connection con = pool.getConnection();
 		try(PreparedStatement stmt =  con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)){		

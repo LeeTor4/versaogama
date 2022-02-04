@@ -33,7 +33,7 @@ public class XmlSubstituir {
 
 	public static void main(String[] args) throws Exception {
 		
-//		Path pXml = Paths.get("D:\\XML");
+//		Path pXml = Paths.get("E:\\XML");
 //		String caminho = pXml.getParent().toString().concat("\\").concat(pXml.getFileName().toString());
 //        SAXParserFactory spf = SAXParserFactory.newInstance();
 //		
@@ -69,27 +69,27 @@ public class XmlSubstituir {
 //	    	}
 //	    }
 		
-//		Path pXmlDE = Paths.get("D:\\xml-202012-repo");
-//		Path pXmlPARA = Paths.get("D:\\xml-servidor");
-//		CopiaArquivoXML_DE_PARA copiarXML = new CopiaArquivoXML_DE_PARA();
-//		
-//		boolean copia = copiarXML.copia(new File(pXmlDE.toString()), new File(pXmlPARA.toString()));
-//		
-//		System.out.println(copia);
+		Path pXmlDE = Paths.get("E:\\xml-202012-repo");
+		Path pXmlPARA = Paths.get("E:\\xml-servidor");
+		CopiaArquivoXML_DE_PARA copiarXML = new CopiaArquivoXML_DE_PARA();
+		
+		boolean copia = copiarXML.copia(new File(pXmlDE.toString()), new File(pXmlPARA.toString()));
+		
+		System.out.println(copia);
 		
 		
 		//System.out.println(UtilsEConverters.preencheZerosAEsquerda("0000000012345"));
 		
-		Path pXml = Paths.get("D:\\XML");
-		Pool pool = new Pool();
-		ModelHistoricoItensDao dao = new ModelHistoricoItensDao(pool);
-		LeitorTxtSpedFiscal leitor = new  LeitorTxtSpedFiscal();
-		
-		List<ProdutoCupomFiscalXml>  lista = leitor.getProdutosXMLHandlerCF(pXml);
-		
-		for(ProdutoCupomFiscalXml cfe :  lista){
-			System.out.println(cfe.getChaveCF());
-		}
+//		Path pXml = Paths.get("E:\\XML");
+//		Pool pool = new Pool();
+//		ModelHistoricoItensDao dao = new ModelHistoricoItensDao(pool);
+//		LeitorTxtSpedFiscal leitor = new  LeitorTxtSpedFiscal();
+//		
+//		List<ProdutoCupomFiscalXml>  lista = leitor.getProdutosXMLHandlerCF(pXml);
+//		
+//		for(ProdutoCupomFiscalXml cfe :  lista){
+//			System.out.println(cfe.getChaveCF());
+//		}
 
 	}
 
